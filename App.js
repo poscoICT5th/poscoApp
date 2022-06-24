@@ -24,6 +24,7 @@ import {
 
 export default function App(props) {
   const navigation = props.navigation;
+  // const navigation = useNavigation();
   const navOptionHandler = () => ({
     headerShown: false,
   });
@@ -41,20 +42,26 @@ export default function App(props) {
           leading={props => (
             <Menu
               visible={visible}
-              anchor={<Text onPress={showMenu}>Show menu</Text>}
+              anchor={<Text onPress={showMenu}><Icon name='menu'/></Text>}
               onRequestClose={hideMenu}>
-              <MenuItem>메인(TodoList)</MenuItem>
+              <MenuItem>
+                <Text style={styles.menuItem}>메인(TodoList)</Text>
+              </MenuItem>
               <MenuItem
                 onPress={() =>
                   navigation.navigate('Inventory')
                 }>
-                인벤토리
+                <Text style={styles.menuItem}>인벤토리</Text>
               </MenuItem>
-              <MenuItem onPress={() => {}}>입고</MenuItem>
-              <MenuItem onPress={() => {}}>출고</MenuItem>
-              <MenuItem onPress={() => {}}>창고이동</MenuItem>
+              <MenuItem onPress={() => {}}>
+                <Text style={styles.menuItem}>입고</Text></MenuItem>
+              <MenuItem onPress={() => {}}>
+                <Text style={styles.menuItem}>출고</Text></MenuItem>
+              <MenuItem onPress={() => {}}>
+                <Text style={styles.menuItem}>창고이동</Text></MenuItem>
               <MenuDivider />
-              <MenuItem onPress={() => {}}>로그아웃</MenuItem>
+              <MenuItem onPress={() => {}}>
+                <Text style={styles.menuItem}>로그아웃</Text></MenuItem>
             </Menu>
           )}
         />
@@ -69,7 +76,7 @@ export default function App(props) {
         <StackApp.Screen
           name="Inventory"
           component={Inventory}
-          options={{title: 'Inventory'}}
+          options={{title: 'Inventory'}}    // header & 뒤로가기
         />
         <StackApp.Screen
           name="Import"
@@ -100,3 +107,8 @@ export default function App(props) {
     </NavigationContainer>
   );
 }
+const styles = StyleSheet.create({
+  menuItem: {
+    color: 'black',
+  },
+});
