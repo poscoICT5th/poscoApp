@@ -22,22 +22,27 @@ class BarcodeScanner extends Component {
   /**
    * 바코드 스캔
    */
+  
   onBarcodeScan(barcodeValue) {
     console.log('onBarcodeScan');
     if (!isFirstGet) {
       return;
     }
     isFirstGet = false;
-    if (this.cmdType == 'inventory') {
-      this.props.route.params.onGetBarcodeInventory(barcodeValue, this.cmdType);
+    if (this.cmdType == 'inventory' || this.cmdType == 'import' || this.cmdType == 'export' || this.cmdType == 'move') {
+      this.props.route.params.onGetBarcode(barcodeValue, this.cmdType);
     } else {
       this.props.route.params.onGetBarcode(barcodeValue, this.cmdType);
     }
     //TODO 필요한 부분 구현하세요
-    this.props.navigation.pop();
+    // this.props.navigation.pop();
 
     //called after te successful scanning of QRCode/Barcode
     console.log('scanned barcode value: ' + barcodeValue);
+
+    setTimeout(() => {
+      isFirstGet = true;
+    }, 2000);
   }
 
   //TODO Home.js로 이동시키세요

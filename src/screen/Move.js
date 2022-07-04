@@ -1,10 +1,94 @@
-import {View, Text} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
+import axios from 'axios';
+import {Button} from '@react-native-material/core';
+import {ListItem} from '@react-native-material/core';
+import {View, StyleSheet, ScrollView, StatusBar, Alert} from 'react-native';
+import Navbar from './Navbar';
 
-export default function Move() {
+export default function Move(props) {
+  const [moveList, setMoveList] = useState([]);
+
+  const onGetBarcodeMove = (barcodeValue, cmdType) => {
+    console.log('barcode value: ', barcodeValue);
+    //아래 함수의 파라미터로 문자열만 넘길 수 있음. barcodeValue가 문자열처럼 보이지만 문자열이 아닌 듯. String()는 작동하지 않음. JSON.stringify()는 작동함
+    //  Alert.alert("barcode value: ", barcodeValue);
+    if (cmdType == 'move') {
+      axios.defaults.baseURL = 'http://35.77.44.58:8080';
+      axios
+        .get('/move/lotno/' + barcodeValue)
+        // axios.get("http://35.77.20.236:8080/import/lotno/" +barcodeValue)
+        .then(res => {
+          console.log(123123123);
+          console.log(res.data);
+          console.log(res.data.instruction_no);
+          // axios.put("http://35.77.20.236:8080/import/import/" + res.data.instruction_no)
+          axios
+            .put('/move/move/' + res.data.instruction_no)
+            .then(res2 => {
+              Alert.alert('입고 완료되었습니다.');
+            })
+            .catch(e => {
+              console.log(e);
+              Alert.alert(e);
+            });
+        })
+        .catch(e => {
+          console.log(e);
+          Alert.alert(e);
+        });
+    }
+  };
+
+  const keyList = [
+    ['상태', 'status'],
+    ['이름', 'item_name'],
+    ['수량', 'amount'],
+    ['일자', 'order_date'],
+  ];
+  const MakeSecondText = ListItem => {
+    let result = '';
+    for (let i = 0; i < 4; i++) {
+      result += keyList[i][0] + ': ' + ListItem[keyList[i][1]] + '\n';
+    }
+    return result;
+  };
+
   return (
     <View>
-      <Text>Move</Text>
+      <Button
+        color="#f1a178"
+        title="이동 물품 확인"
+        onPress={() =>
+          props.navigation.navigate('BarcodeScanner', {
+            onGetBarcode: onGetBarcodeMove,
+            cmdType: 'move',
+          })
+        }
+      />
+      <ScrollView style={styles.scrollView}>
+        {moveList.map((value, index) => {
+          return (
+            <ListItem
+              title={value.lot_no}
+              secondaryText={MakeSecondText(value)}
+              key={index}
+            />
+          );
+        })}
+      </ScrollView>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: StatusBar.currentHeight,
+  },
+  scrollView: {
+    backgroundColor: 'white',
+    marginTop: 0,
+    marginBottom: 50,
+    marginHorizontal: 70,
+  },
+});

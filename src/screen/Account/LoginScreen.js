@@ -9,40 +9,7 @@ import {
   Alert,
   PermissionsAndroid,
 } from 'react-native';
-
-const screenWidth = Dimensions.get('screen').width;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#1f1f1f',
-    alignItems: 'center',
-    paddingTop: 250,
-  },
-  helloText: {
-    color: 'white',
-    marginBottom: 20,
-    fontSize: 30,
-  },
-  textInput: {
-    padding: 5,
-    paddingStart: 15,
-    backgroundColor: '#3b3b3b',
-    width: screenWidth * 0.8,
-    borderRadius: 25,
-    marginBottom: 15,
-    color: 'white',
-    fontWeight: '600',
-  },
-  loginBtn: {
-    paddingHorizontal: 25,
-    paddingVertical: 10,
-    backgroundColor: '#ff1178',
-    borderRadius: 25,
-    color: 'black',
-    textAlign: 'center',
-  },
-});
+import axios from 'axios'
 
 export default function LoginScreen(props) {
   const PermissionCheck = () => {
@@ -73,25 +40,68 @@ export default function LoginScreen(props) {
       requestCameraPermission();
     }
   };
+
   useEffect(() => {
     PermissionCheck();
   }, []);
+
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.helloText}>망한네이티브</Text>
-        <TextInput placeholder="id" style={styles.textInput} />
+        <Text style={styles.helloText}>로그인중인네이티브</Text>
         <TextInput
-          placeholder="password"
-          secureTextEntry
-          style={styles.textInput}
-        />
+                id="id-address"
+                name="id"
+                type="text"
+                placeholder="id"
+                onKeyDown={(e) => { enter(e) }}
+              />
+        <TextInput
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Password"
+                onKeyDown={(e) => { enter(e) }}
+              />
         <Button
           color="#ff1178"
           title="Login"
-          onPress={() => props.navigation.navigate('Inventory')}
-        />
+          />
       </View>
     </View>
   );
 }
+
+  const screenWidth = Dimensions.get('screen').width;
+  
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#1f1f1f',
+      alignItems: 'center',
+      paddingTop: 250,
+    },
+    helloText: {
+      color: 'white',
+      marginBottom: 20,
+      fontSize: 30,
+    },
+    textInput: {
+      padding: 5,
+      paddingStart: 15,
+      backgroundColor: '#3b3b3b',
+      width: screenWidth * 0.8,
+      borderRadius: 25,
+      marginBottom: 15,
+      color: 'white',
+      fontWeight: '600',
+    },
+    loginBtn: {
+      paddingHorizontal: 25,
+      paddingVertical: 10,
+      backgroundColor: '#ff1178',
+      borderRadius: 25,
+      color: 'black',
+      textAlign: 'center',
+    },
+  });
