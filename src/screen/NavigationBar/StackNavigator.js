@@ -8,7 +8,7 @@ import Export from '../Export';
 import Move from '../Move';
 import Home from '../Home';
 import BarcodeScanner from '../BarcodeScanner';
-import TodoList from '../TodoList';
+import Dashboard from '../Dashboard/Dashboard';
 
 const StackApp = createStackNavigator();
 const StackNavigator = () => {
@@ -43,8 +43,8 @@ const StackNavigator = () => {
                 options={navOptionHandler}
             />
             <StackApp.Screen
-                name="TodoList"
-                component={TodoList}
+                name="Dashboard"
+                component={Dashboard}
                 options={navOptionHandler}
             />
             <StackApp.Screen

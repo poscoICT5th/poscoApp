@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import useRootData from './src/hooks/useRootData';
 import MainNavigator from './src/screen/NavigationBar/MainNavigator'
-import { TailwindProvider } from 'tailwindcss-react-native';
+import { NativeBaseProvider } from 'native-base';
 
 const App = () => {
   const { token, setToken } = useRootData(
@@ -13,11 +13,11 @@ const App = () => {
     }),
   );
   return (
-    <TailwindProvider>
+    <NativeBaseProvider>
       <NavigationContainer>
         <MainNavigator />
       </NavigationContainer>
-    </TailwindProvider>
+    </NativeBaseProvider>
   )
 }
 

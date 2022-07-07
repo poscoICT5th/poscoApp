@@ -1,21 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import {
-  StyleSheet,
-  // Text,
-  TextInput,
-  View,
-  Dimensions,
-  // Button,
-  Alert,
-  PermissionsAndroid,
-} from 'react-native';
-import axios from 'axios'
+import { PermissionsAndroid } from 'react-native';
 import { login } from '../../axios';
-import { Box, Text, Heading, VStack, FormControl, Input, Link, Button, HStack, Center, NativeBaseProvider } from "native-base";
+import { Box, Heading, VStack, FormControl, Input, Button, Center, NativeBaseProvider } from "native-base";
 
 export default function LoginScreen(props) {
-  const [inputId, setInputId] = useState("")
-  const [inputPw, setInputPw] = useState("")
+  const [id, setId] = useState("")
+  const [pw, setPw] = useState("")
 
   const PermissionCheck = () => {
     //To Start Scanning
@@ -66,10 +56,10 @@ export default function LoginScreen(props) {
           </Heading>
           <VStack space={3} mt="5">
             <FormControl.Label>ID</FormControl.Label>
-            <Input onChange={(e) => { setInputId(e.nativeEvent.text) }} />
+            <Input onChange={(e) => { setId(e.nativeEvent.text) }} />
             <FormControl.Label>Password</FormControl.Label>
-            <Input type="password" onChange={(e) => { setInputPw(e.nativeEvent.text) }} />
-            <Button mt="2" onPress={() => { login({ id: inputId, pw: inputPw }), props.navigation.navigate('TodoList') }}>
+            <Input type="password" onChange={(e) => { setPw(e.nativeEvent.text) }} />
+            <Button mt="2" onPress={() => { login({ id: id, pw: pw }), props.navigation.navigate('Dashboard') }}>
               Sign in
             </Button>
           </VStack>

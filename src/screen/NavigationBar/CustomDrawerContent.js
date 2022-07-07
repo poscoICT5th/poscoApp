@@ -10,15 +10,13 @@ const CustomDrawerContent = (props) => {
             <View style={styles.header}>
                 <View style={styles.headerContainer}>
                     <Text style={styles.headerTitle}>메뉴</Text>
-                    {/* <Icon name="MehOutlined" size={30} /> */}
                 </View>
             </View>
-
             <View style={styles.buttonWrap}>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity
                         onPress={() => {
-                            props.navigation.navigate('TodoList');
+                            props.navigation.navigate('Dashboard');
                             props.setTitle('Main');
                         }}>
                         <Text style={styles.title}>Main</Text>
@@ -62,15 +60,6 @@ const CustomDrawerContent = (props) => {
                             props.setTitle('Move');
                         }}>
                         <Text style={styles.title}>Move</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.buttonContainer}>
-                    <TouchableOpacity
-                        onPress={() => {
-                            props.navigation.navigate('TodoList');
-                            props.setTitle('TodoList');
-                        }}>
-                        <Text style={styles.title}>TodoList</Text>
                     </TouchableOpacity>
                 </View>
             </View>
