@@ -1,82 +1,81 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import {Button} from '@react-native-material/core';
 import {ListItem} from '@react-native-material/core';
 import {View, StyleSheet, ScrollView, StatusBar} from 'react-native';
-import Navbar from './Navbar';
+import { Box, Heading, AspectRatio, Image, Text, Center, HStack, Stack, NativeBaseProvider } from "native-base";
 
+import Navbar from './Navbar';
+//창고안에 있는 재고들 출력
+//최근순 , 상태 순 setstate 에 담
 export default function Inventory(props) {
   const [inventoryList, setInventoryList] = useState([]);
-
-  const onGetBarcodeInventory = (barcodeValue, cmdType) => {
-    console.log('barcode value: ', barcodeValue);
-    //아래 함수의 파라미터로 문자열만 넘길 수 있음. barcodeValue가 문자열처럼 보이지만 문자열이 아닌 듯. String()는 작동하지 않음. JSON.stringify()는 작동함
-    //  Alert.alert("barcode value: ", barcodeValue);
-    if (cmdType == 'inventory') {
-      axios.defaults.baseURL = 'http://13.230.73.69:8080';
-      axios
-        .get('/inventory/warehouse/' + barcodeValue)
-        // axios.get("http://35.77.20.236:8080/import/lotno/" +barcodeValue)
-        .then(res => {
-          console.log(res.data);
-          console.log(barcodeValue);
-          setInventoryList(res.data);
-        })
-        .catch(e => {
-          console.log(e);
-        });
-    }
-  };
-
-  const keyList = [
-    ['이름', 'item_name'],
-    ['수량', 'amount'],
-    ['일자', 'inventory_date'],
-  ];
-  const MakeSecondText = ListItem => {
-    let result = '';
-    for (let i = 0; i < 3; i++) {
-      result += keyList[i][0] + ': ' + ListItem[keyList[i][1]] + '\n';
-    }
-    return result;
-  };
-
+ 
+  //axios
+  useEffect(() => {
+    axios.defaults.baseURL = "http://13.230.73.69:8080/inventory";
+    axios
+    //.get(`/warehouse/${warehouseCode}`)
+    .get(`/warehouse/GA04`)
+      .then((res) => {
+       // console.log(res.data, "받아온 데이터");
+        setInventoryList(res.data);
+        //setInventoryList([...res.data]);
+        
+    })
+    .catch((err) => {console.log(err); });
+  }, [])
+//console.log(inventoryList);
+  // inventoryList.map((inventoryList) => {
+    
+  // });
+  const title = " 제목";
+  const subTitle = "부제목";
   return (
-    <View>
-      <Button
-        color="#f1a178"
-        title="창고 코드 스캔"
-        onPress={() =>
-          props.navigation.navigate('BarcodeScanner', {
-            onGetBarcode: onGetBarcodeInventory,
-            cmdType: 'inventory',
-          })
-        }
-      />
-      <ScrollView style={styles.scrollView}>
-        {inventoryList.map((value, index) => {
-          return (
-            <ListItem
-              title={value.lot_no}
-              secondaryText={MakeSecondText(value)}
-              key={index}
-            />
-          );
-        })}
-      </ScrollView>
-    </View>
+    <NativeBaseProvider>
+    <Box alignItems="center" marginY={3}>
+            <Box maxW="80" rounded="lg" overflow="hidden" borderColor="coolGray.200" borderWidth="1" _dark={{
+                borderColor: "coolGray.600",
+                backgroundColor: "gray.700"
+            }} _web={{
+                shadow: 2,
+                borderWidth: 0
+            }} _light={{
+                backgroundColor: "gray.50"
+            }}>
+                <Stack p="4" space={3}>
+                    <Stack space={2}>
+                        <Heading size="md" ml="-1">
+                            {title}
+                        </Heading>
+                        <Text fontSize="xs" _light={{
+                            color: "violet.500"
+                        }} _dark={{
+                            color: "violet.400"
+                        }} fontWeight="500" ml="-0.5" mt="-1">
+                            {subTitle}
+                        </Text>
+            </Stack>
+            
+                    <Text fontWeight="400">
+                        Bengaluru (also called Bangalore) is the center of India's high-tech
+              industry. The city is also known for its parks and nightlife.
+              {
+                inventoryList.map((inventoryItem) => {
+                 
+                    {inventoryItem.amount}
+                 
+                   //console.log(inventoryItem.amount);
+                }
+              )
+              }
+            </Text>
+            
+                </Stack>
+            </Box>
+      </Box>
+      </NativeBaseProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: StatusBar.currentHeight,
-  },
-  scrollView: {
-    backgroundColor: 'white',
-    marginTop: 0,
-    marginBottom: 50,
-    marginHorizontal: 70,
-  },
-});
+

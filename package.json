@@ -12,6 +12,7 @@
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.18.6",
     "@babel/plugin-proposal-decorators": "^7.18.6",
+    "@expo/vector-icons": "^13.0.0",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-native-material/core": "^1.3.7",
     "@react-navigation/drawer": "^6.4.2",
@@ -27,6 +28,7 @@
     "react": "17.0.2",
     "react-native": "0.68.2",
     "react-native-camera-kit": "^12.1.0",
+    "react-native-cell-components": "^0.7.9",
     "react-native-gesture-handler": "^2.5.0",
     "react-native-keychain": "^8.0.0",
     "react-native-material-menu": "^2.0.0",
@@ -36,6 +38,7 @@
     "react-native-side-menu": "^1.1.3",
     "react-native-side-menu-updated": "^1.3.2",
     "react-native-svg": "^12.3.0",
+    "react-native-table-component": "^1.2.2",
     "react-native-vector-icons": "^9.1.0",
     "tailwindcss-react-native": "^1.7.10"
   },
