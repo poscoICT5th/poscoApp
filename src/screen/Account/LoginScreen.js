@@ -85,12 +85,12 @@ export default function LoginScreen(props) {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#1f1f1f',
+    //  backgroundColor: '#1f1f1f',
       alignItems: 'center',
       paddingTop: 250,
     },
     helloText: {
-      color: 'white',
+    //  color: 'white',
       marginBottom: 20,
       fontSize: 30,
     },
@@ -101,7 +101,7 @@ export default function LoginScreen(props) {
       width: screenWidth * 0.8,
       borderRadius: 25,
       marginBottom: 15,
-      color: 'white',
+    //  color: 'white',
       fontWeight: '600',
     },
     loginBtn: {
@@ -109,7 +109,7 @@ export default function LoginScreen(props) {
       paddingVertical: 10,
       backgroundColor: '#ff1178',
       borderRadius: 25,
-      color: 'black',
+     // color: 'black',
       textAlign: 'center',
     },
   });
