@@ -10,6 +10,7 @@ import Import from './src/screen/Import';
 import Export from './src/screen/Export';
 import Move from './src/screen/Move';
 import TodoList from './src/screen/TodoList';
+import Mypage from './src/screen/Mypage';
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -42,7 +43,17 @@ function CustomDrawerContent(props) {
             <Text style={styles.title}>Main</Text>
           </TouchableOpacity>
         </View>
-
+       
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            onPress={() => {
+              props.navigation.navigate('Mypage');
+              props.setTitle('Mypage');
+            }}>
+            <Text style={styles.title}>Mypage</Text>
+          </TouchableOpacity>
+        </View>
+        
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             onPress={() => {
@@ -146,6 +157,11 @@ function StackNavigator() {
       <StackApp.Screen
         name="BarcodeScanner"
         component={BarcodeScanner}
+        options={navOptionHandler}
+      />
+       <StackApp.Screen
+        name="Mypage"
+        component={Mypage}
         options={navOptionHandler}
       />
     </StackApp.Navigator>

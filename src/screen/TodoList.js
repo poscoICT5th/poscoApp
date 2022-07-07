@@ -80,7 +80,7 @@ export default function Example() {
         <Center w="100%">
           <Box maxW="300" w="100%">
             <Heading mb="2" size="md">
-              TodoList
+              TodoListㅋㅋㅋ
             </Heading>
             <VStack space={4}>
               <HStack space={2}>

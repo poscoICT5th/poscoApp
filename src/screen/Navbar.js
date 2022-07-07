@@ -38,6 +38,14 @@ export default function Navbar(props) {
             }}>
             <Text style={styles.menuItem}>메인(TodoList)</Text>
           </MenuItem>
+
+          <MenuItem
+            onPress={() => {
+              navi.navigate('Mypage');
+            }}>
+            <Text style={styles.menuItem}>Mypage</Text>
+          </MenuItem>
+          
           <MenuItem
             onPress={() => {
               navi.navigate('Inventory');
