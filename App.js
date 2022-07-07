@@ -27,7 +27,7 @@ function CustomDrawerContent(props) {
     <DrawerContentScrollView {...props} style={{backgroundColor: '#354259'}}>
       <View style={styles.header}>
         <View style={styles.headerContainer}>
-          <Text style={styles.headerTitle}>사용자 정보</Text>
+          <Text style={styles.headerTitle}>메뉴</Text>
           {/* <Icon name="MehOutlined" size={30} /> */}
         </View>
       </View>
@@ -193,7 +193,8 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      {token ? <MainNavigator /> : <LoginNavigator/>}
+      <MainNavigator />
+      {/* {token ? <MainNavigator /> : <LoginNavigator/>} */}
     </NavigationContainer>
   );
 }

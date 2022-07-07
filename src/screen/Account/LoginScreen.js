@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -10,8 +10,12 @@ import {
   PermissionsAndroid,
 } from 'react-native';
 import axios from 'axios'
+import { login } from '../../axios';
 
 export default function LoginScreen(props) {
+  const [inputId, setInputId] = useState("")
+  const [inputPw, setInputPw] = useState("")
+
   const PermissionCheck = () => {
     //To Start Scanning
     if (Platform.OS === 'android') {
@@ -54,18 +58,22 @@ export default function LoginScreen(props) {
                 name="id"
                 type="text"
                 placeholder="id"
-                onKeyDown={(e) => { enter(e) }}
+                // onKeyDown={(e) => { console.log(e); }}
+                onChange={(e)=>{setInputId(e.nativeEvent.text)}}
               />
         <TextInput
                 id="password"
                 name="password"
                 type="password"
                 placeholder="Password"
-                onKeyDown={(e) => { enter(e) }}
+                secureTextEntry = {true}
+                // onKeyDown={(e) => {console.log(e) }}
+                onChange={(e)=>{setInputPw(e.nativeEvent.text)}}
               />
         <Button
           color="#ff1178"
           title="Login"
+          onPress={()=> {login({id: inputId, pw: inputPw}), props.navigation.navigate('TodoList')}}
           />
       </View>
     </View>
