@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -9,42 +9,13 @@ import {
   Alert,
   PermissionsAndroid,
 } from 'react-native';
-
-const screenWidth = Dimensions.get('screen').width;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#1f1f1f',
-    alignItems: 'center',
-    paddingTop: 250,
-  },
-  helloText: {
-    color: 'white',
-    marginBottom: 20,
-    fontSize: 30,
-  },
-  textInput: {
-    padding: 5,
-    paddingStart: 15,
-    backgroundColor: '#3b3b3b',
-    width: screenWidth * 0.8,
-    borderRadius: 25,
-    marginBottom: 15,
-    color: 'white',
-    fontWeight: '600',
-  },
-  loginBtn: {
-    paddingHorizontal: 25,
-    paddingVertical: 10,
-    backgroundColor: '#ff1178',
-    borderRadius: 25,
-    color: 'black',
-    textAlign: 'center',
-  },
-});
+import axios from 'axios'
+import { login } from '../../axios';
 
 export default function LoginScreen(props) {
+  const [inputId, setInputId] = useState("")
+  const [inputPw, setInputPw] = useState("")
+
   const PermissionCheck = () => {
     //To Start Scanning
     if (Platform.OS === 'android') {
@@ -73,25 +44,72 @@ export default function LoginScreen(props) {
       requestCameraPermission();
     }
   };
+
   useEffect(() => {
     PermissionCheck();
   }, []);
+
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.helloText}>망한네이티브</Text>
-        <TextInput placeholder="id" style={styles.textInput} />
+        <Text style={styles.helloText}>로그인중인네이티브</Text>
         <TextInput
-          placeholder="password"
-          secureTextEntry
-          style={styles.textInput}
-        />
+                id="id-address"
+                name="id"
+                type="text"
+                placeholder="id"
+                // onKeyDown={(e) => { console.log(e); }}
+                onChange={(e)=>{setInputId(e.nativeEvent.text)}}
+              />
+        <TextInput
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Password"
+                secureTextEntry = {true}
+                // onKeyDown={(e) => {console.log(e) }}
+                onChange={(e)=>{setInputPw(e.nativeEvent.text)}}
+              />
         <Button
           color="#ff1178"
           title="Login"
-          onPress={() => props.navigation.navigate('Inventory')}
-        />
+          onPress={()=> {login({id: inputId, pw: inputPw}), props.navigation.navigate('TodoList')}}
+          />
       </View>
     </View>
   );
 }
+
+  const screenWidth = Dimensions.get('screen').width;
+  
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#1f1f1f',
+      alignItems: 'center',
+      paddingTop: 250,
+    },
+    helloText: {
+      color: 'white',
+      marginBottom: 20,
+      fontSize: 30,
+    },
+    textInput: {
+      padding: 5,
+      paddingStart: 15,
+      backgroundColor: '#3b3b3b',
+      width: screenWidth * 0.8,
+      borderRadius: 25,
+      marginBottom: 15,
+      color: 'white',
+      fontWeight: '600',
+    },
+    loginBtn: {
+      paddingHorizontal: 25,
+      paddingVertical: 10,
+      backgroundColor: '#ff1178',
+      borderRadius: 25,
+      color: 'black',
+      textAlign: 'center',
+    },
+  });

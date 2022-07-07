@@ -1,17 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
-import {AppBar, Button, HStack, IconButton} from '@react-native-material/core';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {Button} from '@react-native-material/core';
 import {ListItem} from '@react-native-material/core';
-import {
-  View,
-  StyleSheet,
-  Text,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-} from 'react-native';
-import {Menu, MenuItem, MenuDivider} from 'react-native-material-menu';
+import {View, StyleSheet, ScrollView, StatusBar} from 'react-native';
+import Navbar from './Navbar';
 
 export default function Inventory(props) {
   const [inventoryList, setInventoryList] = useState([]);
@@ -35,14 +27,7 @@ export default function Inventory(props) {
         });
     }
   };
-  // const getInventory = () => {
-  //   axios.get("http://13.230.73.69:8080/inventory")
-  //   .then((res)=>{
-  //     console.log(res.data[0])
-  //     setInventoryList(res.data)
-  //   })
-  //   .catch((e)=>{console.log(e)})
-  // }
+
   const keyList = [
     ['이름', 'item_name'],
     ['수량', 'amount'],
@@ -56,12 +41,6 @@ export default function Inventory(props) {
     return result;
   };
 
-  const [visible, setVisible] = useState(false);
-
-  const hideMenu = () => setVisible(false);
-
-  const showMenu = () => setVisible(true);
-
   return (
     <View>
       <Button
@@ -69,7 +48,7 @@ export default function Inventory(props) {
         title="창고 코드 스캔"
         onPress={() =>
           props.navigation.navigate('BarcodeScanner', {
-            onGetBarcodeInventory: onGetBarcodeInventory,
+            onGetBarcode: onGetBarcodeInventory,
             cmdType: 'inventory',
           })
         }
@@ -99,8 +78,5 @@ const styles = StyleSheet.create({
     marginTop: 0,
     marginBottom: 50,
     marginHorizontal: 70,
-  },
-  menuItem: {
-    color: 'black',
   },
 });
