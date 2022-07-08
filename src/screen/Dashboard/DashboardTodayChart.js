@@ -90,7 +90,6 @@ const DashboardTodayChart = (props) => {
       }
     })
       .then((res) => {
-        console.log(res.data)
         setExportData(res.data)
         if (res.data.length) {
           setExportDataMother(res.data.length)
@@ -128,7 +127,6 @@ const DashboardTodayChart = (props) => {
       }
     })
       .then((res) => {
-        console.log(res.data)
         setMoveData(res.data)
         if (res.data.length) {
           setMoveDataMother(res.data.length)
@@ -139,21 +137,12 @@ const DashboardTodayChart = (props) => {
 
 
   const chartConfig = {
-    // backgroundColor: "#ffffff",
-    backgroundGradientFrom: "#6E85B7",
-    backgroundGradientTo: "#B2C8DF",
+    backgroundColor: "#e26a00",
+    backgroundGradientFrom: "#fad6d6",
+    backgroundGradientTo: "#4584a9",
     decimalPlaces: 2, // optional, defaults to 2dp
-    // color: (opacity, value, value3)=>{
-    //   console.log(opacity)
-    //   console.log(value+"인덱스니?"+value3)
-    //   if(opacity===0.2){
-    //     return `rgba(255, 255, 255, 1)`
-    //   }
-    //   return `rgba(0,0,0,1)`
-
-    // },
     color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-    labelColor: (opacity = 1) => "#2c3e50",
+    labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
     style: {
       borderRadius: 16
     },

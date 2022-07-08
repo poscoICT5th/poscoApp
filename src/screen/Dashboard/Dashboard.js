@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import DashboardTodoList from './DashboardTodoList'
 import { ScrollView } from 'native-base'
@@ -134,7 +134,7 @@ const Dashboard = (props) => {
                 {/*  */}
                 <DashboardTodayChart />
                 {/*  */}
-                <View>
+                <View style={styles.dashboardTodolist}>
                     <DashboardTodoList title="입고관리" subTitle="입고예정된 재고들을 바코드스캔" navigate="Import" navigation={props.navigation} />
                     <DashboardTodoList title="출고관리" subTitle="출고예정인 재고들을 바코드스캔" navigate="Export" navigation={props.navigation} />
                     <DashboardTodoList title="창고이동관리" subTitle="창고간 이동예정인 재고들을 바코드스캔" navigate="Move" navigation={props.navigation} />
@@ -144,5 +144,9 @@ const Dashboard = (props) => {
         </ScrollView>
     )
 }
-
+const styles = StyleSheet.create({
+    dashboardTodolist: {
+        marginTop: 10
+    }
+});
 export default Dashboard
