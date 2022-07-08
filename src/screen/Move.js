@@ -10,7 +10,6 @@ export default function TabViewExample() {
   const [moveList, setMoveList] = useState([]);
   //axios
   useEffect(() => {
-    console.log('useeffect');
     axios.defaults.baseURL = 'http://35.77.44.58:8080/move';
     axios
       .get('/move')

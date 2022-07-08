@@ -54,7 +54,7 @@ useEffect(() => {
                 <Stack p="4" space={3}>
                   <Stack space={2}>
                     <Heading size="sm" ml="-1">
-                      lot_no : ####
+                    lot_no : {moveItem.lot_no}
                     </Heading>
                     <Text
                       fontSize="md"
@@ -67,7 +67,7 @@ useEffect(() => {
                       fontWeight="500"
                       ml="-0.5"
                       mt="-1">
-                      amount : {moveItem.status}
+                      move_amount : {moveItem.move_amount}
                     </Text>
                   </Stack>
                   <Text fontWeight="400">
