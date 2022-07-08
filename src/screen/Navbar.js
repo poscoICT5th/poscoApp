@@ -1,12 +1,11 @@
-import React, {useState} from 'react';
-import {useNavigation} from '@react-navigation/native';
-import {AppBar, Button, HStack, IconButton} from '@react-native-material/core';
-import {Menu, MenuDivider, MenuItem} from 'react-native-material-menu';
+import React, { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { AppBar, Button, HStack, IconButton } from '@react-native-material/core';
+import { Menu, MenuDivider, MenuItem } from 'react-native-material-menu';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
-import {StyleSheet, Text} from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import SideMenu from 'react-native-side-menu';
-import {View} from 'native-base';
+import { View } from 'native-base';
 
 export default function Navbar(props) {
   navi = useNavigation();
@@ -63,7 +62,7 @@ export default function Navbar(props) {
             <Text style={styles.menuItem}>창고이동</Text>
           </MenuItem>
           <MenuDivider />
-          <MenuItem onPress={() => {}}>
+          <MenuItem onPress={() => { }}>
             <Text style={styles.menuItem}>로그아웃</Text>
           </MenuItem>
         </Menu>

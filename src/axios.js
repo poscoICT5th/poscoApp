@@ -26,43 +26,4 @@ export const login = async (userInfo) => {
   return result;
 }
 
-export function importToday() {
-  axios.defaults.baseURL = importURL
-  axios.get('/search', {
-    params: {
-      instruction_no: "전체보기",
-      status: "전체보기",
-      lot_no: "전체보기",
-      item_code: "전체보기",
-      item_name: "전체보기",
-      min_order_amount: -1,
-      max_order_amount: 10000000,
-      min_im_amount: -1,
-      max_im_amount: 10000000,
-      unit: "전체보기",
-      min_weight: -1,
-      max_weight: 10000000,
-      min_thickness: -1,
-      max_thickness: 10000000,
-      min_height: -1,
-      max_height: 10000000,
-      min_width: -1,
-      max_width: 10000000,
-      industry_family: "전체보기",
-      product_family: "전체보기",
-      location: "전체보기",
-      to_warehouse: "전체보기",
-      customer: "전체보기",
-      order_date: "전체보기",
-      inst_reg_date: "전체보기",
-      inst_deadline: '2022-12-31',
-      done_date: "전체보기",
-    }
-  })
-    .then((res) => {
-      console.log(res.data)
-      return res.data
-    })
-    .catch((err) => { console.log(err) })
-}
 export default axios;

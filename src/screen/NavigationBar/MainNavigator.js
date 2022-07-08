@@ -24,7 +24,7 @@ const MainNavigator = () => {
                 options={{
                     headerTitle: title,
                     headerStyle: {
-                        backgroundColor: '#354259', //Set Header color
+                        backgroundColor: '#B2C8DF', //Set Header color
                     },
                     headerTintColor: '#fff',
                     headerTitleStyle: {

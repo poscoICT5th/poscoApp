@@ -45,10 +45,6 @@ const TodoList = () => {
                   The Silicon Valley of India.
                 </Text>
               </Stack>
-              <Text fontWeight="400">
-                Bengaluru (also called Bangalore) is the center of India's high-tech
-                industry. The city is also known for its parks and nightlife.
-              </Text>
               <HStack alignItems="center" space={4} justifyContent="space-between">
                 <HStack alignItems="center">
                   <Text color="coolGray.600" _dark={{
