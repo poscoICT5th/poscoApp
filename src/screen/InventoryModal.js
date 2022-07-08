@@ -33,28 +33,16 @@ const InventoryModal = props => {
           <Modal.Header>Order</Modal.Header>
           <Modal.Body>
             <VStack space={3}>
-            <HStack alignItems="center" justifyContent="space-between">
+              <HStack alignItems="center" justifyContent="space-between">
                 <Text fontWeight="medium">customer</Text>
                 <Text color="blueGray.400">{props.inventoryItem.customer}</Text>
               </HStack>
-              <HStack alignItems="center" justifyContent="space-between">
-                <Text fontWeight="medium">item_code</Text>
-                <Text color="blueGray.400">{props.inventoryItem.item_code}</Text>
-              </HStack>
-              <HStack alignItems="center" justifyContent="space-between">
-                <Text fontWeight="medium">inventory_date</Text>
-                <Text color="blueGray.400">{props.inventoryItem.inventory_date}</Text>
-              </HStack>
+
               <HStack alignItems="center" justifyContent="space-between">
                 <Text fontWeight="medium">height</Text>
                 <Text color="blueGray.400">{props.inventoryItem.height}</Text>
               </HStack>
-              <HStack alignItems="center" justifyContent="space-between">
-                <Text fontWeight="medium">industry_family</Text>
-                <Text color="blueGray.400">
-                  {props.inventoryItem.industry_family}
-                </Text>
-              </HStack>
+
               <HStack alignItems="center" justifyContent="space-between">
                 <Text fontWeight="medium">location</Text>
                 <Text color="blueGray.400">{props.inventoryItem.location}</Text>
@@ -71,10 +59,7 @@ const InventoryModal = props => {
                   {props.inventoryItem.product_family}
                 </Text>
               </HStack>
-              <HStack alignItems="center" justifyContent="space-between">
-                <Text fontWeight="medium">state</Text>
-                <Text color="blueGray.400">{props.inventoryItem.state}</Text>
-              </HStack>
+
               <HStack alignItems="center" justifyContent="space-between">
                 <Text fontWeight="medium">status_cause</Text>
                 <Text color="blueGray.400">

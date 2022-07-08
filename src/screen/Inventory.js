@@ -20,6 +20,7 @@ import {
 
 import Navbar from './Navbar';
 import InventoryModal from './InventoryModal';
+import InventoryButton from './InventoryButton';
 
 //창고안에 있는 재고들 출력
 //최근순 , 상태 순 setstate 에 담
@@ -28,25 +29,43 @@ export default function Inventory(props) {
   const [showModal, setShowModal] = useState(false);
   //axios
   useEffect(() => {
-    axios.defaults.baseURL = 'http://13.230.73.69:8080/inventory';
-    axios
-      //.get(`/warehouse/${warehouseCode}`)
-      .get(`/warehouse/GA04`)
-      .then(res => {
-       // console.log(res.data, '받아온 데이터');
-        setInventoryList(res.data);
-        //setInventoryList([...res.data]);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    console.log('useeffect');
+      axios.defaults.baseURL = 'http://13.230.73.69:8080/inventory';
+      axios
+        .get(`/warehouse/GA04`)
+        .then(res => {
+          setInventoryList(res.data);
+          setSortButton(false);
+        })
+        .catch(err => {
+          console.log(err);
+        });
   }, []);
-
-  const title = ' 제목';
-  const subTitle = '부제목';
+  function sortDate() {
+    inventoryList.sort(function (a, b) {
+      if (a.inventory_date < b.inventory_date) return -1;
+      if (a.inventory_date > b.inventory_date) return 1;
+      if (a.inventory_date === b.inventory_date) return 0;
+      else return -1;
+    })
+    setInventoryList([...inventoryList])
+  }
+  function sortState() {
+    inventoryList.sort(function (a, b) {
+      if (a.state < b.state) return -1;
+      if (a.state > b.state) return 1;
+      if (a.state === b.state) return 0;
+      else return -1;
+    })
+    setInventoryList([...inventoryList])
+  }
   return (
     <NativeBaseProvider>
       <ScrollView>
+        <InventoryButton
+          sortDate={sortDate}
+          sortState={sortState}
+        />
         {inventoryList.map(inventoryItem => {
           return (
             <Box alignItems="center" marginY={3}>
@@ -71,7 +90,7 @@ export default function Inventory(props) {
                 <Stack p="4" space={3}>
                   <Stack space={2}>
                     <Heading size="sm" ml="-1">
-                    lot_no : ####
+                      lot_no : ####
                     </Heading>
                     <Text
                       fontSize="md"
@@ -87,12 +106,15 @@ export default function Inventory(props) {
                       amount : {inventoryItem.amount}
                     </Text>
                   </Stack>
-                 
+
                   <Text fontWeight="400">
                     item_name : {inventoryItem.item_name}
                   </Text>
                   <Text fontWeight="400">
                     item_code : {inventoryItem.item_code}
+                  </Text>
+                  <Text fontWeight="400">
+                    state : {inventoryItem.state}
                   </Text>
                   <Text fontWeight="400">
                     inventory_date : {inventoryItem.inventory_date}
