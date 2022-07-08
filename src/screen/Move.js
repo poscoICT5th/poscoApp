@@ -1,19 +1,35 @@
-import React, {useState} from 'react';
+import axios from 'axios';
+import React, {useState, useEffect} from 'react';
 import {View, StyleSheet, Dimensions, StatusBar} from 'react-native';
 import {TabView, SceneMap} from 'react-native-tab-view';
 import Move_first from './Move_first';
+import Move_second from './Move_second';
+import Move_third from './Move_third';
 
 export default function TabViewExample() {
-  const FirstRoute = () => (
-    // <View style={[styles.scene, { backgroundColor: '#ffffff' }]}/>
-<Move_first/>
-  );
+  const [moveList, setMoveList] = useState([]);
+  //axios
+  useEffect(() => {
+    console.log('useeffect');
+    axios.defaults.baseURL = 'http://35.77.44.58:8080/move';
+    axios
+      .get('/move')
+      .then(res => {
+        setMoveList(res.data);
+        console.log(res.data);
+        // first();
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
 
-  const SecondRoute = () => (
-    <View style={[styles.scene, {backgroundColor: '#673ab7'}]} />
-  );
+  const FirstRoute = () => <Move_first moveList={moveList} />;
+
+  const SecondRoute = () => <Move_second moveList={moveList} />;
   const finish = () => (
-    <View style={[styles.scene, {backgroundColor: '#FFFFFF'}]} />
+    // <View style={[styles.scene, {backgroundColor: '#FFFFFF'}]} />
+    <Move_third moveList={moveList} />
   );
   const initialLayout = {width: Dimensions.get('window').width};
 

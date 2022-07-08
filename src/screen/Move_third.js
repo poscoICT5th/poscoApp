@@ -18,15 +18,15 @@ import {
 } from 'native-base';
 
 const Move_first = (props) => {
-    const [moveList, setMoveList] = useState([]);
     const [doneList, setDoneList] = useState([]);
 
-  useEffect(() => {
-    first()
-}, [])
+    useEffect(() => {
+        first()
+    }, [])
 //예정인것 , 필터링 
     function first() {
-        setDoneList([...props.moveList.filter(moveItem => moveItem.status === '이동예정')]);
+        console.log(123123)
+        setDoneList([...props.moveList.filter(moveItem => moveItem.status === '이동완료')]);
     }
     
   return (
