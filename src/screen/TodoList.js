@@ -16,7 +16,7 @@ import {
   VStack,
 } from 'native-base';
 
-export default function Example() {
+export default function Example({navigation, route}) {
   const instState = [
     {
       title: 'Code',

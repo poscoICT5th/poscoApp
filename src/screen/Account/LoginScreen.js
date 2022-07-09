@@ -11,10 +11,16 @@ import {
 } from 'react-native';
 import axios from 'axios'
 import { login } from '../../axios';
+import useRootData from '../../hooks/useRootData';
 
 export default function LoginScreen(props) {
   const [inputId, setInputId] = useState("")
   const [inputPw, setInputPw] = useState("")
+  const {loginApi} = useRootData(
+    ({screenModeStore}) => ({
+      loginApi: screenModeStore.loginApi,
+    }),
+  );
 
   const PermissionCheck = () => {
     //To Start Scanning
@@ -52,7 +58,7 @@ export default function LoginScreen(props) {
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.helloText}>로그인중인네이티브</Text>
+        <Text style={styles.helloText}>로그인된듯한네이티브</Text>
         <TextInput
                 id="id-address"
                 name="id"
@@ -73,7 +79,8 @@ export default function LoginScreen(props) {
         <Button
           color="#ff1178"
           title="Login"
-          onPress={()=> {login({id: inputId, pw: inputPw}), props.navigation.navigate('TodoList')}}
+          onPress={()=> {loginApi({id: inputId, pw: inputPw})}
+                  }
           />
       </View>
     </View>

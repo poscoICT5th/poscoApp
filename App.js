@@ -107,10 +107,10 @@ function StackNavigator() {
     headerShown: false,
   });
   return (
-    <StackApp.Navigator initialRouteName="LoginScreen" backBehavior="history">
+    <StackApp.Navigator initialRouteName='TodoList' backBehavior="history">
       <StackApp.Screen
-        name="LoginScreen"
-        component={LoginScreen}
+        name="TodoList"
+        component={TodoList}
         options={navOptionHandler}
       />
       <StackApp.Screen
@@ -131,11 +131,6 @@ function StackNavigator() {
       <StackApp.Screen
         name="Move"
         component={Move}
-        options={navOptionHandler}
-      />
-      <StackApp.Screen
-        name="TodoList"
-        component={TodoList}
         options={navOptionHandler}
       />
       <StackApp.Screen
@@ -193,8 +188,8 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <MainNavigator />
-      {/* {token ? <MainNavigator /> : <LoginNavigator/>} */}
+      {/* <MainNavigator /> */}
+      {token ? <MainNavigator /> : <LoginNavigator/>}
     </NavigationContainer>
   );
 }

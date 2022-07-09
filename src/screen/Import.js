@@ -4,9 +4,17 @@ import {Button} from '@react-native-material/core';
 import {ListItem} from '@react-native-material/core';
 import {View, StyleSheet, ScrollView, StatusBar, Alert} from 'react-native';
 import Navbar from './Navbar';
+import useRootData from '../hooks/useRootData';
+import store from '../store/screenModeStore';
 
 export default function Import(props) {
   const [importList, setImportList] = useState([]);
+
+  const {loginApi} = useRootData(
+    ({screenModeStore}) => ({
+      loginApi: screenModeStore.loginApi,
+    }),
+  );
 
   const onGetBarcodeImport = (barcodeValue, cmdType) => {
     console.log('barcode value: ', barcodeValue);
@@ -28,10 +36,20 @@ export default function Import(props) {
             .then(res2 => {
               Alert.alert(res.data.instruction_no + ' 입고 완료되었습니다.');
             })
+            axios
+              .get('/import/search?to_warehouse=' + store.token.to_warehouse)
+              // .get('/import/search?to_warehouse=399')
+              .then(res3 => {
+                console.log(res.data.to_warehouse);
+              })
+              .catch(e => {
+                console.log(e);
+                Alert.alert(e);
+              })
             .catch(e => {
               console.log(e);
               Alert.alert(e);
-            });
+            }); 
         })
         .catch(e => {
           console.log(e);
