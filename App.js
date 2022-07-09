@@ -15,11 +15,7 @@ const App = () => {
   return (
     <NativeBaseProvider>
       <NavigationContainer>
-        {
-          token
-            ? <MainNavigator />
-            : null
-        }
+ <MainNavigator />
       </NavigationContainer>
     </NativeBaseProvider>
   )
