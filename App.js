@@ -16,10 +16,6 @@ const App = () => {
     <NativeBaseProvider>
       <NavigationContainer>
         <MainNavigator />
-<<<<<<< HEAD
-        {/* <StackNavigator /> */}
-=======
->>>>>>> 281737e9889fdbcfbe0ebe70ba540e86aa86b3ed
       </NavigationContainer>
     </NativeBaseProvider>
   )
