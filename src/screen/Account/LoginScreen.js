@@ -2,11 +2,27 @@ import React, { useEffect, useState } from 'react';
 import { PermissionsAndroid } from 'react-native';
 import { login } from '../../axios';
 import { Box, Heading, VStack, FormControl, Input, Button, Center, NativeBaseProvider } from "native-base";
+import axios from 'axios';
+import jwtDecode from 'jwt-decode';
 
 export default function LoginScreen(props) {
   const [id, setId] = useState("")
   const [pw, setPw] = useState("")
 
+  function login(loginInfo) {
+    axios.defaults.baseURL = "http://18.177.162.121:8080/user"
+    axios
+      .post('/login', loginInfo)
+      .then(res => {
+        console.log(res.data.sessionID)
+        console.log(res.data.token);
+        console.log(jwtDecode(res.data.token));
+        props.navigation.navigate('Dashboard')
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
   const PermissionCheck = () => {
     //To Start Scanning
     if (Platform.OS === 'android') {
@@ -39,7 +55,6 @@ export default function LoginScreen(props) {
   useEffect(() => {
     PermissionCheck();
   }, []);
-
   return (
     <NativeBaseProvider>
       <Center w="100%" marginTop={20}>
@@ -59,7 +74,7 @@ export default function LoginScreen(props) {
             <Input onChange={(e) => { setId(e.nativeEvent.text) }} />
             <FormControl.Label>Password</FormControl.Label>
             <Input type="password" onChange={(e) => { setPw(e.nativeEvent.text) }} />
-            <Button mt="2" onPress={() => { login({ id: id, pw: pw }), props.navigation.navigate('Dashboard') }}>
+            <Button mt="2" onPress={() => { login({ id: id, pw: pw }) }}>
               Sign in
             </Button>
           </VStack>
