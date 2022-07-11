@@ -62,6 +62,16 @@ const CustomDrawerContent = (props) => {
                         <Text style={styles.title}>Move</Text>
                     </TouchableOpacity>
                 </View>
+
+                <View style={styles.buttonContainer}>
+                    <TouchableOpacity
+                        onPress={() => {
+                            props.navigation.navigate('Mypage');
+                            props.setTitle('Mypage');
+                        }}>
+                        <Text style={styles.title}>Mypage</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </DrawerContentScrollView>
     );
