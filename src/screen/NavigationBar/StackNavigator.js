@@ -9,6 +9,7 @@ import Move from '../Move';
 import Home from '../Home';
 import BarcodeScanner from '../BarcodeScanner';
 import Dashboard from '../Dashboard/Dashboard';
+import Mypage from '../Mypage';
 
 const StackApp = createStackNavigator();
 const StackNavigator = () => {
@@ -55,6 +56,11 @@ const StackNavigator = () => {
             <StackApp.Screen
                 name="BarcodeScanner"
                 component={BarcodeScanner}
+                options={navOptionHandler}
+            />
+            <StackApp.Screen
+                name="Mypage"
+                component={Mypage}
                 options={navOptionHandler}
             />
         </StackApp.Navigator>
