@@ -2,6 +2,7 @@ import 'react-native-gesture-handler';
 import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import useRootData from './src/hooks/useRootData';
+import StackNavigator from './src/screen/NavigationBar/StackNavigator'
 import MainNavigator from './src/screen/NavigationBar/MainNavigator'
 import { NativeBaseProvider } from 'native-base';
 
@@ -15,7 +16,8 @@ const App = () => {
   return (
     <NativeBaseProvider>
       <NavigationContainer>
- <MainNavigator />
+        <MainNavigator />
+        <StackNavigator />
       </NavigationContainer>
     </NativeBaseProvider>
   )
