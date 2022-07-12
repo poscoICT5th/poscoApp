@@ -5,9 +5,12 @@ import Move_first from './Move_first';
 import Move_second from './Move_second';
 import Move_third from './Move_third';
 import axios from 'axios';
-
+import MoveModal from './MoveModal';
+import { NativeBaseProvider } from 'native-base';
+import Stagger1 from './Stagger1';
 const Move = props => {
   const [moveList, setMoveList] = useState([]);
+  const [showModal, setShowModal] = useState(false);
   //axios
   useEffect(() => {
     axios.defaults.baseURL = 'http://35.77.44.58:8080/move';
@@ -76,12 +79,16 @@ const Move = props => {
   });
 
   return (
+
+
     <TabView
       navigationState={state}
       renderScene={_renderScene}
       renderTabBar={_renderTabBar}
       onIndexChange={_handleIndexChange}
-    />
+      />
+
+     
   );
 };
 export default Move;

@@ -7,8 +7,9 @@ import {
   HStack,
   Center,
   NativeBaseProvider,
+  View
 } from 'native-base';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import axios from 'axios';
 
@@ -45,7 +46,7 @@ const Example = props => {
   };
 
   return (
-    <View style={{alignSelf: 'flex-start', alignContent: 'flex-start'}}>
+    <View style={{alignSelf: 'flex-end', alignContent: 'flex-end', marginRight: 13,}}>
       <Center>
         <Box alignItems="center" minH="110">
           <Stagger
@@ -80,50 +81,59 @@ const Example = props => {
                 },
               },
             }}>
-            <IconButton
+          <IconButton
               mb="4"
               size="lg"
               variant="solid"
-              bg="indigo.500"
+              bg="yellow.400"
               colorScheme="indigo"
               borderRadius="full"
-              icon={<Icon name="delete" size={6} color="#e33057" />}
-              // onPress={() =>
-              //   props.navigation.navigate('BarcodeScanner', {
-              //     onGetBarcode: onGetBarcodeExport,
-              //     cmdType: 'export',
-              //   })
-              // }
+              icon={<Icon as={Icon}
+              name="comment"
+              size={20}
+              color="black"
+              _dark={{
+                color: 'warmGray.50',
+              }} />}
             />
             <IconButton
               mb="4"
               size="lg"
               variant="solid"
-              bg="indigo.500"
+              bg="indigo.400"
               colorScheme="indigo"
               borderRadius="full"
-              icon={<Icon name="circledowno" size={6} color="#3143e8" />}
+              icon={<Icon as={Icon}
+              name="camera"
+              size={20}
+              color="black"
+              _dark={{
+                color: 'warmGray.50',
+              }} />}
             />
-            {/* <Icon.Button
-               mb="4"
-               size="lg"
-               variant="solid"
-               bg="indigo.500"
-              colorScheme="indigo"
-              borderRadius="full"
-              icon={<Icon name="camera" size={6} color="#3143e8" />}
-              // onPress={this.loginWithFacebook}
-            ></Icon.Button> */}
           </Stagger>
         </Box>
         <HStack alignItems="center">
           <IconButton
-            variant="solid"
+            mb="4"
+            // variant="solid"
             borderRadius="full"
             size="lg"
             onPress={onToggle}
-            bg="cyan.400"
-            icon={<Icon name="circledowno" size={10} color="#3143e8" />}
+            // bg="blue"
+            // colorScheme="gray"
+            variant="ghost"
+            icon={
+              <Icon
+                as={Icon}
+                name="angle-up"
+                size={30}
+                color="black"
+                // _dark={{
+                //   color: 'warmGray.50',
+                // }}
+              />
+            }
           />
         </HStack>
       </Center>

@@ -16,10 +16,13 @@ import {
   VStack,
   Button,
 } from 'native-base';
+import MoveModal from './MoveModal';
+import Stagger1 from './Stagger1';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const Move_first = props => {
+const Move_third = props => {
   const [doneList, setDoneList] = useState([]);
-
+  const [showModal, setShowModal] = useState(false);
   useEffect(() => {
     first();
   }, []);
@@ -37,6 +40,7 @@ const Move_first = props => {
         {doneList.map(moveItem => {
           return (
             <Box alignItems="center" marginY={3}>
+                <TouchableOpacity onPress={() => setShowModal(true)}>
               <Box
                 width="80"
                 rounded="lg"
@@ -80,12 +84,20 @@ const Move_first = props => {
                   <Text fontWeight="400">item_name : {moveItem.item_name}</Text>
                 </Stack>
               </Box>
+              <MoveModal
+                showModal={showModal}
+                setShowModal={setShowModal}
+                moveItem={moveItem}
+              />
+                </TouchableOpacity>
             </Box>
           );
         })}
+          
       </ScrollView>
+      <Stagger1></Stagger1>
     </NativeBaseProvider>
   );
 };
 
-export default Move_first;
+export default Move_third;

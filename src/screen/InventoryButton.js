@@ -12,28 +12,27 @@ import {
   HStack,
 } from 'native-base';
 //최근 순 , 상태 순
+//여기는 안씀
 const InventoryButton = props => {
   return (
     <NativeBaseProvider>
       <Center flex={3} px="3">
         <HStack space={2} justifyContent="center">
-          <Button
-            size="sm"
-            variant="ghost"
-            onPress={() => {
-              props.sortDate();
-            }}>
-            SortDate
-          </Button>
-          <Button
-            size="sm"
-            variant="ghost"
-            colorScheme="secondary"
-            onPress={() => {
-              props.sortState();
-            }}>
-            SortState
-          </Button>
+          {props.userWarehouseCode.map((code, i) => {
+            return (
+              <Button
+                key={i}
+                size="sm"
+                 variant="ghost"
+                 colorScheme="secondary"
+                onPress={() => {
+                  props.setCurWarehouseCode(code)
+
+                }}>
+                {code}
+              </Button>)
+          })
+          }          
         </HStack>
       </Center>
     </NativeBaseProvider>
