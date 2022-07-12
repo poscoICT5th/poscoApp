@@ -24,6 +24,7 @@ import MoveModal from './MoveModal';
 const Move_first = props => {
   const [doneList, setDoneList] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  
   useEffect(() => {
     first();
   }, []);
@@ -37,7 +38,7 @@ const Move_first = props => {
   return (
    
     <NativeBaseProvider>
-      <ScrollView style={{height:"100%"}}>
+      <ScrollView>
         {doneList.map(moveItem => {
           return (
             <Box alignItems="center" marginY={3}>
@@ -99,8 +100,14 @@ const Move_first = props => {
             </Box>
           );
         })}
-<Stagger1></Stagger1>
       </ScrollView>
+      <View style={{position:'absolute', bottom:0, right:13}}>
+        <Stagger1
+          title="move"
+          onGetBarcode={props.onGetBarcodeMove}
+          navigation= {props.navigation}
+        />
+      </View>
       </NativeBaseProvider>
    
 
