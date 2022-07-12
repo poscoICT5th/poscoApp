@@ -17,12 +17,7 @@ const StackNavigator = () => {
         headerShown: false,
     });
     return (
-        <StackApp.Navigator initialRouteName="LoginScreen" backBehavior="history">
-            <StackApp.Screen
-                name="LoginScreen"
-                component={LoginScreen}
-                options={navOptionHandler}
-            />
+        <StackApp.Navigator initialRouteName="Dashboard" backBehavior="history">
             <StackApp.Screen
                 name="Inventory"
                 component={Inventory}
