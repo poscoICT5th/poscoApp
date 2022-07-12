@@ -6,8 +6,7 @@ import {
   Stagger,
   HStack,
   Center,
-  NativeBaseProvider,
-  View
+  NativeBaseProvider
 } from 'native-base';
 import {StyleSheet, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
