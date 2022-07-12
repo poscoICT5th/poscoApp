@@ -15,20 +15,6 @@ export default function LoginScreen(props) {
     }),
   );
 
-  function login(loginInfo) {
-    axios.defaults.baseURL = "http://18.177.162.121:8080/user"
-    axios
-      .post('/login', loginInfo)
-      .then(res => {
-        console.log(res.data.sessionID)
-        console.log(res.data.token);
-        console.log(jwtDecode(res.data.token));
-        props.navigation.navigate('Dashboard')
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
   const PermissionCheck = () => {
     //To Start Scanning
     if (Platform.OS === 'android') {
