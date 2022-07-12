@@ -1,16 +1,15 @@
-import axios from 'axios';
-import React, {useState, useEffect} from 'react';
-import {View, StyleSheet, Dimensions, StatusBar} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Animated, View, TouchableOpacity, StyleSheet, Text} from 'react-native';
 import {TabView, SceneMap} from 'react-native-tab-view';
 import Move_first from './Move_first';
 import Move_second from './Move_second';
 import Move_third from './Move_third';
+import axios from 'axios';
 
-export default function TabViewExample() {
+const Move = props => {
   const [moveList, setMoveList] = useState([]);
   //axios
   useEffect(() => {
-    console.log('useeffect');
     axios.defaults.baseURL = 'http://35.77.44.58:8080/move';
     axios
       .get('/move')
@@ -24,44 +23,81 @@ export default function TabViewExample() {
       });
   }, []);
 
-  const FirstRoute = () => <Move_first moveList={moveList} />;
-
-  const SecondRoute = () => <Move_second moveList={moveList} />;
-  const finish = () => (
-    // <View style={[styles.scene, {backgroundColor: '#FFFFFF'}]} />
-    <Move_third moveList={moveList} />
+  const FirstRoute = () => (
+    <Move_first moveList={moveList} style={{backgroundColor: '#ffffff'}} />
   );
-  const initialLayout = {width: Dimensions.get('window').width};
+  const SecondRoute = () => <Move_second moveList={moveList} />;
+  const ThirdRoute = () => (
+    <Move_third
+      moveList={moveList}
+      style={[styles.container, {backgroundColor: '#ffffff'}]}
+    />
+  );
+  const [state, setState] = useState({
+    index: 0,
+    routes: [
+      {key: 'first', title: '이동예정'},
+      {key: 'second', title: '이동중'},
+      {key: 'third', title: '이동완료'},
+    ],
+  });
+  _handleIndexChange = index => this.setState({index});
 
-  const renderScene = SceneMap({
+  _renderTabBar = props => {
+    const inputRange = props.navigationState.routes.map((x, i) => i);
+
+    return (
+      <View style={styles.tabBar}>
+        {props.navigationState.routes.map((route, i) => {
+          const opacity = props.position.interpolate({
+            inputRange,
+            outputRange: inputRange.map(inputIndex =>
+              inputIndex === i ? 1 : 0.5,
+            ),
+          });
+
+          return (
+            <TouchableOpacity
+              key={i}
+              style={styles.tabItem}
+              onPress={() => setState({...state, index: i})}>
+              <Animated.Text style={{opacity}}>{route.title}</Animated.Text>
+            </TouchableOpacity>
+          );
+        })}
+      </View>
+    );
+  };
+
+  _renderScene = SceneMap({
     first: FirstRoute,
     second: SecondRoute,
-    3: finish,
+    third: ThirdRoute,
   });
-
-  const [index, setIndex] = useState(0);
-  const [routes, setRoutes] = useState([
-    {key: 'first', title: '이동예정'},
-    {key: 'second', title: '이동중'},
-    {key: '3', title: '이동완료'},
-  ]);
 
   return (
     <TabView
-      navigationState={{index, routes}}
-      renderScene={renderScene}
-      onIndexChange={setIndex}
-      initialLayout={initialLayout}
-      style={styles.container}
+      navigationState={state}
+      renderScene={_renderScene}
+      renderTabBar={_renderTabBar}
+      onIndexChange={_handleIndexChange}
     />
   );
-}
+};
+export default Move;
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: StatusBar.currentHeight,
-  },
-  scene: {
     flex: 1,
+    backgroundColor: 'white',
+  },
+  tabBar: {
+    flexDirection: 'row',
+  },
+  tabItem: {
+    flex: 1,
+    alignItems: 'center',
+    padding: 16,
+    backgroundColor: 'white',
   },
 });
