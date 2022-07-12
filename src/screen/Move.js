@@ -90,18 +90,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-<<<<<<< HEAD
-=======
-  },
-  tabBar: {
-    flexDirection: 'row',
-  },
-  tabItem: {
-    flex: 1,
-    alignItems: 'center',
-    padding: 16,
-    backgroundColor: 'white',
->>>>>>> anzi
   },
   tabBar: {
     flexDirection: 'row',

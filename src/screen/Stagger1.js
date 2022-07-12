@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   Box,
   useDisclose,
@@ -12,11 +12,9 @@ import {StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import axios from 'axios';
 
-const Example = (props) => {
-  const { isOpen, onToggle } = useDisclose();
+const Example = props => {
+  const {isOpen, onToggle} = useDisclose();
   const [exportList, setExportList] = useState([]);
-
-
 
   const onGetBarcodeExport = (barcodeValue, cmdType) => {
     console.log('barcode value: ', barcodeValue);
@@ -45,7 +43,6 @@ const Example = (props) => {
         });
     }
   };
-
 
   return (
     <View style={{alignSelf: 'flex-start', alignContent: 'flex-start'}}>
@@ -133,7 +130,6 @@ const Example = (props) => {
     </View>
   );
 };
-
 
 export default () => {
   return (

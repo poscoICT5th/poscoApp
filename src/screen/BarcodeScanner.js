@@ -22,14 +22,19 @@ class BarcodeScanner extends Component {
   /**
    * 바코드 스캔
    */
-  
+
   onBarcodeScan(barcodeValue) {
     console.log('onBarcodeScan');
     if (!isFirstGet) {
       return;
     }
     isFirstGet = false;
-    if (this.cmdType == 'inventory' || this.cmdType == 'import' || this.cmdType == 'export' || this.cmdType == 'move') {
+    if (
+      this.cmdType == 'inventory' ||
+      this.cmdType == 'import' ||
+      this.cmdType == 'export' ||
+      this.cmdType == 'move'
+    ) {
       this.props.route.params.onGetBarcode(barcodeValue, this.cmdType);
     } else {
       this.props.route.params.onGetBarcode(barcodeValue, this.cmdType);
@@ -44,6 +49,8 @@ class BarcodeScanner extends Component {
       isFirstGet = true;
     }, 2000);
   }
+
+  //AAAAAZZZZZ
 
   //TODO Home.js로 이동시키세요
   checkCameraPermission() {}

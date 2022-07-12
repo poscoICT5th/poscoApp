@@ -17,22 +17,24 @@ import {
   Button,
 } from 'native-base';
 
-const Move_first = (props) => {
-    const [doneList, setDoneList] = useState([]);
-  
-useEffect(() => {
-    first()
-}, [])
-//예정인것 , 필터링 
-    function first() {
-        setDoneList([...props.moveList.filter(moveItem => moveItem.status === '이동중')]);
-    }
-    
+const Move_first = props => {
+  const [doneList, setDoneList] = useState([]);
+
+  useEffect(() => {
+    first();
+  }, []);
+  //예정인것 , 필터링
+  function first() {
+    setDoneList([
+      ...props.moveList.filter(moveItem => moveItem.status === '이동중'),
+    ]);
+  }
+
   return (
     <NativeBaseProvider>
       <ScrollView>
-      {doneList.map(moveItem => {
-       return (
+        {doneList.map(moveItem => {
+          return (
             <Box alignItems="center" marginY={3}>
               <Box
                 width="80"
@@ -54,7 +56,7 @@ useEffect(() => {
                 <Stack p="4" space={3}>
                   <Stack space={2}>
                     <Heading size="sm" ml="-1">
-                    lot_no : {moveItem.lot_no}
+                      lot_no : {moveItem.lot_no}
                     </Heading>
                     <Text
                       fontSize="md"
@@ -71,22 +73,18 @@ useEffect(() => {
                     </Text>
                   </Stack>
                   <Text fontWeight="400">
-                  instruction_no : {moveItem.instruction_no}
-                       </Text>
-                       <Text fontWeight="400">
-                       item_code : {moveItem.item_code}
-                       </Text>
-                       <Text fontWeight="400">
-                       item_name : {moveItem.item_name}
-                       </Text>
+                    instruction_no : {moveItem.instruction_no}
+                  </Text>
+                  <Text fontWeight="400">item_code : {moveItem.item_code}</Text>
+                  <Text fontWeight="400">item_name : {moveItem.item_name}</Text>
                 </Stack>
               </Box>
             </Box>
-        );
-    })}
+          );
+        })}
       </ScrollView>
     </NativeBaseProvider>
-  )
-}
+  );
+};
 
-export default Move_first
+export default Move_first;

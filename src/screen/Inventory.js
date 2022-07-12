@@ -31,16 +31,15 @@ export default function Inventory(props) {
   //axios
   useEffect(() => {
     console.log('useeffect');
-      axios.defaults.baseURL = 'http://13.230.73.69:8080/inventory';
-      axios
-        .get(`/warehouse/GA04`)
-        .then(res => {
-          setInventoryList(res.data);
-          setSortButton(false);
-        })
-        .catch(err => {
-          console.log(err);
-        });
+    axios.defaults.baseURL = 'http://13.230.73.69:8080/inventory';
+    axios
+      .get(`/warehouse/GA04`)
+      .then(res => {
+        setInventoryList(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }, []);
   function sortDate() {
     inventoryList.sort(function (a, b) {
@@ -48,8 +47,8 @@ export default function Inventory(props) {
       if (a.inventory_date > b.inventory_date) return 1;
       if (a.inventory_date === b.inventory_date) return 0;
       else return -1;
-    })
-    setInventoryList([...inventoryList])
+    });
+    setInventoryList([...inventoryList]);
   }
   function sortState() {
     inventoryList.sort(function (a, b) {
@@ -57,23 +56,16 @@ export default function Inventory(props) {
       if (a.state > b.state) return 1;
       if (a.state === b.state) return 0;
       else return -1;
-    })
-    setInventoryList([...inventoryList])
+    });
+    setInventoryList([...inventoryList]);
   }
   return (
     <NativeBaseProvider>
       <ScrollView>
-      <Center flex={1} px="3">
-          <Actionsheet1
-          sortDate={sortDate}
-          sortState={sortState}
-          
-          />
-            </Center>
-        <InventoryButton
-          sortDate={sortDate}
-          sortState={sortState}
-        />
+        <Center flex={1} px="3">
+          <Actionsheet1 sortDate={sortDate} sortState={sortState} />
+        </Center>
+        <InventoryButton sortDate={sortDate} sortState={sortState} />
         {inventoryList.map(inventoryItem => {
           return (
             <Box alignItems="center" marginY={3}>
@@ -121,9 +113,7 @@ export default function Inventory(props) {
                   <Text fontWeight="400">
                     item_code : {inventoryItem.item_code}
                   </Text>
-                  <Text fontWeight="400">
-                    state : {inventoryItem.state}
-                  </Text>
+                  <Text fontWeight="400">state : {inventoryItem.state}</Text>
                   <Text fontWeight="400">
                     inventory_date : {inventoryItem.inventory_date}
                   </Text>

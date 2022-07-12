@@ -94,15 +94,9 @@ const Move_first = props => {
             </Box>
           );
         })}
-    <Stagger1></Stagger1>
+        <Stagger1></Stagger1>
       </ScrollView>
-
     </NativeBaseProvider>
-
-
-
-    
-    
   );
 };
 
