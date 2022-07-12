@@ -107,11 +107,16 @@ const Example = (props) => {
               borderRadius="full"
               icon={<Icon name="circledowno" size={6} color="#3143e8" />}
             />
-            <Icon.Button
-              name="facebook"
-              backgroundColor="#3b5998"
+            {/* <Icon.Button
+               mb="4"
+               size="lg"
+               variant="solid"
+               bg="indigo.500"
+              colorScheme="indigo"
+              borderRadius="full"
+              icon={<Icon name="camera" size={6} color="#3143e8" />}
               // onPress={this.loginWithFacebook}
-            ></Icon.Button>
+            ></Icon.Button> */}
           </Stagger>
         </Box>
         <HStack alignItems="center">
