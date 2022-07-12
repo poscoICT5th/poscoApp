@@ -6,7 +6,8 @@ import {
   Stagger,
   HStack,
   Center,
-  NativeBaseProvider
+  NativeBaseProvider,
+  View
 } from 'native-base';
 import {StyleSheet, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -46,7 +47,7 @@ const Example = props => {
   };
 
   return (
-    <View style={{alignSelf: 'flex-end', alignContent: 'flex-end', marginRight: 13,}}>
+    // <View style={{alignSelf: 'flex-end', alignContent: 'flex-end', marginRight: 13,}}>
       <Center>
         <Box alignItems="center" minH="110">
           <Stagger
@@ -137,7 +138,7 @@ const Example = props => {
           />
         </HStack>
       </Center>
-    </View>
+    // </View>
   );
 };
 

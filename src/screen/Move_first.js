@@ -35,7 +35,7 @@ const Move_first = props => {
   }
 
   return (
-    <View  style={{height:"90%",zIndex:1}}>
+   
     <NativeBaseProvider>
       <ScrollView style={{height:"100%"}}>
         {doneList.map(moveItem => {
@@ -99,13 +99,11 @@ const Move_first = props => {
             </Box>
           );
         })}
-
+<Stagger1></Stagger1>
       </ScrollView>
       </NativeBaseProvider>
-      <View style={{zIndex:3}}>
-      <Stagger1 style={{zIndex:4}}></Stagger1>
-    </View>
-    </View>
+   
+
  
    
   );
