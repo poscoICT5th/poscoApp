@@ -1,12 +1,11 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import axios from 'axios';
 import {Button} from '@react-native-material/core';
 import {ListItem} from '@react-native-material/core';
 import {View, StyleSheet, ScrollView, StatusBar, Alert} from 'react-native';
-import Navbar from './Navbar';
 import useRootData from '../hooks/useRootData';
-import store from '../store/screenModeStore';
 import jwtDecode from 'jwt-decode';
+import Toast from 'react-native-easy-toast';
 
 export default function Import(props) {
   const [importList, setImportList] = useState([]);
@@ -19,6 +18,8 @@ export default function Import(props) {
 
   let team = jwtDecode(token.get().token).info.team;
   console.log(team);
+
+  const toastRef = useRef();
 
   const onGetBarcodeImport = (barcodeValue, cmdType) => {
     console.log('barcode value: ', barcodeValue);
