@@ -21,6 +21,7 @@ import {
 import Navbar from './Navbar';
 import InventoryModal from './InventoryModal';
 import InventoryButton from './InventoryButton';
+import Actionsheet1 from './Actionsheet1';
 
 //창고안에 있는 재고들 출력
 //최근순 , 상태 순 setstate 에 담
@@ -62,6 +63,13 @@ export default function Inventory(props) {
   return (
     <NativeBaseProvider>
       <ScrollView>
+      <Center flex={1} px="3">
+          <Actionsheet1
+          sortDate={sortDate}
+          sortState={sortState}
+          
+          />
+            </Center>
         <InventoryButton
           sortDate={sortDate}
           sortState={sortState}
