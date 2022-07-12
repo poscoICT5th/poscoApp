@@ -133,6 +133,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     padding: 16,
-    backgroundColor: 'white',
+    backgroundColor: 'gray.300',
+    
   },
 });

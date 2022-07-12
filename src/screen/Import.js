@@ -5,7 +5,6 @@ import {ListItem} from '@react-native-material/core';
 import {View, StyleSheet, ScrollView, StatusBar, Alert} from 'react-native';
 import useRootData from '../hooks/useRootData';
 import jwtDecode from 'jwt-decode';
-import Toast from 'react-native-easy-toast';
 import {  useToast } from "native-base";
 export default function Import(props) {
   const toast = useToast();
