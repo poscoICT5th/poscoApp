@@ -11,6 +11,7 @@ import {
 import {StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import axios from 'axios';
+import { Button } from '@react-native-material/core';
 
 const Example = props => {
   const {isOpen, onToggle} = useDisclose();
@@ -46,6 +47,16 @@ const Example = props => {
 
   return (
     <View style={{alignSelf: 'flex-start', alignContent: 'flex-start'}}>
+      <Button
+        color="#f1a178"
+        title="입고 물품 확인"
+        onPress={() =>
+          props.navigation.navigate('BarcodeScanner', {
+            onGetBarcode: onGetBarcodeExport,
+            cmdType: 'export',
+          })
+        }
+      />
       <Center>
         <Box alignItems="center" minH="110">
           <Stagger

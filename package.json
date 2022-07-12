@@ -32,6 +32,7 @@
     "react-native-camera-kit": "^12.1.0",
     "react-native-cell-components": "^0.7.9",
     "react-native-chart-kit": "^6.12.0",
+    "react-native-easy-toast": "^2.0.0",
     "react-native-gesture-handler": "^2.5.0",
     "react-native-heroicons": "^2.2.0",
     "react-native-keychain": "^8.0.0",
