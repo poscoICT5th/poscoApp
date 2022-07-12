@@ -28,19 +28,38 @@ import Actionsheet1 from './Actionsheet1';
 export default function Inventory(props) {
   const [inventoryList, setInventoryList] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  //axios
-  useEffect(() => {
-    console.log('useeffect');
+
+  const userInfo = {
+    warehouse_code: 'GG07 GA04',
+  };
+  const userWarehouseCode = userInfo.warehouse_code.split(' ');
+  const [curWarehouseCode, setCurWarehouseCode] = useState(''); //현재선택한창고코드
+
+  const getInvenData = warehouse_code => {
     axios.defaults.baseURL = 'http://13.230.73.69:8080/inventory';
     axios
-      .get(`/warehouse/GA04`)
+      .get(`/warehouse/` + warehouse_code)
       .then(res => {
+       // console.log(res.data, ' 인벤토리데이터');
         setInventoryList(res.data);
       })
       .catch(err => {
         console.log(err);
       });
+  };
+
+  //axios
+  useEffect(() => {
+    console.log('useeffect');
+    setCurWarehouseCode(userWarehouseCode[0]);
+    getInvenData(userWarehouseCode[0]);
   }, []);
+
+  //창고코드 바뀌면
+  useEffect(() => {
+    getInvenData(curWarehouseCode);
+  }, [curWarehouseCode]);
+//정렬
   function sortDate() {
     inventoryList.sort(function (a, b) {
       if (a.inventory_date < b.inventory_date) return -1;
@@ -59,13 +78,33 @@ export default function Inventory(props) {
     });
     setInventoryList([...inventoryList]);
   }
+  function sortProduct() {
+    inventoryList.sort(function (a, b) {
+      if (a.product_family < b.product_family) return -1;
+      if (a.product_family > b.product_family) return 1;
+      if (a.product_family === b.product_family) return 0;
+      else return -1;
+    });
+    setInventoryList([...inventoryList]);
+  }
+
   return (
     <NativeBaseProvider>
       <ScrollView>
         <Center flex={1} px="3">
-          <Actionsheet1 sortDate={sortDate} sortState={sortState} />
+          <HStack>
+            <Actionsheet1
+              sortDate={sortDate}
+              sortState={sortState}
+              sortProduct={sortProduct}
+            />
+            <InventoryButton
+              userWarehouseCode={userWarehouseCode}
+              setCurWarehouseCode={setCurWarehouseCode}
+            />
+          </HStack>
         </Center>
-        <InventoryButton sortDate={sortDate} sortState={sortState} />
+
         {inventoryList.map(inventoryItem => {
           return (
             <Box alignItems="center" marginY={3}>
@@ -90,7 +129,7 @@ export default function Inventory(props) {
                 <Stack p="4" space={3}>
                   <Stack space={2}>
                     <Heading size="sm" ml="-1">
-                      lot_no : ####
+                      lot_no : {inventoryItem.lot_no}
                     </Heading>
                     <Text
                       fontSize="md"
@@ -113,7 +152,9 @@ export default function Inventory(props) {
                   <Text fontWeight="400">
                     item_code : {inventoryItem.item_code}
                   </Text>
-                  <Text fontWeight="400">state : {inventoryItem.state}</Text>
+                  <Text fontWeight="400">
+                    state : {inventoryItem.state ? inventoryItem.state : '대기'}
+                  </Text>
                   <Text fontWeight="400">
                     inventory_date : {inventoryItem.inventory_date}
                   </Text>

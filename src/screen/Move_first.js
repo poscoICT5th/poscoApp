@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import {ListItem} from '@react-native-material/core';
-import {View, StyleSheet, ScrollView, StatusBar, Alert} from 'react-native';
+import { StyleSheet, ScrollView, StatusBar, Alert} from 'react-native';
 import {
+  View,
   Box,
   Heading,
   AspectRatio,
@@ -15,14 +16,14 @@ import {
   Modal,
   VStack,
   Button,
+  ZStack,
 } from 'native-base';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Stagger1 from './Stagger1';
-
+import MoveModal from './MoveModal';
 const Move_first = props => {
-  const [moveList, setMoveList] = useState([]);
   const [doneList, setDoneList] = useState([]);
-
+  const [showModal, setShowModal] = useState(false);
   useEffect(() => {
     first();
   }, []);
@@ -34,15 +35,14 @@ const Move_first = props => {
   }
 
   return (
+    <View  style={{height:"90%",zIndex:1}}>
     <NativeBaseProvider>
-      <ScrollView>
+      <ScrollView style={{height:"100%"}}>
         {doneList.map(moveItem => {
           return (
             <Box alignItems="center" marginY={3}>
               <TouchableOpacity
-                onPress={() => {
-                  Alert.alert('하이하이');
-                }}>
+                onPress={() => setShowModal(true)}>
                 <Box
                   width="80"
                   rounded="lg"
@@ -90,13 +90,24 @@ const Move_first = props => {
                     </Text>
                   </Stack>
                 </Box>
+                <MoveModal
+                  showModal={showModal}
+                  setShowModal={setShowModal}
+                  moveItem={moveItem}
+                />
               </TouchableOpacity>
             </Box>
           );
         })}
-        <Stagger1></Stagger1>
+
       </ScrollView>
-    </NativeBaseProvider>
+      </NativeBaseProvider>
+      <View style={{zIndex:3}}>
+      <Stagger1 style={{zIndex:4}}></Stagger1>
+    </View>
+    </View>
+ 
+   
   );
 };
 
