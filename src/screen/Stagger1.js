@@ -87,13 +87,12 @@ const Example = props => {
               bg="indigo.500"
               colorScheme="indigo"
               borderRadius="full"
-              icon={<Icon name="delete" size={6} color="#e33057" />}
-              // onPress={() =>
-              //   props.navigation.navigate('BarcodeScanner', {
-              //     onGetBarcode: onGetBarcodeExport,
-              //     cmdType: 'export',
-              //   })
-              // }
+              onPress={() =>
+                props.navigation.navigate('BarcodeScanner', {
+                  onGetBarcode: onGetBarcodeExport,
+                  cmdType: 'export',
+                })
+              }
             />
             <IconButton
               mb="4"
@@ -104,16 +103,6 @@ const Example = props => {
               borderRadius="full"
               icon={<Icon name="circledowno" size={6} color="#3143e8" />}
             />
-            {/* <Icon.Button
-               mb="4"
-               size="lg"
-               variant="solid"
-               bg="indigo.500"
-              colorScheme="indigo"
-              borderRadius="full"
-              icon={<Icon name="camera" size={6} color="#3143e8" />}
-              // onPress={this.loginWithFacebook}
-            ></Icon.Button> */}
           </Stagger>
         </Box>
         <HStack alignItems="center">

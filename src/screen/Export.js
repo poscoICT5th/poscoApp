@@ -5,9 +5,9 @@ import Stagger1 from './Stagger1';
 
 const Export = () => {
   return (
-    <NativeBaseProvider>
+    // <NativeBaseProvider>
       <Stagger1 />
-    </NativeBaseProvider>
+    //  </NativeBaseProvider> 
   );
 };
 

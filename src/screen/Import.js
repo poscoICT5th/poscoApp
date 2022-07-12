@@ -6,15 +6,19 @@ import {View, StyleSheet, ScrollView, StatusBar, Alert} from 'react-native';
 import Navbar from './Navbar';
 import useRootData from '../hooks/useRootData';
 import store from '../store/screenModeStore';
+import jwtDecode from 'jwt-decode';
 
 export default function Import(props) {
   const [importList, setImportList] = useState([]);
-
-  const {loginApi} = useRootData(
+  // store에서 token 갖고옴
+  const {token} = useRootData(
     ({screenModeStore}) => ({
-      loginApi: screenModeStore.loginApi,
+      token: screenModeStore.token,
     }),
   );
+
+  let team = jwtDecode(token.get().token).info.team;
+  console.log(team);
 
   const onGetBarcodeImport = (barcodeValue, cmdType) => {
     console.log('barcode value: ', barcodeValue);
@@ -29,23 +33,24 @@ export default function Import(props) {
           console.log(123123123);
           console.log(res.data);
           console.log(res.data.instruction_no);
+          console.log(token2);
           // setImportList(res.data);
           // axios.put("http://35.77.20.236:8080/import/import/" + res.data.instruction_no)
           axios
             .put('/import/import/' + res.data.instruction_no)
             .then(res2 => {
               Alert.alert(res.data.instruction_no + ' 입고 완료되었습니다.');
+              axios
+                .get('/import/search?to_warehouse=' + team)
+                // .get('/import/search?to_warehouse=399')
+                .then(res3 => {
+                  console.log("창고코드 들어왔나연~");
+                })
+                .catch(e => {
+                  console.log(e);
+                  Alert.alert(e);
+                })
             })
-            axios
-              .get('/import/search?to_warehouse=' + store.token.to_warehouse)
-              // .get('/import/search?to_warehouse=399')
-              .then(res3 => {
-                console.log(res.data.to_warehouse);
-              })
-              .catch(e => {
-                console.log(e);
-                Alert.alert(e);
-              })
             .catch(e => {
               console.log(e);
               Alert.alert(e);
