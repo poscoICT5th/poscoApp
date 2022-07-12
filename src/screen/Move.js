@@ -41,7 +41,7 @@ const Move = props => {
       {key: 'third', title: '이동완료'},
     ],
   });
-  _handleIndexChange = index => this.setState({index});
+  _handleIndexChange = index => setState({...state, index: index});
 
   _renderTabBar = props => {
     const inputRange = props.navigationState.routes.map((x, i) => i);
