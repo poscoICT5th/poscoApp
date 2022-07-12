@@ -1,6 +1,78 @@
-import { ScrollView, View } from 'react-native'
-import React from 'react'
-import { Box, Heading, AspectRatio, Image, Text, Center, HStack, Stack, NativeBaseProvider } from "native-base";
+import {View, Text} from 'react-native';
+import React from 'react';
+import Navbar from './Navbar';
+import {
+  Box,
+  Center,
+  Checkbox,
+  Container,
+  Heading,
+  HStack,
+  Icon,
+  IconButton,
+  Input,
+  NativeBaseProvider,
+  useToast,
+  VStack,
+} from 'native-base';
+
+export default function Example({navigation, route}) {
+  const instState = [
+    {
+      title: 'Code',
+      isCompleted: true,
+    },
+    {
+      title: 'Meeting with team at 9',
+      isCompleted: false,
+    },
+    {
+      title: 'Check Emails',
+      isCompleted: false,
+    },
+    {
+      title: 'Write an article',
+      isCompleted: false,
+    },
+  ];
+  const [list, setList] = React.useState(instState);
+  const [inputValue, setInputValue] = React.useState('');
+  const toast = useToast();
+
+  const addItem = title => {
+    if (title === '') {
+      toast.show({
+        title: 'Please Enter Text',
+        status: 'warning',
+      });
+      return;
+    }
+
+    setList(prevList => {
+      return [
+        ...prevList,
+        {
+          title: title,
+          isCompleted: false,
+        },
+      ];
+    });
+  };
+
+  const handleDelete = index => {
+    setList(prevList => {
+      const temp = prevList.filter((_, itemI) => itemI !== index);
+      return temp;
+    });
+  };
+
+  const handleStatusChange = index => {
+    setList(prevList => {
+      const newList = [...prevList];
+      newList[index].isCompleted = !newList[index].isCompleted;
+      return newList;
+    });
+  };
 
 const TodoList = () => {
   return (

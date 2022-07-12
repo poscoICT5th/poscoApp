@@ -24,6 +24,7 @@ export const login = async (userInfo) => {
       return null;
     })
   return result;
+  
 }
 
 export default axios;

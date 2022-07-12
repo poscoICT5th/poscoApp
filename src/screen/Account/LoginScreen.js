@@ -4,10 +4,16 @@ import { login } from '../../axios';
 import { Box, Heading, VStack, FormControl, Input, Button, Center, NativeBaseProvider } from "native-base";
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
+import useRootData from '../../hooks/useRootData';
 
 export default function LoginScreen(props) {
   const [id, setId] = useState("")
   const [pw, setPw] = useState("")
+  const {loginApi} = useRootData(
+    ({screenModeStore}) => ({
+      loginApi: screenModeStore.loginApi,
+    }),
+  );
 
   function login(loginInfo) {
     axios.defaults.baseURL = "http://18.177.162.121:8080/user"
@@ -74,7 +80,7 @@ export default function LoginScreen(props) {
             <Input onChange={(e) => { setId(e.nativeEvent.text) }} />
             <FormControl.Label>Password</FormControl.Label>
             <Input type="password" onChange={(e) => { setPw(e.nativeEvent.text) }} />
-            <Button mt="2" onPress={() => { login({ id: id, pw: pw }) }}>
+            <Button mt="2" onPress={() => { loginApi({id: id, pw: pw}) }}>
               Sign in
             </Button>
           </VStack>
