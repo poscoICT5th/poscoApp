@@ -76,10 +76,10 @@ const Move_first = props => {
                       instruction_no : {moveItem.instruction_no}
                     </Text>
                     <Text fontWeight="400">
-                      item_code : {moveItem.item_code}
+                      제품코드 : {moveItem.item_code}
                     </Text>
                     <Text fontWeight="400">
-                      item_name : {moveItem.item_name}
+                      제품이름 : {moveItem.item_name}
                     </Text>
                   </Stack>
                 </Box>

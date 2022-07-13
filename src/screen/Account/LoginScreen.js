@@ -66,7 +66,10 @@ export default function LoginScreen(props) {
             <Input onChange={(e) => { setId(e.nativeEvent.text) }} />
             <FormControl.Label>Password</FormControl.Label>
             <Input type="password" onChange={(e) => { setPw(e.nativeEvent.text) }} />
-            <Button mt="2" onPress={() => { loginApi({id: id, pw: pw}) }}>
+            <Button mt="2" onPress={() => { loginApi({ id: id, pw: pw }) }}
+            bg="amber.400"
+            
+            >
               Sign in
             </Button>
           </VStack>

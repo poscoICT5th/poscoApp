@@ -152,21 +152,21 @@ export default function Inventory(props) {
                       fontWeight="500"
                       ml="-0.5"
                       mt="-1">
-                      amount : {inventoryItem.amount}
+                      재고량 : {inventoryItem.amount}
                     </Text>
                   </Stack>
 
                   <Text fontWeight="400">
-                    item_name : {inventoryItem.item_name}
+                    제품이름 : {inventoryItem.item_name}
                   </Text>
                   <Text fontWeight="400">
-                    item_code : {inventoryItem.item_code}
+                    제품코드 : {inventoryItem.item_code}
                   </Text>
                   <Text fontWeight="400">
-                    state : {inventoryItem.state ? inventoryItem.state : '대기'}
+                    상태 : {inventoryItem.state ? inventoryItem.state : '대기'}
                   </Text>
                   <Text fontWeight="400">
-                    inventory_date : {inventoryItem.inventory_date}
+                    입고날짜 : {inventoryItem.inventory_date}
                   </Text>
                 </Stack>
                 <InventoryModal

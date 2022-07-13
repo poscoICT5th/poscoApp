@@ -13,7 +13,7 @@ import {
   Stack,
   Divider,
   Box,
-  Icon,
+  HStack,
   IconButton,
   Flex,
   View,
@@ -21,7 +21,7 @@ import {
 import useRootData from '../hooks/useRootData';
 import jwtDecode from 'jwt-decode';
 import InventoryStagger from './InventoryStagger';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 const Mypage = props => {
   const {token} = useRootData(({screenModeStore}) => ({
     token: screenModeStore.token,
@@ -60,21 +60,29 @@ const Mypage = props => {
     }
     tableData.push(rowData);
   }
+  let now = new Date();
+  let month = now.getMonth();
+  let date = now.getDate();
 
   return (
     <NativeBaseProvider>
       <View bg="muted.600">
-        <Heading color="amber.400" mx="4" mt="8">
+      <HStack space={3}  mx="4" mt="8" color="amber.400">
+      <Icon as={Icon} name="user" size={35} color="white" />
+        <Heading color="amber.400"
+        >
           마이페이지
-        </Heading>
+          </Heading>
+          </HStack>
         <Text
-          fontSize="xs"
+          fontSize="lg"
           alignItems="center"
           mx="5"
           color="amber.50"
           mt="10"
-          mb="7">
-          오늘도 화이팅 !
+          mb="7"
+        >
+          {month+1} 월 {date} 일 오늘도 화이팅 !
         </Text>
       </View>
 
@@ -132,8 +140,6 @@ const Mypage = props => {
       </Center>
       <View style={{position: 'absolute', bottom: 0, right: 13}}>
         <InventoryStagger
-        // title="move"
-        // onGetBarcode={props.onGetBarcodeMove}
          navigation={props.navigation}
         />
       </View>

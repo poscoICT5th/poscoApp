@@ -29,7 +29,7 @@ const CustomDrawerContent = props => {
               props.navigation.navigate('Dashboard', {
                 // setTitle: props.setTitle,
               });
-              props.setTitle('Main');
+              props.setTitle('메인');
             }}>
             <Text style={styles.title}>메인</Text>
           </TouchableOpacity>
@@ -39,7 +39,7 @@ const CustomDrawerContent = props => {
           <TouchableOpacity
             onPress={() => {
               props.navigation.navigate('Inventory');
-              props.setTitle('Inventory');
+              props.setTitle('재고');
             }}>
             <Text style={styles.title}>재고</Text>
           </TouchableOpacity>
@@ -49,7 +49,7 @@ const CustomDrawerContent = props => {
           <TouchableOpacity
             onPress={() => {
               props.navigation.navigate('Import');
-              props.setTitle('Import');
+              props.setTitle('입고');
             }}>
             <Text style={styles.title}>입고</Text>
           </TouchableOpacity>
@@ -59,7 +59,7 @@ const CustomDrawerContent = props => {
           <TouchableOpacity
             onPress={() => {
               props.navigation.navigate('Export');
-              props.setTitle('Export');
+              props.setTitle('출고');
             }}>
             <Text style={styles.title}>출고</Text>
           </TouchableOpacity>
@@ -69,7 +69,7 @@ const CustomDrawerContent = props => {
           <TouchableOpacity
             onPress={() => {
               props.navigation.navigate('Move');
-              props.setTitle('Move');
+              props.setTitle('창고이동');
             }}>
             <Text style={styles.title}>창고이동</Text>
           </TouchableOpacity>
