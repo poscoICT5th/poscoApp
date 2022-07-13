@@ -6,7 +6,6 @@ import {
 } from '@react-navigation/drawer';
 import useRootData from '../../hooks/useRootData';
 
-
 const CustomDrawerContent = props => {
   const {token, setToken} = useRootData(({screenModeStore}) => ({
     token: screenModeStore.token,
@@ -23,7 +22,9 @@ const CustomDrawerContent = props => {
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             onPress={() => {
-              props.navigation.navigate('Dashboard');
+              props.navigation.navigate('Dashboard', {
+                // setTitle: props.setTitle,
+              });
               props.setTitle('Main');
             }}>
             <Text style={styles.title}>Main</Text>
@@ -75,6 +76,7 @@ const CustomDrawerContent = props => {
             onPress={() => {
               props.navigation.navigate('Mypage');
               props.setTitle('Mypage');
+              console.log(props);
             }}>
             <Text style={styles.title}>Mypage</Text>
           </TouchableOpacity>

@@ -7,12 +7,14 @@ import {View, StyleSheet, ScrollView, StatusBar, Alert
 } from 'react-native';
 import useRootData from '../hooks/useRootData';
 import jwtDecode from 'jwt-decode';
-import {  useToast } from "native-base";
+
+import {useToast} from 'native-base';
 
 import Import_first from './Import_first';
 import { TabView, SceneMap } from 'react-native-tab-view';
 
 function Import(props) {
+
   const toast = useToast();
   const [importList, setImportList] = useState([]);
   // store에서 token 갖고옴
@@ -23,6 +25,7 @@ function Import(props) {
   let team = jwtDecode(token.get().token).info.team;
   const userWarehouseCode = team.split(' ');
   console.log(team);
+
 //axios
 useEffect(() => {
   axios.defaults.baseURL = 'http://35.77.20.236:8080/import';
@@ -87,14 +90,14 @@ useEffect(() => {
               // Alert.alert(res.data.instruction_no + ' 입고 완료되었습니다.');
               toast.show({
                 title: res.data.instruction_no + ' 입고 완료되었습니다.',
-                placement: "bottom"
-              })
+                placement: 'bottom',
+              });
               axios
                 .get('/import/lotno/' + barcodeValue)
                 // .get('/import/search?to_warehouse=399')
                 .then(res3 => {
                   console.log('창고코드 들어왔나연~');
-                  setImportList(res3.data)
+                  setImportList(res3.data);
                 })
                 .catch(e => {
                   console.log(e);
