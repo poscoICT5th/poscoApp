@@ -60,7 +60,8 @@ const Example = props => {
               variant="solid"
               bg="yellow.400"
               colorScheme="indigo"
-              borderRadius="full"
+            borderRadius="full"
+            onPress={() => props.navigation.navigate('Claim')}
               icon={<Icon as={Icon}
               name="comment"
               size={20}

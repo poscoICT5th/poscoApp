@@ -100,8 +100,8 @@ const {token} = useRootData(
   }
 
   return (
-    <NativeBaseProvider>
-      <ScrollView>
+    <NativeBaseProvider style={backgroundColor= "#fafaf9"}>
+      <ScrollView style={backgroundColor= "#fafaf9"}>
         <Center flex={1} px="3">
           <HStack>
             <Actionsheet1
@@ -124,7 +124,7 @@ const {token} = useRootData(
                 width="80"
                 rounded="lg"
                 overflow="hidden"
-                borderColor="coolGray.200"
+                borderColor="#fafaf9"
                 borderWidth="1"
                 _dark={{
                   borderColor: 'coolGray.600',
@@ -135,7 +135,7 @@ const {token} = useRootData(
                   borderWidth: 0,
                 }}
                 _light={{
-                  backgroundColor: 'gray.50',
+                  backgroundColor: '#fafaf9',
                 }}>
                 <Stack p="4" space={3}>
                   <Stack space={2}>
@@ -145,10 +145,11 @@ const {token} = useRootData(
                     <Text
                       fontSize="md"
                       _light={{
-                        color: 'violet.500',
+                        // color: 'info.500',
+                         color: 'amber.500',
                       }}
                       _dark={{
-                        color: 'violet.400',
+                        color: 'info.800',
                       }}
                       fontWeight="500"
                       ml="-0.5"
