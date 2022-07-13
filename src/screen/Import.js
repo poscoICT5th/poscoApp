@@ -5,7 +5,7 @@ import {ListItem} from '@react-native-material/core';
 import {View, StyleSheet, ScrollView, StatusBar, Alert} from 'react-native';
 import useRootData from '../hooks/useRootData';
 import jwtDecode from 'jwt-decode';
-import {  useToast } from "native-base";
+import {useToast} from 'native-base';
 export default function Import(props) {
   const toast = useToast();
   const [importList, setImportList] = useState([]);
@@ -17,10 +17,6 @@ export default function Import(props) {
   let team = jwtDecode(token.get().token).info.team;
   console.log(team);
 
-  const toastRef = useRef();
-  const showCopyToast = useCallback(() => {
-    toastRef.current.show('주소가 복사되었습니다.');
-  }, []);
   const onGetBarcodeImport = (barcodeValue, cmdType) => {
     console.log('barcode value: ', barcodeValue);
     //아래 함수의 파라미터로 문자열만 넘길 수 있음. barcodeValue가 문자열처럼 보이지만 문자열이 아닌 듯. String()는 작동하지 않음. JSON.stringify()는 작동함
@@ -43,14 +39,14 @@ export default function Import(props) {
               // Alert.alert(res.data.instruction_no + ' 입고 완료되었습니다.');
               toast.show({
                 title: res.data.instruction_no + ' 입고 완료되었습니다.',
-                placement: "bottom"
-              })
+                placement: 'bottom',
+              });
               axios
                 .get('/import/search?to_warehouse=' + team)
                 // .get('/import/search?to_warehouse=399')
                 .then(res3 => {
                   console.log('창고코드 들어왔나연~');
-                  setImportList(res3.data)
+                  setImportList(res3.data);
                 })
                 .catch(e => {
                   console.log(e);
@@ -82,13 +78,7 @@ export default function Import(props) {
     }
     return result;
   };
-  const [click, setClick] = useState(false);
-  function trueClick() {
-    setClick(true);
-  }
-  function falseClick(params) {
-    setClick(false);
-  }
+
   return (
     <View>
       <Button
@@ -98,8 +88,6 @@ export default function Import(props) {
           props.navigation.navigate('BarcodeScanner', {
             onGetBarcode: onGetBarcodeImport,
             cmdType: 'import',
-            trueClick: trueClick,
-            click: click,
           })
         }
       />

@@ -13,7 +13,7 @@ const createStore = () => {
       let token = await login(userInfo);
 			// console.log("Token", token);
       if (token == null) {
-        Alert.alert('오류', '로그인 실패', [{text: 'OK', style: 'ok'}]);
+        Alert.alert('로그인 실패', '아이디, 비밀번호를 다시 확인해 주세요.', [{text: 'OK', style: 'ok'}]);
       }
       runInAction(() => {
         screenModeStore.setToken(token);
