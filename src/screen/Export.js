@@ -1,36 +1,65 @@
-// import {View, Text} from 'react-native';
-// import React from 'react';
-// import {Center, Box, NativeBaseProvider} from 'native-base';
-// import Stagger1 from './Stagger1';
-
-// const Export = () => {
-//   return (
-//     // <NativeBaseProvider>
-//       <Stagger1 />
-//     //  </NativeBaseProvider> 
-//   );
-// };
-
-// export default Export;
-
-import React, {useState} from 'react';
-import {
-  Box,
-  useDisclose,
-  IconButton,
-  Stagger,
-  HStack,
-  Center,
-  NativeBaseProvider,
-} from 'native-base';
-import {StyleSheet, Text, View} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import React, {useEffect, useState} from 'react';
+import {Animated, View, TouchableOpacity, StyleSheet, Text} from 'react-native';
 import axios from 'axios';
-import { Button } from '@react-native-material/core';
+import Export_first from './Export_first';
+import useRootData from '../hooks/useRootData';
+import jwtDecode from 'jwt-decode';
+import {TabView, SceneMap} from 'react-native-tab-view';
 
 const Export = props => {
-  const {isOpen, onToggle} = useDisclose();
   const [exportList, setExportList] = useState([]);
+
+  // store에서 token 갖고옴
+  const {token} = useRootData(({screenModeStore}) => ({
+    token: screenModeStore.token,
+  }));
+
+  let team = jwtDecode(token.get().token).info.team;
+  const userWarehouseCode = team.split(' ');
+
+  //axios
+  useEffect(() => {
+    axios.defaults.baseURL = 'http://13.230.30.203:8080/export';
+    axios
+      .get('/search', {
+        params: {
+          instruction_no: '전체보기',
+          status: '전체보기',
+          lot_no: '전체보기',
+          item_code: '전체보기',
+          item_name: '전체보기',
+          min_order_amount: 0,
+          max_order_amount: 10000000,
+          min_ex_amount: 0,
+          max_ex_amount: 10000000,
+          ex_remain: '전체보기',
+          unit: '전체보기',
+          min_width: 0,
+          max_width: 10000000,
+          min_weight: 0,
+          max_weight: 10000000,
+          min_thickness: 0,
+          max_thickness: 10000000,
+          min_height: 0,
+          max_height: 10000000,
+          product_family: '전체보기',
+          location: '전체보기',
+          from_warehouse: userWarehouseCode[0],
+          customer: '전체보기',
+          order_date: '전체보기',
+          inst_reg_date: '전체보기',
+          inst_deadline: '전체보기',
+          done_date: '전체보기',
+        },
+      })
+      .then(res => {
+        setExportList(res.data);
+        //console.log(res.data, ' 이거 뭐야 ');
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
 
   const onGetBarcodeExport = (barcodeValue, cmdType) => {
     console.log('barcode value: ', barcodeValue);
@@ -60,90 +89,101 @@ const Export = props => {
     }
   };
 
+  const FirstRoute = () => (
+    <Export_first
+      exportList={exportList}
+      title="출고대기"
+      onGetBarcodeExport={onGetBarcodeExport}
+      navigation={props.navigation}
+    />
+  );
+  const SecondRoute = () => (
+    <Export_first
+      exportList={exportList}
+      title="출고완료"
+      onGetBarcodeExport={onGetBarcodeExport}
+      navigation={props.navigation}
+    />
+  );
+  const [state, setState] = useState({
+    index: 0,
+    routes: [
+      {key: 'first', title: '출고대기'},
+      {key: 'second', title: '출고완료'},
+    ],
+  });
+  _handleIndexChange = index => setState({...state, index: index});
+
+  _renderTabBar = props => {
+    const inputRange = props.navigationState.routes.map((x, i) => i);
+
+    return (
+      <View style={styles.tabBar}>
+        {props.navigationState.routes.map((route, i) => {
+          const opacity = props.position.interpolate({
+            inputRange,
+            outputRange: inputRange.map(inputIndex =>
+              inputIndex === i ? 1 : 0.5,
+            ),
+          });
+
+          return (
+            <TouchableOpacity
+              key={i}
+              style={styles.tabItem}
+              onPress={() => setState({...state, index: i})}>
+              <Animated.Text style={{opacity}}>{route.title}</Animated.Text>
+            </TouchableOpacity>
+          );
+        })}
+      </View>
+    );
+  };
+  _renderScene = SceneMap({
+    first: FirstRoute,
+    second: SecondRoute,
+  });
+
   return (
-    <View style={{alignSelf: 'flex-start', alignContent: 'flex-start'}}>
-      <Button
-        color="#f1a178"
-        title="입고 물품 확인"
-        onPress={() =>
-          props.navigation.navigate('BarcodeScanner', {
-            onGetBarcode: onGetBarcodeExport,
-            cmdType: 'export',
-          })
-        }
-      />
-      <Center>
-        <Box alignItems="center" minH="110">
-          <Stagger
-            visible={isOpen}
-            initial={{
-              opacity: 0,
-              scale: 0,
-              translateY: 34,
-            }}
-            animate={{
-              translateY: 0,
-              scale: 1,
-              opacity: 1,
-              transition: {
-                type: 'spring',
-                mass: 0.8,
-                stagger: {
-                  offset: 30,
-                  reverse: true,
-                },
-              },
-            }}
-            exit={{
-              translateY: 34,
-              scale: 0.5,
-              opacity: 0,
-              transition: {
-                duration: 100,
-                stagger: {
-                  offset: 30,
-                  reverse: true,
-                },
-              },
-            }}>
-            <IconButton
-              mb="4"
-              size="lg"
-              variant="solid"
-              bg="indigo.500"
-              colorScheme="indigo"
-              borderRadius="full"
-              onPress={() =>
-                props.navigation.navigate('BarcodeScanner', {
-                  onGetBarcode: onGetBarcodeExport,
-                  cmdType: 'export',
-                })
-              }
-            />
-            <IconButton
-              mb="4"
-              size="lg"
-              variant="solid"
-              bg="indigo.500"
-              colorScheme="indigo"
-              borderRadius="full"
-              icon={<Icon name="circledowno" size={6} color="#3143e8" />}
-            />
-          </Stagger>
-        </Box>
-        <HStack alignItems="center">
-          <IconButton
-            variant="solid"
-            borderRadius="full"
-            size="lg"
-            onPress={onToggle}
-            bg="cyan.400"
-            icon={<Icon name="circledowno" size={10} color="#3143e8" />}
-          />
-        </HStack>
-      </Center>
-    </View>
+    <TabView
+      navigationState={state}
+      renderScene={_renderScene}
+      renderTabBar={_renderTabBar}
+      onIndexChange={_handleIndexChange}
+    />
   );
 };
-
 export default Export;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  tabBar: {
+    flexDirection: 'row',
+  },
+  tabItem: {
+    flex: 1,
+    alignItems: 'center',
+    padding: 16,
+    backgroundColor: 'white',
+  },
+});
+
+{
+  /* <IconButton
+mb="4"
+size="lg"
+variant="solid"
+bg="indigo.500"
+colorScheme="indigo"
+borderRadius="full"
+onPress={() =>
+  props.navigation.navigate('BarcodeScanner', {
+    onGetBarcode: onGetBarcodeExport,
+    cmdType: 'export',
+  })
+}
+/> */
+}
