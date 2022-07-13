@@ -6,7 +6,7 @@ import {
 } from '@react-navigation/drawer';
 const CustomDrawerContent = props => {
   return (
-    <DrawerContentScrollView {...props} style={{backgroundColor: '#354259'}}>
+    <DrawerContentScrollView {...props} style={{backgroundColor: 'gray'}}>
       <View style={styles.header}>
         <View style={styles.headerContainer}>
           <Text style={styles.headerTitle}>메뉴</Text>

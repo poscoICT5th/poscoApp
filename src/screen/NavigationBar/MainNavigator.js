@@ -12,7 +12,7 @@ const MainNavigator = () => {
       drawerPosition="left"
       drawerType="slide"
       drawerStyle={{
-        backgroundColor: '#2c3e50',
+        backgroundColor: 'gray',
       }}
       drawerContent={props => (
         <CustomDrawerContent {...props} setTitle={setTitle} />
