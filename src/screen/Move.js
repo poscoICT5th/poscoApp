@@ -6,60 +6,95 @@ import Move_second from './Move_second';
 import Move_third from './Move_third';
 import axios from 'axios';
 import MoveModal from './MoveModal';
-import { NativeBaseProvider } from 'native-base';
+import {NativeBaseProvider} from 'native-base';
 import Stagger1 from './Stagger1';
+import useRootData from '../hooks/useRootData';
+import jwtDecode from 'jwt-decode';
+
 const Move = props => {
   const [moveList, setMoveList] = useState([]);
   const [showModal, setShowModal] = useState(false);
+
+  // store에서 token 갖고옴
+  const {token} = useRootData(({screenModeStore}) => ({
+    token: screenModeStore.token,
+  }));
+
+  let team = jwtDecode(token.get().token).info.team;
+  const userWarehouseCode = team.split(' ');
+
+
   //axios
   useEffect(() => {
-    console.log(props)
     axios.defaults.baseURL = 'http://35.77.44.58:8080/move';
     axios
-      .get('/move')
+      .get('/search', {
+        params: {
+          instruction_no: '전체보기',
+          status: '전체보기',
+          lot_no: '전체보기',
+          item_code: '전체보기',
+          item_name: '전체보기',
+          min_move_amount: 0,
+          max_move_amount: 10000000,
+          unit: '전체보기',
+          min_weight: 0,
+          max_weight: 10000000,
+          min_width: 0,
+          max_width: 10000000,
+          min_thickness: 0,
+          max_thickness: 10000000,
+          min_height: 0,
+          max_height: 10000000,
+          location: '전체보기',
+          from_warehouse: userWarehouseCode[0],
+          to_warehouse: '전체보기',
+          inst_reg_date: '전체보기',
+          inst_deadline: '전체보기',
+          done_date: '전체보기',
+        },
+      })
       .then(res => {
         setMoveList(res.data);
-        console.log(res.data);
-        // first();
       })
       .catch(err => {
         console.log(err);
       });
   }, []);
-//바코드용 
-const onGetBarcodeMove = (barcodeValue, cmdType) => {
-  console.log('barcode value: ', barcodeValue);
-  //아래 함수의 파라미터로 문자열만 넘길 수 있음. barcodeValue가 문자열처럼 보이지만 문자열이 아닌 듯. String()는 작동하지 않음. JSON.stringify()는 작동함
-  //  Alert.alert("barcode value: ", barcodeValue);
-  if (cmdType == 'export') {
-    axios.defaults.baseURL = 'http://13.230.30.203:8080';
-    axios
-      .get('/export/lotno/' + barcodeValue)
-      // axios.get("http://13.230.30.203:8080/export/lotno/" +barcodeValue)
-      .then(res => {
-        console.log(123123123);
-        console.log(res.data);
-        console.log(res.data.instruction_no);
-        axios
-          .put('/export/export/' + res.data.instruction_no)
-          .then(res2 => {
-            Alert.alert('출고 완료되었습니다.');
-          })
-          .catch(e => {
-            console.log(e);
-          });
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  }
-};
+  //바코드용
+  const onGetBarcodeMove = (barcodeValue, cmdType) => {
+    console.log('barcode value: ', barcodeValue);
+    //아래 함수의 파라미터로 문자열만 넘길 수 있음. barcodeValue가 문자열처럼 보이지만 문자열이 아닌 듯. String()는 작동하지 않음. JSON.stringify()는 작동함
+    //  Alert.alert("barcode value: ", barcodeValue);
+    if (cmdType == 'export') {
+      axios.defaults.baseURL = 'http://13.230.30.203:8080';
+      axios
+        .get('/export/lotno/' + barcodeValue)
+        // axios.get("http://13.230.30.203:8080/export/lotno/" +barcodeValue)
+        .then(res => {
+         // console.log(res.data);
+          axios
+            .put('/export/export/' + res.data.instruction_no)
+            .then(res2 => {
+              Alert.alert('출고 완료되었습니다.');
+            })
+            .catch(e => {
+              console.log(e);
+            });
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    }
+  };
 
   const FirstRoute = () => (
-    <Move_first moveList={moveList}
+    <Move_first
+      moveList={moveList}
       onGetBarcodeMove={onGetBarcodeMove}
-      navigation={ props.navigation}
-      style={{ backgroundColor: '#ffffff' }} />
+      navigation={props.navigation}
+      style={{backgroundColor: '#ffffff'}}
+    />
   );
   const SecondRoute = () => <Move_second moveList={moveList} />;
   const ThirdRoute = () => (
@@ -116,7 +151,7 @@ const onGetBarcodeMove = (barcodeValue, cmdType) => {
       renderScene={_renderScene}
       renderTabBar={_renderTabBar}
       onIndexChange={_handleIndexChange}
-      />    
+    />
   );
 };
 export default Move;

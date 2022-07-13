@@ -11,6 +11,8 @@ import {
 } from 'native-base';
 import {StyleSheet, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon1 from 'react-native-vector-icons/Entypo';
+
 import axios from 'axios';
 import { Button } from '@react-native-material/core';
 
@@ -60,8 +62,7 @@ const Example = props => {
               variant="solid"
               bg="yellow.400"
               colorScheme="indigo"
-            borderRadius="full"
-            onPress={() => props.navigation.navigate('Claim')}
+              borderRadius="full"
               icon={<Icon as={Icon}
               name="comment"
               size={20}
@@ -69,22 +70,16 @@ const Example = props => {
               _dark={{
                 color: 'warmGray.50',
               }} />}
-            />
-            <IconButton
+                  />
+                   <IconButton
               mb="4"
               size="lg"
               variant="solid"
-              bg="indigo.400"
+              bg="red.400"
               colorScheme="indigo"
-            borderRadius="full"
-            onPress={() =>
-              props.navigation.navigate('BarcodeScanner', {
-                onGetBarcode: props.onGetBarcode,
-                cmdType: props.title,
-              })
-            }
-              icon={<Icon as={Icon}
-              name="camera"
+              borderRadius="full"
+              icon={<Icon1 as={Icon1}
+              name="phone"
               size={20}
               color="black"
               _dark={{

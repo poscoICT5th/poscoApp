@@ -10,12 +10,11 @@ import {
   Stack,
   NativeBaseProvider,
   Modal,
-
 } from 'native-base';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Stagger1 from './Stagger1';
 import MoveModal from './MoveModal';
-const Move_first = props => {
+const Import_first = props => {
   const [doneList, setDoneList] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
@@ -24,9 +23,19 @@ const Move_first = props => {
   }, []);
   //예정인것 , 필터링
   function first() {
-    setDoneList([
-      ...props.moveList.filter(moveItem => moveItem.status === '이동예정'),
-    ]);
+    if ((props.title === '입고예정')) {
+      setDoneList([
+        ...props.importList.filter(moveItem => moveItem.status === '입고예정'),
+      ]);
+    } else if ((props.title === '입고완료')) {
+      setDoneList([
+        ...props.importList.filter(moveItem => moveItem.status === '입고완료'),
+      ]);
+    } else if ((props.title ==='입고취소')) {
+      setDoneList([
+        ...props.importList.filter(moveItem => moveItem.status === '입고취소'),
+      ]);
+    }
   }
 
   return (
@@ -95,8 +104,8 @@ const Move_first = props => {
       </ScrollView>
       <View style={{position: 'absolute', bottom: 0, right: 13}}>
         <Stagger1
-          title="move"
-          onGetBarcode={props.onGetBarcodeMove}
+          title="import"
+          onGetBarcode={props.onGetBarcodeImport}
           navigation={props.navigation}
         />
       </View>
@@ -104,4 +113,4 @@ const Move_first = props => {
   );
 };
 
-export default Move_first;
+export default Import_first;
