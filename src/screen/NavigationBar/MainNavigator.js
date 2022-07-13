@@ -11,9 +11,11 @@ const MainNavigator = () => {
     <Drawer.Navigator
       drawerPosition="left"
       drawerType="slide"
-      drawerStyle={{
-        backgroundColor: '#bae6fd',
-      }}
+      drawerStyle={
+        {
+          // backgroundColor: '#bae6fd',
+        }
+      }
       drawerContent={props => (
         <CustomDrawerContent {...props} setTitle={setTitle} />
       )}>
@@ -24,9 +26,9 @@ const MainNavigator = () => {
         options={{
           headerTitle: title,
           headerStyle: {
-            backgroundColor: '#bae6fd', //Set Header color
+            backgroundColor: '#fafafa', //Set Header color
           },
-          headerTintColor: '#0c4a6e',
+          headerTintColor: '#525252',
           headerTitleStyle: {
             fontWeight: 'bold', //Set Header text style
             // textAlign: 'center',

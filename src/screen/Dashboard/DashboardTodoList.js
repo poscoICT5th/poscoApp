@@ -6,8 +6,8 @@ const DashboardTodoList = (props) => {
     return (
         <Box alignItems="center" marginY={3}>
             <TouchableOpacity onPress={() => { props.navigation.navigate(props.navigate) }}>
-                <Box width={80} rounded="lg" overflow="hidden" borderColor="coolGray.200" borderWidth="1" _dark={{
-                    borderColor: "coolGray.600",
+                <Box width={80} rounded="lg" overflow="hidden" borderColor="coolGray.100" borderWidth="1" _dark={{
+                    borderColor: "coolGray.100",
                     backgroundColor: "gray.700"
                 }} _web={{
                     shadow: 2,
@@ -17,13 +17,15 @@ const DashboardTodoList = (props) => {
                 }}>
                     <Stack p="4" space={3} >
                         <Stack space={2}>
-                            <Heading size="md" ml="-1" >
+                            <Heading size="md" ml="-1"
+                           color="muted.700"
+                            >
                                 {props.title}
                             </Heading>
                             <Text fontSize="xs" _light={{
-                                color: "violet.500"
+                                color: "amber.500"
                             }} _dark={{
-                                color: "violet.400"
+                                color: "amber.400"
                             }} fontWeight="500" ml="-0.5" mt="-1"
                             >
                                 {props.subTitle}

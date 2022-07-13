@@ -12,13 +12,26 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon1 from 'react-native-vector-icons/Fontisto';
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 
-
 function Example(props) {
   const {isOpen, onOpen, onClose} = useDisclose();
   return (
     <Center>
-      <Button onPress={onOpen} size="md" variant="ghost">
-        Sort
+      <Button
+        onPress={onOpen}
+        size="sm"
+        variant="outline"
+        borderRadius={20}
+        bg="muted.200"
+        _text={{
+          color: "#1F2937"
+          
+        }} 
+        
+        borderColor="muted.200"
+        mt={3}
+        width={140}
+      >
+        정렬
       </Button>
 
       <Actionsheet isOpen={isOpen} onClose={onClose}>
@@ -34,12 +47,7 @@ function Example(props) {
             </Text>
           </Box>
           <Actionsheet.Item
-             startIcon={ 
-              <Icon1 as={Icon1} 
-              name="date"
-              size={20}
-              color="black" />
-            }
+            startIcon={<Icon1 as={Icon1} name="date" size={20} color="black" />}
             onPress={() => {
               props.sortDate();
               onClose();
@@ -47,29 +55,25 @@ function Example(props) {
             Date
           </Actionsheet.Item>
           <Actionsheet.Item
-           startIcon={ 
-            <Icon as={Icon} 
-            name="smile-o"
-            size={20}
-            color="black" />
-          }
-          onPress={() => {
-            props.sortState();
-            onClose();
-          }}
-          >State</Actionsheet.Item>
+            startIcon={
+              <Icon as={Icon} name="smile-o" size={20} color="black" />
+            }
+            onPress={() => {
+              props.sortState();
+              onClose();
+            }}>
+            State
+          </Actionsheet.Item>
           <Actionsheet.Item
-           startIcon={ 
-            <Icon2 as={Icon2} 
-            name="factory"
-            size={20}
-            color="black" />
-          }
-          onPress={() => {
-            props.sortProduct();
-            onClose();
-          }}
-          >Product_Family</Actionsheet.Item>
+            startIcon={
+              <Icon2 as={Icon2} name="factory" size={20} color="black" />
+            }
+            onPress={() => {
+              props.sortProduct();
+              onClose();
+            }}>
+            Product_Family
+          </Actionsheet.Item>
         </Actionsheet.Content>
       </Actionsheet>
     </Center>

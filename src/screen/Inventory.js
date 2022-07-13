@@ -31,12 +31,10 @@ import jwtDecode from 'jwt-decode';
 export default function Inventory(props) {
   const [inventoryList, setInventoryList] = useState([]);
   const [showModal, setShowModal] = useState(false);
-// store에서 token 갖고옴
-const {token} = useRootData(
-  ({screenModeStore}) => ({
+  // store에서 token 갖고옴
+  const {token} = useRootData(({screenModeStore}) => ({
     token: screenModeStore.token,
-  }),
-  );
+  }));
   let team = jwtDecode(token.get().token).info.team;
   console.log(team);
 
@@ -51,7 +49,7 @@ const {token} = useRootData(
     axios
       .get(`/warehouse/` + warehouse_code)
       .then(res => {
-       // console.log(res.data, ' 인벤토리데이터');
+        // console.log(res.data, ' 인벤토리데이터');
         setInventoryList(res.data);
       })
       .catch(err => {
@@ -70,7 +68,7 @@ const {token} = useRootData(
   useEffect(() => {
     getInvenData(curWarehouseCode);
   }, [curWarehouseCode]);
-//정렬
+  //정렬
   function sortDate() {
     inventoryList.sort(function (a, b) {
       if (a.inventory_date < b.inventory_date) return -1;
@@ -100,9 +98,9 @@ const {token} = useRootData(
   }
 
   return (
-    <NativeBaseProvider style={backgroundColor= "#fafaf9"}>
-      <ScrollView style={backgroundColor= "#fafaf9"}>
-        <Center flex={1} px="3">
+    <NativeBaseProvider style={(backgroundColor = '#fafaf9')}>
+      <ScrollView style={(backgroundColor = '#fafaf9')}>
+        <Center flex={1} px="7">
           <HStack>
             <Actionsheet1
               sortDate={sortDate}
@@ -146,7 +144,7 @@ const {token} = useRootData(
                       fontSize="md"
                       _light={{
                         // color: 'info.500',
-                         color: 'amber.500',
+                        color: 'amber.500',
                       }}
                       _dark={{
                         color: 'info.800',
@@ -183,9 +181,9 @@ const {token} = useRootData(
       </ScrollView>
       <View style={{position: 'absolute', bottom: 0, right: 13}}>
         <InventoryStagger
-          // title="move"
-          // onGetBarcode={props.onGetBarcodeMove}
-          // navigation={props.navigation}
+        // title="move"
+        // onGetBarcode={props.onGetBarcodeMove}
+        // navigation={props.navigation}
         />
       </View>
     </NativeBaseProvider>

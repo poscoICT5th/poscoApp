@@ -22,17 +22,22 @@ const InventoryButton = props => {
             return (
               <Button
                 key={i}
-                size="sm"
-                 variant="ghost"
-                 colorScheme="secondary"
+                size="xs"
+                variant="outline"
+                borderRadius={20}
+                marginTop={3}
+                bg="amber.400"
+                borderColor="amber.400"
+                _text={{
+                  color: 'muted.600',
+                }}
                 onPress={() => {
-                  props.setCurWarehouseCode(code)
-
+                  props.setCurWarehouseCode(code);
                 }}>
                 {code}
-              </Button>)
-          })
-          }          
+              </Button>
+            );
+          })}
         </HStack>
       </Center>
     </NativeBaseProvider>
