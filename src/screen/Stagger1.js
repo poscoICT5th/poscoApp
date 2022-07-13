@@ -11,6 +11,9 @@ import {
 } from 'native-base';
 import {StyleSheet, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon1 from 'react-native-vector-icons/Entypo';
+import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
+
 import axios from 'axios';
 import { Button } from '@react-native-material/core';
 
@@ -58,18 +61,20 @@ const Example = props => {
               mb="4"
               size="lg"
               variant="solid"
-              bg="yellow.400"
-              colorScheme="indigo"
+              bg="red.400"
+               colorScheme="red.500"
             borderRadius="full"
             onPress={() => props.navigation.navigate('Claim')}
-              icon={<Icon as={Icon}
-              name="comment"
+              icon={<Icon1 as={Icon1}
+              name="phone"
               size={20}
               color="black"
               _dark={{
-                color: 'warmGray.50',
+                color: 'red.500',
               }} />}
-            />
+          />
+          
+          
             <IconButton
               mb="4"
               size="lg"
@@ -83,8 +88,8 @@ const Example = props => {
                 cmdType: props.title,
               })
             }
-              icon={<Icon as={Icon}
-              name="camera"
+              icon={<Icon2 as={Icon2}
+              name="barcode-scan"
               size={20}
               color="black"
               _dark={{

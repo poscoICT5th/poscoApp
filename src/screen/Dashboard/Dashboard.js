@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet} from 'react-native';
+import { Text, StyleSheet} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import DashboardTodoList from './DashboardTodoList';
 import {ScrollView} from 'native-base';
@@ -6,6 +6,9 @@ import {importToday} from '../../axios';
 import axios from 'axios';
 import DashboardTodayChart from './DashboardTodayChart';
 import moment from 'moment';
+import { View, NativeBaseProvider } from 'native-base';
+import InventoryStagger from '../InventoryStagger';
+
 const importURL = 'http://35.77.20.236:8080/import';
 const exportURL = 'http://13.230.30.203:8080/export';
 const moveURL = 'http://35.77.44.58:8080/move';
@@ -131,7 +134,9 @@ const Dashboard = props => {
     moveAxios();
   }, []);
   console.log(props);
-  return (
+    return (
+        <NativeBaseProvider>
+            
     <ScrollView>
       <View>
         {/*  */}
@@ -140,7 +145,7 @@ const Dashboard = props => {
         <View style={styles.dashboardTodolist}>
           <DashboardTodoList
             title="입고관리"
-            subTitle="입고예정된 재고들을 바코드스캔"
+            subTitle="음 수정해야할듯"
             navigate="Import"
             navigation={props.navigation}
             // setTitle={props.route.params.setTitle}
@@ -168,7 +173,15 @@ const Dashboard = props => {
           />
         </View>
       </View>
-    </ScrollView>
+            </ScrollView>
+        <View style={{position: 'absolute', bottom: 0, right: 13}}>
+        <InventoryStagger
+        //   title="import"
+        //   onGetBarcode={props.onGetBarcodeImport}
+          navigation={props.navigation}
+        />
+      </View>
+      </NativeBaseProvider>
   );
 };
 const styles = StyleSheet.create({

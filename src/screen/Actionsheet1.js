@@ -43,7 +43,7 @@ function Example(props) {
               _dark={{
                 color: 'gray.300',
               }}>
-              Sort
+              정렬
             </Text>
           </Box>
           <Actionsheet.Item
@@ -52,7 +52,7 @@ function Example(props) {
               props.sortDate();
               onClose();
             }}>
-            Date
+            날짜순
           </Actionsheet.Item>
           <Actionsheet.Item
             startIcon={
@@ -62,7 +62,7 @@ function Example(props) {
               props.sortState();
               onClose();
             }}>
-            State
+            상태순
           </Actionsheet.Item>
           <Actionsheet.Item
             startIcon={
@@ -72,7 +72,7 @@ function Example(props) {
               props.sortProduct();
               onClose();
             }}>
-            Product_Family
+            제품군순
           </Actionsheet.Item>
         </Actionsheet.Content>
       </Actionsheet>

@@ -183,7 +183,7 @@ export default function Inventory(props) {
         <InventoryStagger
         // title="move"
         // onGetBarcode={props.onGetBarcodeMove}
-        // navigation={props.navigation}
+         navigation={props.navigation}
         />
       </View>
     </NativeBaseProvider>

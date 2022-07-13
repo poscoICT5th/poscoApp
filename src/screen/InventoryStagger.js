@@ -23,7 +23,7 @@ const Example = props => {
   return (
     // <View style={{alignSelf: 'flex-end', alignContent: 'flex-end', marginRight: 13,}}>
       <Center>
-        <Box alignItems="center" minH="110">
+        <Box alignItems="center" minH="50">
           <Stagger
             visible={isOpen}
             initial={{
@@ -56,21 +56,7 @@ const Example = props => {
                 },
               },
             }}>
-          <IconButton
-              mb="4"
-              size="lg"
-              variant="solid"
-              bg="yellow.400"
-              colorScheme="indigo"
-              borderRadius="full"
-              icon={<Icon as={Icon}
-              name="comment"
-              size={20}
-              color="black"
-              _dark={{
-                color: 'warmGray.50',
-              }} />}
-                  />
+       
                    <IconButton
               mb="4"
               size="lg"
@@ -79,12 +65,15 @@ const Example = props => {
               colorScheme="indigo"
               borderRadius="full"
               icon={<Icon1 as={Icon1}
-              name="phone"
+              name="phone" //hotline아이콘
               size={20}
               color="black"
               _dark={{
                 color: 'warmGray.50',
               }} />}
+              onPress={() => props.navigation.navigate('Claim')}
+           
+            
             />
           </Stagger>
         </Box>
