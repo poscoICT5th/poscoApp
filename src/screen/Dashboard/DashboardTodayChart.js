@@ -137,9 +137,12 @@ const DashboardTodayChart = (props) => {
 
 
   const chartConfig = {
-    backgroundColor: "#e26a00",
-    backgroundGradientFrom: "#fad6d6",
-    backgroundGradientTo: "#4584a9",
+    // backgroundColor: "#e26a00",
+    // backgroundGradientFrom: "#fad6d6",
+    // backgroundGradientTo: "#4584a9",
+      backgroundColor: "#fde68a",
+    backgroundGradientFrom: "#f59e0b",
+    backgroundGradientTo: "#fbbf24",
     decimalPlaces: 2, // optional, defaults to 2dp
     color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
     labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,

@@ -49,7 +49,7 @@ const Import_first = props => {
                   width="80"
                   rounded="lg"
                   overflow="hidden"
-                  borderColor="coolGray.200"
+                  borderColor="coolGray.100"
                   borderWidth="1"
                   _dark={{
                     borderColor: 'coolGray.600',
@@ -70,7 +70,7 @@ const Import_first = props => {
                       <Text
                         fontSize="md"
                         _light={{
-                          color: 'violet.500',
+                          color: 'amber.500',
                         }}
                         _dark={{
                           color: 'violet.400',

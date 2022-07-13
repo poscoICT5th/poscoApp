@@ -1,10 +1,14 @@
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, TouchableOpacity, StyleSheet} from 'react-native';
 import React from 'react';
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
 } from '@react-navigation/drawer';
 import useRootData from '../../hooks/useRootData';
+import {
+  Container,
+  Text,
+} from 'native-base';
 
 const CustomDrawerContent = props => {
   const {token, setToken} = useRootData(({screenModeStore}) => ({
@@ -12,7 +16,7 @@ const CustomDrawerContent = props => {
     setToken: screenModeStore.setToken,
   }));
   return (
-    <DrawerContentScrollView {...props} style={{backgroundColor: 'blueGray'}}>
+    <DrawerContentScrollView {...props} style={{backgroundColor: 'white'}}>
       <View style={styles.header}>
         <View style={styles.headerContainer}>
           <Text style={styles.headerTitle}>메뉴</Text>
@@ -27,7 +31,7 @@ const CustomDrawerContent = props => {
               });
               props.setTitle('Main');
             }}>
-            <Text style={styles.title}>Main</Text>
+            <Text style={styles.title}>메인</Text>
           </TouchableOpacity>
         </View>
 
@@ -37,7 +41,7 @@ const CustomDrawerContent = props => {
               props.navigation.navigate('Inventory');
               props.setTitle('Inventory');
             }}>
-            <Text style={styles.title}>Inventory</Text>
+            <Text style={styles.title}>재고</Text>
           </TouchableOpacity>
         </View>
 
@@ -47,7 +51,7 @@ const CustomDrawerContent = props => {
               props.navigation.navigate('Import');
               props.setTitle('Import');
             }}>
-            <Text style={styles.title}>Import</Text>
+            <Text style={styles.title}>입고</Text>
           </TouchableOpacity>
         </View>
 
@@ -57,7 +61,7 @@ const CustomDrawerContent = props => {
               props.navigation.navigate('Export');
               props.setTitle('Export');
             }}>
-            <Text style={styles.title}>Export</Text>
+            <Text style={styles.title}>출고</Text>
           </TouchableOpacity>
         </View>
 
@@ -67,7 +71,7 @@ const CustomDrawerContent = props => {
               props.navigation.navigate('Move');
               props.setTitle('Move');
             }}>
-            <Text style={styles.title}>Move</Text>
+            <Text style={styles.title}>창고이동</Text>
           </TouchableOpacity>
         </View>
 
@@ -78,7 +82,7 @@ const CustomDrawerContent = props => {
               props.setTitle('Mypage');
               console.log(props);
             }}>
-            <Text style={styles.title}>Mypage</Text>
+            <Text style={styles.title}>마이페이지</Text>
           </TouchableOpacity>
         </View>
 
@@ -89,7 +93,12 @@ const CustomDrawerContent = props => {
               setToken(null);
               console.log(token);
             }}>
-            <Text>로그아웃</Text>
+            <Text
+             _light={{
+              color: 'amber.500',
+            }}
+            
+            >로그아웃</Text>
           </TouchableOpacity>
         </View>
       </View>
