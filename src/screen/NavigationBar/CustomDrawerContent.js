@@ -4,7 +4,14 @@ import {
   createDrawerNavigator,
   DrawerContentScrollView,
 } from '@react-navigation/drawer';
+import useRootData from '../../hooks/useRootData';
+
+
 const CustomDrawerContent = props => {
+  const {token, setToken} = useRootData(({screenModeStore}) => ({
+    token: screenModeStore.token,
+    setToken: screenModeStore.setToken,
+  }));
   return (
     <DrawerContentScrollView {...props} style={{backgroundColor: '#354259'}}>
       <View style={styles.header}>
@@ -70,6 +77,17 @@ const CustomDrawerContent = props => {
               props.setTitle('Mypage');
             }}>
             <Text style={styles.title}>Mypage</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            onPress={() => {
+              console.log(token);
+              setToken(null);
+              console.log(token);
+            }}>
+            <Text>로그아웃</Text>
           </TouchableOpacity>
         </View>
       </View>
