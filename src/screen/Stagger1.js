@@ -64,7 +64,7 @@ const Example = props => {
             bg="red.400"
             colorScheme="red.500"
             borderRadius="full"
-            onPress={() => props.navigation.navigate('Claim')}
+            onPress={() => props.navigation.navigate('Claim', {navigation : props.navigation})}
             icon={
               <Icon1
                 as={Icon1}

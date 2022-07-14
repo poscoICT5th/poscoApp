@@ -19,8 +19,10 @@ import useRootData from '../hooks/useRootData';
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 import {create} from 'react-test-renderer';
+import { Alert } from 'react-native';
 
-const Claim = () => {
+const Claim = (props) => {
+  console.log(props)
   const {token} = useRootData(({screenModeStore}) => ({
     token: screenModeStore.token,
   }));
@@ -35,11 +37,17 @@ const Claim = () => {
   });
 
   function create() {
-    axios.defaults.baseURL = 'http://192.168.0.10:8088';
+    axios.defaults.baseURL = 'http://35.77.54.132:8080/hotline';
     axios
       .post('/', hotlineData)
       .then(res => {
+        console.log("여기다 여기 여기라고")
+        console.log(res)
         console.log(res.data);
+        Alert.alert(res.data?"등록되었습니다.":"등록을 실패하였습니다.")
+        if (res.data) {
+          props.navigation.goBack();
+        }
       })
       .catch(e => {
         console.log(e);
