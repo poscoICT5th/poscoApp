@@ -4,10 +4,9 @@ import { Box, Heading, AspectRatio, Image, Text, Center, HStack, Stack, NativeBa
 import { TouchableOpacity } from 'react-native-gesture-handler';
 const DashboardTodoList = (props) => {
     return (
-        <Box alignItems="center" marginY={3} >
+        <Box alignItems="center" marginY={1} >
             <TouchableOpacity onPress={() => { props.navigation.navigate(props.navigate) }}>
-                <Box w="600" rounded="lg" overflow="hidden" borderColor="coolGray.100" borderWidth="1"
-                   
+                <Box w="400" h="200" rounded="lg" overflow="hidden" borderColor="coolGray.100" borderWidth="1"
                     mt="5"
                     _dark={{
                     borderColor: "coolGray.100",
@@ -18,8 +17,8 @@ const DashboardTodoList = (props) => {
                 }} _light={{
                     backgroundColor: "gray.50"
                 }}>
-                    <Stack p="4" space={3} >
-                        <Stack space={2}>
+                    <Stack p="10" space={6} >
+                        <Stack space={5}>
                             <Heading size="md" ml="-1"
                            color="muted.700"
                             >

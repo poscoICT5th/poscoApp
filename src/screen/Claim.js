@@ -66,7 +66,7 @@ const Claim = (props) => {
 
         <Flex direction="row-reverse" h="58" p="4" mb="3">
           <Text color="amber.50" fontSize="lg">
-            POSCO ICT
+            Even Better
           </Text>
           <Divider bg="amber.50" thickness="1" mx="2" orientation="vertical" />
           <Text color="amber.50" fontSize="lg">

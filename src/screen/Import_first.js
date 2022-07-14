@@ -45,7 +45,7 @@ const Import_first = props => {
         {doneList.map(moveItem => {
           return (
             <Box alignItems="center" marginY={6}>
-              <TouchableOpacity onPress={() => setShowModal(true)}>
+              <TouchableOpacity>
                 <Box
                     width="550"
                   rounded="lg"
