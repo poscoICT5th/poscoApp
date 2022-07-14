@@ -9,11 +9,22 @@ import moment from 'moment';
 import {View, NativeBaseProvider} from 'native-base';
 import InventoryStagger from '../InventoryStagger';
 import messaging from '@react-native-firebase/messaging'
+import useRootData from '../../hooks/useRootData';
+import jwtDecode from 'jwt-decode';
 
 const importURL = 'http://35.77.20.236:8080/import';
 const exportURL = 'http://13.230.30.203:8080/export';
 const moveURL = 'http://35.77.44.58:8080/move';
 const Dashboard = props => {
+  // user정보 추출
+  const {token} = useRootData(({screenModeStore}) => ({
+    token: screenModeStore.token,
+  }));
+
+  let user = jwtDecode(token.get().token).info;
+  const userId = user.id;
+  const userWarehouseCode = user.team.split(' ');
+
   // 입고데이터
   function importAxios(params) {
     axios.defaults.baseURL = importURL;
@@ -130,7 +141,10 @@ const Dashboard = props => {
       .catch(err => {});
   }
   useEffect(() => {
-    messaging().subscribeToTopic("admin")
+    messaging().subscribeToTopic(userId)
+    userWarehouseCode.map((wh_code)=> {
+      messaging().subscribeToTopic(wh_code)
+    })
     importAxios();
     exportAxios();
     moveAxios();
