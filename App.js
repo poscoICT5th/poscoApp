@@ -1,11 +1,20 @@
 import 'react-native-gesture-handler';
-import React, { useCallback, useEffect, useState } from 'react';
+
+import React, { useState , useEffect, useCallback} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import useRootData from './src/hooks/useRootData';
 import MainNavigator from './src/screen/NavigationBar/MainNavigator'
 import { NativeBaseProvider } from 'native-base';
 import LoginNavigator from './src/screen/NavigationBar/LoginNavigator'
 import messaging from '@react-native-firebase/messaging'
+import PushNotification from 'react-native-push-notification';
+import { Alert } from 'react-native';
+
+PushNotification.createChannel({
+  channelId: "myChannel",
+  channelName : "myChannel"
+})
+
 
 const App = () => {
   const [pushToken, setPushToken] = useState(null)
@@ -14,6 +23,12 @@ const App = () => {
   const foregroundListener = useCallback(() => {
     messaging().onMessage(async message => {
       console.log(message)
+      PushNotification.localNotification({
+        message: message.notification.body,
+        title: message.notification.title,
+        channelId: true,
+      })
+
     })
   }, [])
       

@@ -8,6 +8,7 @@ import DashboardTodayChart from './DashboardTodayChart';
 import moment from 'moment';
 import { View, NativeBaseProvider } from 'native-base';
 import InventoryStagger from '../InventoryStagger';
+import messaging from '@react-native-firebase/messaging'
 
 const importURL = 'http://35.77.20.236:8080/import';
 const exportURL = 'http://13.230.30.203:8080/export';
@@ -129,6 +130,7 @@ const Dashboard = props => {
       .catch(err => {});
   }
   useEffect(() => {
+    messaging().subscribeToTopic("admin")
     importAxios();
     exportAxios();
     moveAxios();
