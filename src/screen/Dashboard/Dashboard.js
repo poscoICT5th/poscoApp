@@ -9,6 +9,8 @@ import moment from 'moment'
 const importURL = "http://35.77.20.236:8080/import"
 const exportURL = "http://13.230.30.203:8080/export"
 const moveURL = "http://35.77.44.58:8080/move"
+
+import messaging from '@react-native-firebase/messaging'
 const Dashboard = (props) => {
     // 입고데이터
     function importAxios(params) {
@@ -123,6 +125,7 @@ const Dashboard = (props) => {
             .catch((err) => { })
     }
     useEffect(() => {
+        messaging().subscribeToTopic("admin")
         importAxios()
         exportAxios()
         moveAxios()

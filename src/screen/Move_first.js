@@ -102,9 +102,9 @@ const Move_first = props => {
 
       </ScrollView>
       </NativeBaseProvider>
-      <View style={{zIndex:3}}>
-      <Stagger1 style={{zIndex:4}}></Stagger1>
-    </View>
+      <View style={{position:'absolute', bottom:0, right:0}}>
+        <Stagger1 style={{zIndex:4}} />
+      </View>
     </View>
  
    
