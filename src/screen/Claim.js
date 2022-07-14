@@ -41,9 +41,6 @@ const Claim = (props) => {
     axios
       .post('/', hotlineData)
       .then(res => {
-        console.log("여기다 여기 여기라고")
-        console.log(res)
-        console.log(res.data);
         Alert.alert(res.data?"등록되었습니다.":"등록을 실패하였습니다.")
         if (res.data) {
           props.navigation.goBack();
@@ -56,11 +53,11 @@ const Claim = (props) => {
   return (
     <NativeBaseProvider>
       <View bg="muted.600">
-        <Heading color="amber.400" mx="7" mt="10" fontSize="3xl">
-          요청사항
+        <Heading color="amber.400" mx="8" mt="10" fontSize="4xl">
+          HotLine
         </Heading>
 
-        <Text fontSize="xl" alignItems="center" mx="7" color="amber.50" mt="5" mb="10">
+        <Text fontSize="xl" alignItems="center" mx="8" color="amber.50" mt="5" mb="10">
           *요청사항을 입력해주세요.
         </Text>
 

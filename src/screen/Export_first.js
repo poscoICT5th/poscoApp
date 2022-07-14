@@ -28,9 +28,9 @@ const Export_first = props => {
         ...props.exportList.filter(moveItem => moveItem.status === '출고대기'),
       ]);
         console.log(111);
-    } else if ((props.title === '츨고완료')) {
+    } else if ((props.title === '출고완료')) {
       setDoneList([
-        ...props.exportList.filter(moveItem => moveItem.status === '츨고완료'),
+        ...props.exportList.filter(moveItem => moveItem.status === '출고완료'),
       ]);
       console.log(2222);
         console.log(doneList, 2222);
