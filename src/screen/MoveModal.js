@@ -17,6 +17,17 @@ import {
 const InventoryModal = props => {
   return (
     <View>
+      <Button
+        // color="muted.800"
+        bgColor="muted.700"
+       _text={{
+        color: 'muted.50'
+      }} 
+        onPress={() => {
+          props.setShowModal(true);
+        }}>
+        이거수정
+      </Button>
       <Modal
         isOpen={props.showModal}
         onClose={() => props.setShowModal(false)}

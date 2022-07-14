@@ -144,8 +144,8 @@ const Dashboard = props => {
         {/*  */}
         <DashboardTodayChart />
         {/*  */}
-        <View style={styles.dashboardTodolist}>
-          <DashboardTodoList
+        <View style={styles.dashboardTodolist} >
+            <DashboardTodoList
             title="입고관리"
             subTitle="음 수정해야할듯"
             navigate="Import"

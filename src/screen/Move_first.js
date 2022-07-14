@@ -34,10 +34,10 @@ const Move_first = props => {
       <ScrollView>
         {doneList.map(moveItem => {
           return (
-            <Box alignItems="center" marginY={3}>
+            <Box alignItems="center" marginY={6}>
               <TouchableOpacity onPress={() => setShowModal(true)}>
                 <Box
-                  width="80"
+                   width="600"
                   rounded="lg"
                   overflow="hidden"
                   borderColor="coolGray.100"
