@@ -10,7 +10,6 @@ import { StoreProvider } from './src/utils/context';  //  추가
 import messaging from '@react-native-firebase/messaging'
 
 messaging().setBackgroundMessageHandler(async message => {
-  console.log(111)
   console.log(message)
 })
 

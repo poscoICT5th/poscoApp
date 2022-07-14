@@ -45,7 +45,7 @@ const Move_third = props => {
                 width="80"
                 rounded="lg"
                 overflow="hidden"
-                borderColor="coolGray.200"
+                borderColor="coolGray.100"
                 borderWidth="1"
                 _dark={{
                   borderColor: 'coolGray.600',
@@ -66,10 +66,10 @@ const Move_third = props => {
                     <Text
                       fontSize="md"
                       _light={{
-                        color: 'violet.500',
+                        color: 'amber.500',
                       }}
                       _dark={{
-                        color: 'violet.400',
+                        color: 'amber.500',
                       }}
                       fontWeight="500"
                       ml="-0.5"
@@ -95,7 +95,13 @@ const Move_third = props => {
         })}
           
       </ScrollView>
-      <Stagger1></Stagger1>
+      <View style={{position: 'absolute', bottom: 0, right: 13}}>
+        <Stagger1
+          title="move"
+          onGetBarcode={props.onGetBarcodeMove}
+          navigation={props.navigation}
+        />
+      </View>
     </NativeBaseProvider>
   );
 };

@@ -1,37 +1,41 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import {ListItem} from '@react-native-material/core';
-import { View, StyleSheet, ScrollView, StatusBar } from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {StyleSheet, ScrollView, StatusBar, Alert} from 'react-native';
 import {
+  View,
   Box,
   Heading,
-  AspectRatio,
-  Image,
   Text,
-  Center,
-  HStack,
   Stack,
   NativeBaseProvider,
   Modal,
-  VStack,
-  Button,
 } from 'native-base';
-import MoveModal from './MoveModal';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import Stagger1 from './Stagger1';
-
-const Move_second = props => {
-  const [showModal, setShowModal] = useState(false);
+import MoveModal from './MoveModal';
+const Import_first = props => {
   const [doneList, setDoneList] = useState([]);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     first();
   }, []);
   //예정인것 , 필터링
   function first() {
-    setDoneList([
-      ...props.moveList.filter(moveItem => moveItem.status === '이동중'),
-    ]);
+    if ((props.title === '입고예정')) {
+      setDoneList([
+        ...props.importList.filter(moveItem => moveItem.status === '입고예정'),
+      ]);
+    } else if ((props.title === '입고완료')) {
+      setDoneList([
+        ...props.importList.filter(moveItem => moveItem.status === '입고완료'),
+      ]);
+    } else if ((props.title ==='입고취소')) {
+      setDoneList([
+        ...props.importList.filter(moveItem => moveItem.status === '입고취소'),
+      ]);
+    }
   }
 
   return (
@@ -69,7 +73,7 @@ const Move_second = props => {
                           color: 'amber.500',
                         }}
                         _dark={{
-                          color: 'amber.500',
+                          color: 'violet.400',
                         }}
                         fontWeight="500"
                         ml="-0.5"
@@ -88,11 +92,11 @@ const Move_second = props => {
                     </Text>
                   </Stack>
                 </Box>
-              <MoveModal
-                showModal={showModal}
-                setShowModal={setShowModal}
-                moveItem={moveItem}
-              />
+                <MoveModal
+                  showModal={showModal}
+                  setShowModal={setShowModal}
+                  moveItem={moveItem}
+                />
               </TouchableOpacity>
             </Box>
           );
@@ -100,8 +104,8 @@ const Move_second = props => {
       </ScrollView>
       <View style={{position: 'absolute', bottom: 0, right: 13}}>
         <Stagger1
-          title="move"
-          onGetBarcode={props.onGetBarcodeMove}
+          title="import"
+          onGetBarcode={props.onGetBarcodeImport}
           navigation={props.navigation}
         />
       </View>
@@ -109,4 +113,4 @@ const Move_second = props => {
   );
 };
 
-export default Move_second;
+export default Import_first;

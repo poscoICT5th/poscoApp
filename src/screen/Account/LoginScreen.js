@@ -15,20 +15,6 @@ export default function LoginScreen(props) {
     }),
   );
 
-  function login(loginInfo) {
-    axios.defaults.baseURL = "http://18.177.162.121:8080/user"
-    axios
-      .post('/login', loginInfo)
-      .then(res => {
-        console.log(res.data.sessionID)
-        console.log(res.data.token);
-        console.log(jwtDecode(res.data.token));
-        props.navigation.navigate('Dashboard')
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
   const PermissionCheck = () => {
     //To Start Scanning
     if (Platform.OS === 'android') {
@@ -80,7 +66,10 @@ export default function LoginScreen(props) {
             <Input onChange={(e) => { setId(e.nativeEvent.text) }} />
             <FormControl.Label>Password</FormControl.Label>
             <Input type="password" onChange={(e) => { setPw(e.nativeEvent.text) }} />
-            <Button mt="2" onPress={() => { loginApi({id: id, pw: pw}) }}>
+            <Button mt="2" onPress={() => { loginApi({ id: id, pw: pw }) }}
+            bg="amber.400"
+            
+            >
               Sign in
             </Button>
           </VStack>

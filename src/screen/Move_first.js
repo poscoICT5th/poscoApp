@@ -1,22 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import {ListItem} from '@react-native-material/core';
-import { StyleSheet, ScrollView, StatusBar, Alert} from 'react-native';
+import {StyleSheet, ScrollView, StatusBar, Alert} from 'react-native';
 import {
   View,
   Box,
   Heading,
-  AspectRatio,
-  Image,
   Text,
-  Center,
-  HStack,
   Stack,
   NativeBaseProvider,
   Modal,
-  VStack,
-  Button,
-  ZStack,
+
 } from 'native-base';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Stagger1 from './Stagger1';
@@ -24,6 +18,7 @@ import MoveModal from './MoveModal';
 const Move_first = props => {
   const [doneList, setDoneList] = useState([]);
   const [showModal, setShowModal] = useState(false);
+
   useEffect(() => {
     first();
   }, []);
@@ -35,19 +30,17 @@ const Move_first = props => {
   }
 
   return (
-    <View  style={{height:"90%",zIndex:1}}>
     <NativeBaseProvider>
-      <ScrollView style={{height:"100%"}}>
+      <ScrollView>
         {doneList.map(moveItem => {
           return (
             <Box alignItems="center" marginY={3}>
-              <TouchableOpacity
-                onPress={() => setShowModal(true)}>
+              <TouchableOpacity onPress={() => setShowModal(true)}>
                 <Box
                   width="80"
                   rounded="lg"
                   overflow="hidden"
-                  borderColor="coolGray.200"
+                  borderColor="coolGray.100"
                   borderWidth="1"
                   _dark={{
                     borderColor: 'coolGray.600',
@@ -68,10 +61,10 @@ const Move_first = props => {
                       <Text
                         fontSize="md"
                         _light={{
-                          color: 'violet.500',
+                          color: 'amber.500',
                         }}
                         _dark={{
-                          color: 'violet.400',
+                          color: 'amber.500',
                         }}
                         fontWeight="500"
                         ml="-0.5"
@@ -83,10 +76,10 @@ const Move_first = props => {
                       instruction_no : {moveItem.instruction_no}
                     </Text>
                     <Text fontWeight="400">
-                      item_code : {moveItem.item_code}
+                      제품코드 : {moveItem.item_code}
                     </Text>
                     <Text fontWeight="400">
-                      item_name : {moveItem.item_name}
+                      제품이름 : {moveItem.item_name}
                     </Text>
                   </Stack>
                 </Box>
@@ -99,15 +92,15 @@ const Move_first = props => {
             </Box>
           );
         })}
-
       </ScrollView>
-      </NativeBaseProvider>
-      <View style={{position:'absolute', bottom:0, right:0}}>
-        <Stagger1 style={{zIndex:4}} />
+      <View style={{position: 'absolute', bottom: 0, right: 13}}>
+        <Stagger1
+          title="move"
+          onGetBarcode={props.onGetBarcodeMove}
+          navigation={props.navigation}
+        />
       </View>
-    </View>
- 
-   
+    </NativeBaseProvider>
   );
 };
 

@@ -14,9 +14,10 @@ export const login = async (userInfo) => {
   let result = await axios
     .post('/login/', userInfo)
     .then(res => {
-      console.log(res.data.sessionID)
-      console.log(res.data.token);
+      // console.log(res.data.sessionID)
+      // console.log(res.data.token);
       console.log(jwtDecode(res.data.token));
+      console.log(jwtDecode(res.data.token).info.team);
       return res.data;
     })
     .catch((err) => {

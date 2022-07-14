@@ -22,15 +22,24 @@ import Navbar from './Navbar';
 import InventoryModal from './InventoryModal';
 import InventoryButton from './InventoryButton';
 import Actionsheet1 from './Actionsheet1';
-
+import Stagger1 from './Stagger1';
+import InventoryStagger from './InventoryStagger';
+import useRootData from '../hooks/useRootData';
+import jwtDecode from 'jwt-decode';
 //창고안에 있는 재고들 출력
 //최근순 , 상태 순 setstate 에 담
 export default function Inventory(props) {
   const [inventoryList, setInventoryList] = useState([]);
   const [showModal, setShowModal] = useState(false);
+  // store에서 token 갖고옴
+  const {token} = useRootData(({screenModeStore}) => ({
+    token: screenModeStore.token,
+  }));
+  let team = jwtDecode(token.get().token).info.team;
+  console.log(team);
 
   const userInfo = {
-    warehouse_code: 'GG07 GA04',
+    warehouse_code: team,
   };
   const userWarehouseCode = userInfo.warehouse_code.split(' ');
   const [curWarehouseCode, setCurWarehouseCode] = useState(''); //현재선택한창고코드
@@ -40,7 +49,7 @@ export default function Inventory(props) {
     axios
       .get(`/warehouse/` + warehouse_code)
       .then(res => {
-       // console.log(res.data, ' 인벤토리데이터');
+        // console.log(res.data, ' 인벤토리데이터');
         setInventoryList(res.data);
       })
       .catch(err => {
@@ -59,7 +68,7 @@ export default function Inventory(props) {
   useEffect(() => {
     getInvenData(curWarehouseCode);
   }, [curWarehouseCode]);
-//정렬
+  //정렬
   function sortDate() {
     inventoryList.sort(function (a, b) {
       if (a.inventory_date < b.inventory_date) return -1;
@@ -89,9 +98,9 @@ export default function Inventory(props) {
   }
 
   return (
-    <NativeBaseProvider>
-      <ScrollView>
-        <Center flex={1} px="3">
+    <NativeBaseProvider style={(backgroundColor = '#fafaf9')}>
+      <ScrollView style={(backgroundColor = '#fafaf9')}>
+        <Center flex={1} px="7">
           <HStack>
             <Actionsheet1
               sortDate={sortDate}
@@ -113,7 +122,7 @@ export default function Inventory(props) {
                 width="80"
                 rounded="lg"
                 overflow="hidden"
-                borderColor="coolGray.200"
+                borderColor="#fafaf9"
                 borderWidth="1"
                 _dark={{
                   borderColor: 'coolGray.600',
@@ -124,7 +133,7 @@ export default function Inventory(props) {
                   borderWidth: 0,
                 }}
                 _light={{
-                  backgroundColor: 'gray.50',
+                  backgroundColor: '#fafaf9',
                 }}>
                 <Stack p="4" space={3}>
                   <Stack space={2}>
@@ -134,29 +143,30 @@ export default function Inventory(props) {
                     <Text
                       fontSize="md"
                       _light={{
-                        color: 'violet.500',
+                        // color: 'info.500',
+                        color: 'amber.500',
                       }}
                       _dark={{
-                        color: 'violet.400',
+                        color: 'info.800',
                       }}
                       fontWeight="500"
                       ml="-0.5"
                       mt="-1">
-                      amount : {inventoryItem.amount}
+                      재고량 : {inventoryItem.amount}
                     </Text>
                   </Stack>
 
                   <Text fontWeight="400">
-                    item_name : {inventoryItem.item_name}
+                    제품이름 : {inventoryItem.item_name}
                   </Text>
                   <Text fontWeight="400">
-                    item_code : {inventoryItem.item_code}
+                    제품코드 : {inventoryItem.item_code}
                   </Text>
                   <Text fontWeight="400">
-                    state : {inventoryItem.state ? inventoryItem.state : '대기'}
+                    상태 : {inventoryItem.state ? inventoryItem.state : '대기'}
                   </Text>
                   <Text fontWeight="400">
-                    inventory_date : {inventoryItem.inventory_date}
+                    입고날짜 : {inventoryItem.inventory_date}
                   </Text>
                 </Stack>
                 <InventoryModal
@@ -169,6 +179,13 @@ export default function Inventory(props) {
           );
         })}
       </ScrollView>
+      <View style={{position: 'absolute', bottom: 0, right: 13}}>
+        <InventoryStagger
+        // title="move"
+        // onGetBarcode={props.onGetBarcodeMove}
+         navigation={props.navigation}
+        />
+      </View>
     </NativeBaseProvider>
   );
 }

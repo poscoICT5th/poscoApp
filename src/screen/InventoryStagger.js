@@ -12,7 +12,6 @@ import {
 import {StyleSheet, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon1 from 'react-native-vector-icons/Entypo';
-import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import axios from 'axios';
 import { Button } from '@react-native-material/core';
@@ -24,7 +23,7 @@ const Example = props => {
   return (
     // <View style={{alignSelf: 'flex-end', alignContent: 'flex-end', marginRight: 13,}}>
       <Center>
-        <Box alignItems="center" minH="110">
+        <Box alignItems="center" minH="50">
           <Stagger
             visible={isOpen}
             initial={{
@@ -57,44 +56,24 @@ const Example = props => {
                 },
               },
             }}>
-          <IconButton
+       
+                   <IconButton
               mb="4"
               size="lg"
               variant="solid"
               bg="red.400"
-               colorScheme="red.500"
-            borderRadius="full"
-            onPress={() => props.navigation.navigate('Claim')}
-              icon={<Icon1 as={Icon1}
-              name="phone"
-              size={20}
-              color="black"
-              _dark={{
-                color: 'red.500',
-              }} />}
-          />
-          
-          
-            <IconButton
-              mb="4"
-              size="lg"
-              variant="solid"
-              bg="indigo.400"
               colorScheme="indigo"
-            borderRadius="full"
-            onPress={() =>
-              props.navigation.navigate('BarcodeScanner', {
-                onGetBarcode: props.onGetBarcode,
-                cmdType: props.title,
-              })
-            }
-              icon={<Icon2 as={Icon2}
-              name="barcode-scan"
+              borderRadius="full"
+              icon={<Icon1 as={Icon1}
+              name="phone" //hotline아이콘
               size={20}
               color="black"
               _dark={{
                 color: 'warmGray.50',
               }} />}
+              onPress={() => props.navigation.navigate('Claim')}
+           
+            
             />
           </Stagger>
         </Box>

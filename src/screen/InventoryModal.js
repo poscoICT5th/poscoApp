@@ -18,7 +18,11 @@ const InventoryModal = props => {
   return (
     <View>
       <Button
-        colorScheme="violet"
+        // color="muted.800"
+        bgColor="muted.700"
+       _text={{
+        color: 'muted.50'
+      }} 
         onPress={() => {
           props.setShowModal(true);
         }}>

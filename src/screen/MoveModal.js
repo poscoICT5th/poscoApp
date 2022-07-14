@@ -26,7 +26,7 @@ const InventoryModal = props => {
           <Modal.Header>{props.moveItem.status}</Modal.Header>
           <Modal.Body>
             <VStack space={3}>
-              <HStack alignItems="center" justifyContent="space-between">
+              {/* <HStack alignItems="center" justifyContent="space-between">
                 <Text fontWeight="medium">from_warehouse</Text>
                 <Text color="blueGray.400">
                   {props.moveItem.from_warehouse}
@@ -71,7 +71,15 @@ const InventoryModal = props => {
               <HStack alignItems="center" justifyContent="space-between">
                 <Text fontWeight="medium">done_date</Text>
                 <Text color="blueGray.400">{props.moveItem.done_date}</Text>
-              </HStack>
+              </HStack> */}
+              {Object.entries(props.moveItem).map(([key, value], index) => {
+                return (
+                  <HStack alignItems="center" justifyContent="space-between">
+                    <Text fontWeight="medium">{key}</Text>
+                    <Text color="blueGray.400">{value}</Text>
+                  </HStack>
+                );
+              })}
             </VStack>
           </Modal.Body>
           <Modal.Footer></Modal.Footer>

@@ -1,4 +1,5 @@
 import 'react-native-gesture-handler';
+
 import React, { useState , useEffect, useCallback} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import useRootData from './src/hooks/useRootData';
@@ -14,6 +15,7 @@ PushNotification.createChannel({
   channelName : "myChannel"
 })
 
+
 const App = () => {
   const [pushToken, setPushToken] = useState(null)
   const [isAuthorized, setIsAuthorized] = useState(false)
@@ -26,6 +28,7 @@ const App = () => {
         title: message.notification.title,
         channelId: true,
       })
+
     })
   }, [])
       
