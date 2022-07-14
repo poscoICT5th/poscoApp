@@ -26,9 +26,8 @@ const CustomDrawerContent = props => {
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             onPress={() => {
-              props.navigation.navigate('Dashboard', {
-                // setTitle: props.setTitle,
-              });
+              props.navigation.navigate('Dashboard');
+              console.log(props);
               props.setTitle('메인');
             }}>
             <Text style={styles.title}>메인</Text>
