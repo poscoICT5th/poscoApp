@@ -17,15 +17,15 @@ const InventoryButton = props => {
   return (
     <NativeBaseProvider>
       <Center flex={3} px="3">
-        <HStack space={2} justifyContent="center">
+        <HStack space={5} justifyContent="center">
           {props.userWarehouseCode.map((code, i) => {
             return (
               <Button
                 key={i}
-                size="xs"
+                size="lg"
                 variant="outline"
                 borderRadius={20}
-                marginTop={3}
+                marginTop={5}
                 bg="amber.400"
                 borderColor="amber.400"
                 _text={{

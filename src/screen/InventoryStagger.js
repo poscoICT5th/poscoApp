@@ -22,7 +22,7 @@ const Example = props => {
   console.log(props)
   return (
     // <View style={{alignSelf: 'flex-end', alignContent: 'flex-end', marginRight: 13,}}>
-      <Center>
+      <Center marginRight="7">
         <Box alignItems="center" minH="50">
           <Stagger
             visible={isOpen}
@@ -66,7 +66,7 @@ const Example = props => {
               borderRadius="full"
               icon={<Icon1 as={Icon1}
               name="phone" //hotline아이콘
-              size={20}
+              size={40}
               color="black"
               _dark={{
                 color: 'warmGray.50',
@@ -91,7 +91,7 @@ const Example = props => {
               <Icon
                 as={Icon}
                 name="angle-up"
-                size={30}
+                size={40}
                 color="black"
                 // _dark={{
                 //   color: 'warmGray.50',

@@ -18,25 +18,25 @@ function Example(props) {
     <Center>
       <Button
         onPress={onOpen}
-        size="sm"
+        size="lg"
         variant="outline"
         borderRadius={20}
         bg="muted.200"
         _text={{
-          color: "#1F2937"
-          
+          color: "#1F2937",
+          fontSize: "lg"
         }} 
         
         borderColor="muted.200"
         mt={3}
-        width={140}
+        width={200}
       >
         정렬
       </Button>
 
-      <Actionsheet isOpen={isOpen} onClose={onClose}>
+      <Actionsheet isOpen={isOpen} onClose={onClose} w="100%" alignSelf="auto">
         <Actionsheet.Content>
-          <Box w="100%" h={60} px={4} justifyContent="center">
+          <Box w="90%" h={60} px={4} justifyContent="center">
             <Text
               fontSize="16"
               color="gray.500"
@@ -51,7 +51,8 @@ function Example(props) {
             onPress={() => {
               props.sortDate();
               onClose();
-            }}>
+            }}
+            w="90%">
             날짜순
           </Actionsheet.Item>
           <Actionsheet.Item
@@ -61,7 +62,9 @@ function Example(props) {
             onPress={() => {
               props.sortState();
               onClose();
-            }}>
+            }}
+            w="90%"
+          >
             상태순
           </Actionsheet.Item>
           <Actionsheet.Item
@@ -71,7 +74,10 @@ function Example(props) {
             onPress={() => {
               props.sortProduct();
               onClose();
-            }}>
+            }}
+            w="90%"
+            mb="3"
+          >
             제품군순
           </Actionsheet.Item>
         </Actionsheet.Content>
