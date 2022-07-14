@@ -81,6 +81,7 @@ const Mypage = props => {
           color="amber.50"
           mt="20"
           mb="10"
+          textAlign="right"
         >
           {month+1} 월 {date} 일 오늘도 화이팅 !
         </Text>
@@ -93,7 +94,7 @@ const Mypage = props => {
           alignSelf="center"
           px="0"
           safeArea
-          mt="0"
+          // mt="0"
           w={{
             base: '100%',
             md: '100%',
