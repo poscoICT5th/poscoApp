@@ -71,7 +71,7 @@ const Example = props => {
               _dark={{
                 color: 'warmGray.50',
               }} />}
-              onPress={() => props.navigation.navigate('Claim')}
+              onPress={() => props.navigation.navigate('Claim', {navigation : props.navigation})}
            
             
             />

@@ -1,4 +1,4 @@
-import { Text, StyleSheet} from 'react-native';
+import {Text, StyleSheet} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import DashboardTodoList from './DashboardTodoList';
 import {ScrollView} from 'native-base';
@@ -6,14 +6,25 @@ import {importToday} from '../../axios';
 import axios from 'axios';
 import DashboardTodayChart from './DashboardTodayChart';
 import moment from 'moment';
-import { View, NativeBaseProvider } from 'native-base';
+import {View, NativeBaseProvider} from 'native-base';
 import InventoryStagger from '../InventoryStagger';
 import messaging from '@react-native-firebase/messaging'
+import useRootData from '../../hooks/useRootData';
+import jwtDecode from 'jwt-decode';
 
 const importURL = 'http://35.77.20.236:8080/import';
 const exportURL = 'http://13.230.30.203:8080/export';
 const moveURL = 'http://35.77.44.58:8080/move';
 const Dashboard = props => {
+  // user정보 추출
+  const {token} = useRootData(({screenModeStore}) => ({
+    token: screenModeStore.token,
+  }));
+
+  let user = jwtDecode(token.get().token).info;
+  const userId = user.id;
+  const userWarehouseCode = user.team.split(' ');
+
   // 입고데이터
   function importAxios(params) {
     axios.defaults.baseURL = importURL;
@@ -130,60 +141,60 @@ const Dashboard = props => {
       .catch(err => {});
   }
   useEffect(() => {
-    messaging().subscribeToTopic("admin")
+    messaging().subscribeToTopic(userId)
+    userWarehouseCode.map((wh_code)=> {
+      messaging().subscribeToTopic(wh_code)
+    })
     importAxios();
     exportAxios();
     moveAxios();
   }, []);
   console.log(props);
-    return (
-        <NativeBaseProvider>
-            
-    <ScrollView>
-      <View>
-        {/*  */}
-        <DashboardTodayChart />
-        {/*  */}
-        <View style={styles.dashboardTodolist}>
-          <DashboardTodoList
-            title="입고관리"
-            subTitle="음 수정해야할듯"
-            navigate="Import"
-            navigation={props.navigation}
-            // setTitle={props.route.params.setTitle}
-          />
-          <DashboardTodoList
-            title="출고관리"
-            subTitle="출고예정인 재고들을 바코드스캔"
-            navigate="Export"
-            navigation={props.navigation}
-            // setTitle={props.route.params.setTitle}
-          />
-          <DashboardTodoList
-            title="창고이동관리"
-            subTitle="창고간 이동예정인 재고들을 바코드스캔"
-            navigate="Move"
-            navigation={props.navigation}
-            // setTitle={props.route.params.setTitle}
-          />
-          <DashboardTodoList
-            title="재고관리"
-            subTitle="담당하는 창고의 재고현황들을 파악할 수 있음"
-            navigate="Inventory"
-            navigation={props.navigation}
-            // setTitle={props.route.params.setTitle}
-          />
+  return (
+    <NativeBaseProvider>
+      <ScrollView>
+        <View>
+          <DashboardTodayChart />
+          <View style={styles.dashboardTodolist}>
+            <DashboardTodoList
+              title="재고"
+              subTitle="담당하는 창고의 재고현황 파악"
+              navigate="Inventory"
+              navigation={props.navigation}
+              // setTitle={props.route.params.setTitle}
+            />
+            <DashboardTodoList
+              title="창고입고"
+              subTitle="담당 창고 입고 리스트"
+              navigate="Import"
+              navigation={props.navigation}
+              // setTitle={props.route.params.setTitle}
+            />
+            <DashboardTodoList
+              title="창고출고"
+              subTitle="담당 창고 출고 리스트"
+              navigate="Export"
+              navigation={props.navigation}
+              // setTitle={props.route.params.setTitle}
+            />
+            <DashboardTodoList
+              title="창고이동"
+              subTitle="담당 창고 이동 리스트"
+              navigate="Move"
+              navigation={props.navigation}
+              // setTitle={props.route.params.setTitle}
+            />
+          </View>
         </View>
-      </View>
-            </ScrollView>
-        <View style={{position: 'absolute', bottom: 0, right: 13}}>
+      </ScrollView>
+      <View style={{position: 'absolute', bottom: 0, right: 13}}>
         <InventoryStagger
-        //   title="import"
-        //   onGetBarcode={props.onGetBarcodeImport}
+          //   title="import"
+          //   onGetBarcode={props.onGetBarcodeImport}
           navigation={props.navigation}
         />
       </View>
-      </NativeBaseProvider>
+    </NativeBaseProvider>
   );
 };
 const styles = StyleSheet.create({
