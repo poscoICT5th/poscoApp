@@ -1,19 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { PermissionsAndroid } from 'react-native';
-import { login } from '../../axios';
-import { Box, Heading, VStack, FormControl, Input, Button, Center, NativeBaseProvider } from "native-base";
+import React, {useEffect, useState} from 'react';
+import {PermissionsAndroid} from 'react-native';
+import {login} from '../../axios';
+import {
+  Box,
+  Heading,
+  VStack,
+  FormControl,
+  Input,
+  Button,
+  Center,
+  NativeBaseProvider,
+} from 'native-base';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import useRootData from '../../hooks/useRootData';
 
 export default function LoginScreen(props) {
-  const [id, setId] = useState("")
-  const [pw, setPw] = useState("")
-  const {loginApi} = useRootData(
-    ({screenModeStore}) => ({
-      loginApi: screenModeStore.loginApi,
-    }),
-  );
+  const [id, setId] = useState('');
+  const [pw, setPw] = useState('');
+  const {loginApi} = useRootData(({screenModeStore}) => ({
+    loginApi: screenModeStore.loginApi,
+  }));
 
   const PermissionCheck = () => {
     //To Start Scanning
@@ -51,25 +58,48 @@ export default function LoginScreen(props) {
     <NativeBaseProvider>
       <Center w="100%" marginTop={20}>
         <Box safeArea p="2" py="8" w="90%" maxW="290">
-          <Heading size="lg" fontWeight="600" color="coolGray.800" _dark={{
-            color: "warmGray.50"
-          }}>
+          <Heading
+            size="lg"
+            fontWeight="600"
+            color="coolGray.800"
+            _dark={{
+              color: 'warmGray.50',
+            }}>
             POSCO ICT - 5
           </Heading>
-          <Heading mt="1" _dark={{
-            color: "warmGray.200"
-          }} color="coolGray.600" fontWeight="medium" size="xs">
+          <Heading
+            mt="1"
+            _dark={{
+              color: 'warmGray.200',
+            }}
+            color="coolGray.600"
+            fontWeight="medium"
+            size="xs">
             물류, 창고 재고 모니터링 시스템
           </Heading>
           <VStack space={3} mt="5">
             <FormControl.Label>ID</FormControl.Label>
-            <Input onChange={(e) => { setId(e.nativeEvent.text) }} />
+            <Input
+              onChange={e => {
+                setId(e.nativeEvent.text);
+              }}
+            />
             <FormControl.Label>Password</FormControl.Label>
-            <Input type="password" onChange={(e) => { setPw(e.nativeEvent.text) }} />
-            <Button mt="2" onPress={() => { loginApi({ id: id, pw: pw }) }}
-            bg="amber.400"
-            
-            >
+            <Input
+              type="password"
+              onChange={e => {
+                setPw(e.nativeEvent.text);
+              }}
+            />
+            <Button
+              mt="2"
+              onPress={() => {
+                loginApi({id: id, pw: pw});
+              }}
+              bg="amber.400"
+              _hover={{
+                _text: {color: 'secondary.900'},
+              }}>
               Sign in
             </Button>
           </VStack>

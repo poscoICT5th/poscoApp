@@ -67,7 +67,7 @@ const Mypage = props => {
   return (
     <NativeBaseProvider>
       <View bg="muted.600">
-      <HStack space={3}  mx="4" mt="8" color="amber.400">
+      <HStack space={3}  mx="8" mt="12" color="amber.400">
       <Icon as={Icon} name="user" size={35} color="white" />
         <Heading color="amber.400"
         >
@@ -75,66 +75,68 @@ const Mypage = props => {
           </Heading>
           </HStack>
         <Text
-          fontSize="lg"
+          fontSize="xl"
           alignItems="center"
-          mx="5"
+          mx="8"
           color="amber.50"
-          mt="10"
-          mb="7"
+          mt="20"
+          mb="10"
         >
           {month+1} 월 {date} 일 오늘도 화이팅 !
         </Text>
       </View>
 
       {/* 여기부터 회원정보 */}
-      <Center flex={1} px="12">
+      <Center flex={2} px="20">
         <Stack
-          space={2.5}
+          space={12}
           alignSelf="center"
           px="0"
           safeArea
-          mt="11"
+          mt="0"
           w={{
             base: '100%',
             md: '100%',
-          }}>
-          <Box>
-            <Text bold fontSize="xl" mb="4">
+          }}
+          
+        >
+          <Box w="100%" >
+            <Text bold fontSize="2xl" mb="4">
               이름
             </Text>
-            <FormControl mb="5">
-              <FormControl.Label>{userInfo.name}</FormControl.Label>
-            </FormControl>
-            <Divider thickness="1" />
+            <Text fontSize="lg" mb="4">
+            {userInfo.name}
+            </Text>
+            <Divider thickness="2" />
           </Box>
-          <Box>
-            <Text bold fontSize="xl" mb="4">
+          <Box w="100%">
+            <Text bold fontSize="2xl" mb="4">
               전화번호
             </Text>
-            <FormControl mb="5">
-              <FormControl.Label>{userInfo.phone}</FormControl.Label>
-            </FormControl>
-            <Divider />
+            <Text fontSize="lg" mb="4">
+            {userInfo.phone}
+            </Text>
+            <Divider  thickness="2"/>
           </Box>
 
-          <Box>
-            <Text bold fontSize="xl" mb="4">
+          <Box w="100%">
+            <Text bold fontSize="2xl" mb="4">
               담당창고
             </Text>
-            <FormControl mb="5">
-              <FormControl.Label>{userInfo.team}</FormControl.Label>
-            </FormControl>
-            <Divider />
+            <Text fontSize="lg" mb="4">
+            {userInfo.team}
+            </Text>
+            <Divider  thickness="2"/>
           </Box>
 
-          <Box>
-            <Text bold fontSize="xl" mb="4">
+          <Box w="100%">
+            <Text bold fontSize="2xl" mb="4">
               이메일
             </Text>
-            <FormControl mb="5">
-              <FormControl.Label>{userInfo.email}</FormControl.Label>
-            </FormControl>
-            <Divider />
+            <Text fontSize="lg" mb="4">
+            {userInfo.email}
+            </Text>
+            <Divider  thickness="2"/>
           </Box>
         </Stack>
       </Center>

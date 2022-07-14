@@ -31,6 +31,7 @@ const Claim = () => {
     content: '',
     title: '',
     category: '',
+    writer_id:userInfo.id,
   });
 
   function create() {
@@ -47,69 +48,77 @@ const Claim = () => {
   return (
     <NativeBaseProvider>
       <View bg="muted.600">
-        <Heading color="amber.400" mx="4" mt="4">
+        <Heading color="amber.400" mx="7" mt="10" fontSize="3xl">
           요청사항
         </Heading>
 
-        <Text fontSize="xs" alignItems="center" mx="4" color="amber.50" mt="1">
+        <Text fontSize="xl" alignItems="center" mx="7" color="amber.50" mt="5" mb="10">
           *요청사항을 입력해주세요.
         </Text>
 
-        <Flex direction="row-reverse" h="58" p="4">
-          <Text color="amber.50" fontSize="sm">
+        <Flex direction="row-reverse" h="58" p="4" mb="3">
+          <Text color="amber.50" fontSize="lg">
             POSCO ICT
           </Text>
           <Divider bg="amber.50" thickness="1" mx="2" orientation="vertical" />
-          <Text color="amber.50" fontSize="sm">
+          <Text color="amber.50" fontSize="lg">
             {userInfo.phone}
           </Text>
           <Divider bg="amber.50" thickness="1" mx="2" orientation="vertical" />
-          <Text color="amber.50" fontSize="sm">
+          <Text color="amber.50" fontSize="lg">
             {userInfo.name}
           </Text>
         </Flex>
       </View>
 
       <Center>
-        <VStack space={3}>
-          <Text fontSize="lg" alignItems="center" mt="4" mx="3">
+        <VStack space={5} mt="10" width="1/2">
+          <Text fontSize="xl" alignItems="center" mt="7" mx="3">
             말머리
           </Text>
           <Input
             mx="3"
             placeholder="말머리"
-            w="75%"
-            maxWidth="300px"
+            w="100%"
+            // maxWidth="300px"
+            fontSize="md"
             onChangeText={text => {
               setHotlineData({...hotlineData, category: text});
             }}
           />
-          <Text fontSize="lg" mx="3">
+          <Text fontSize="xl" mx="3">
             제목
           </Text>
           <Input
+             fontSize="md"
             mx="3"
             placeholder="제목"
-            w="75%"
-            maxWidth="300px"
+            w="100%"
+            // maxWidth="300px"
             onChangeText={text => {
               setHotlineData({...hotlineData, title: text});
             }}
           />
-          <Text fontSize="lg" mx="3">
+          <Text fontSize="xl" mx="3">
             내용
           </Text>
           <TextArea
+             fontSize="md"
             h={40}
             placeholder="내용을 입력해주세요."
-            w="80%"
-            maxW="300"
+            w="100%"
+            // maxW="300"
             mx="3"
             onChangeText={text => {
               setHotlineData({...hotlineData, content: text});
             }}
           />
-          <Button mt="4" onPress={() => create()} bg="amber.400" mx="3">
+          <Button mt="4" onPress={() => create()}
+          bg="amber.400" mx="3"
+            w="100%"
+            size="lg"
+            fontSize="lg"
+          >
             접수하기
           </Button>
         </VStack>

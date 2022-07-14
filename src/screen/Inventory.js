@@ -100,7 +100,7 @@ export default function Inventory(props) {
   return (
     <NativeBaseProvider style={(backgroundColor = '#fafaf9')}>
       <ScrollView style={(backgroundColor = '#fafaf9')}>
-        <Center flex={1} px="7">
+        <Center flex={1} width="70%" margin="auto">
           <HStack>
             <Actionsheet1
               sortDate={sortDate}
@@ -119,7 +119,7 @@ export default function Inventory(props) {
             <Box alignItems="center" marginY={3}>
               <Box
                 onPress={() => setShowModal(true)}
-                width="80"
+                width="60%"
                 rounded="lg"
                 overflow="hidden"
                 borderColor="#fafaf9"
