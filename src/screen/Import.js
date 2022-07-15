@@ -28,7 +28,10 @@ function Import(props) {
 
 //axios
 useEffect(() => {
-  props.setTitle("입고")
+  let cleanup = true
+  if(cleanup){
+    props.setTitle("입고")
+  }
   axios.defaults.baseURL = 'http://35.77.20.236:8080/import';
   axios
     .get('/search', {
@@ -68,6 +71,7 @@ useEffect(() => {
     .catch(err => {
       console.log(err);
     });
+    return () => {cleanup = false}
 }, []);
   
   const onGetBarcodeImport = (barcodeValue, cmdType) => {
@@ -191,8 +195,6 @@ useEffect(() => {
   );
 };
 export default Import;
-
-
 
 const styles = StyleSheet.create({
   container: {
