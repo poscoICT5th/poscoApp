@@ -1,14 +1,12 @@
 // import {View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {
-  Box,
   Center,
   Heading,
   Input,
   NativeBaseProvider,
   Text,
   VStack,
-  Container,
   Divider,
   View,
   Flex,
@@ -18,11 +16,9 @@ import {
 import useRootData from '../hooks/useRootData';
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
-import {create} from 'react-test-renderer';
-import { Alert } from 'react-native';
+import {Alert} from 'react-native';
 
-const Claim = (props) => {
-  console.log(props)
+const Claim = props => {
   const {token} = useRootData(({screenModeStore}) => ({
     token: screenModeStore.token,
   }));
@@ -33,23 +29,45 @@ const Claim = (props) => {
     content: '',
     title: '',
     category: '',
-    writer_id:userInfo.id,
+    writer_id: userInfo.id,
   });
+
+  useEffect(() => {
+    props.setTitle('HOT line');
+  }, []);
+
+  function checkDatas() {
+    let check = true;
+    Object.values(hotlineData).map(value => {
+      if (value === '') {
+        check = false;
+        return check;
+      }
+    });
+    return check;
+  }
 
   function create() {
     axios.defaults.baseURL = 'http://35.77.54.132:8080/hotline';
-    axios
-      .post('/', hotlineData)
-      .then(res => {
-        Alert.alert(res.data?"등록되었습니다.":"등록을 실패하였습니다.")
-        if (res.data) {
-          props.navigation.goBack();
-        }
-      })
-      .catch(e => {
-        console.log(e);
-      });
+    if(checkDatas() === false){
+      Alert.alert("모든 항목을 입력해주세요.")
+    }
+    else{
+      axios
+        .post('/', hotlineData)
+        .then(res => {
+          console.log('여기다 여기 여기라고');
+          Alert.alert(res.data ? '등록되었습니다.' : '등록을 실패하였습니다.');
+          if (res.data) {
+            props.navigation.goBack();
+          }
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    }
   }
+
   return (
     <NativeBaseProvider>
       <View bg="muted.600">
@@ -95,7 +113,7 @@ const Claim = (props) => {
             제목
           </Text>
           <Input
-             fontSize="md"
+            fontSize="md"
             mx="3"
             placeholder="제목"
             w="100%"
@@ -108,7 +126,7 @@ const Claim = (props) => {
             내용
           </Text>
           <TextArea
-             fontSize="md"
+            fontSize="md"
             h={40}
             placeholder="내용을 입력해주세요."
             w="100%"
@@ -118,12 +136,14 @@ const Claim = (props) => {
               setHotlineData({...hotlineData, content: text});
             }}
           />
-          <Button mt="4" onPress={() => create()}
-          bg="amber.400" mx="3"
+          <Button
+            mt="4"
+            onPress={() => create()}
+            bg="amber.400"
+            mx="3"
             w="100%"
             size="lg"
-            fontSize="lg"
-          >
+            fontSize="lg">
             접수하기
           </Button>
         </VStack>

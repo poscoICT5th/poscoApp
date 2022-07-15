@@ -6,7 +6,7 @@ const DashboardTodoList = (props) => {
     return (
         <Box alignItems="center" marginY={1} >
             <TouchableOpacity onPress={() => { props.navigation.navigate(props.navigate) }}>
-                <Box w="400" h="200" rounded="lg" overflow="hidden" borderColor="coolGray.100" borderWidth="1"
+                <Box w="365" h="200" rounded="lg" overflow="hidden" borderColor="coolGray.100" borderWidth="1"
                     mt="5"
                     _dark={{
                     borderColor: "coolGray.100",

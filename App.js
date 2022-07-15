@@ -60,6 +60,7 @@ const App = () => {
   }, [pushToken, isAuthorized])
 
   useEffect(() => {
+    messaging().deleteToken()
     foregroundListener()  
     handlePushToken()
     saveDeviceToken()

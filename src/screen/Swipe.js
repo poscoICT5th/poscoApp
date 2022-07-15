@@ -1,15 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {Dimensions, TouchableOpacity, View} from 'react-native';
 import {
   NativeBaseProvider,
   Box,
   Text,
   Pressable,
   Heading,
-  IconButton,
-  Icon,
   HStack,
-  Avatar,
   VStack,
   Spacer,
   Center,
@@ -21,12 +17,12 @@ import useRootData from '../hooks/useRootData';
 import jwtDecode from 'jwt-decode';
 import Icon1 from 'react-native-vector-icons/Entypo';
 
-function Example(props) {
+function Swipe(props) {
   const [mode, setMode] = useState('Basic');
   return (
     <NativeBaseProvider>
       <Center flex={1} px="3">
-        <Center h="290" w="850" marginTop={5}>
+        <Center h="450" w="780" marginTop={5}>
           <Box
             _dark={{
               bg: 'coolGray.800',
@@ -40,7 +36,7 @@ function Example(props) {
               My Hotline
             </Heading>
             <ScrollView showsVerticalScrollIndicator={false}>
-              <Basic />
+              <Basic reloadHotline={props.reloadHotline} />
             </ScrollView>
           </Box>
         </Center>
@@ -48,9 +44,9 @@ function Example(props) {
     </NativeBaseProvider>
   );
 }
-export default Example;
+export default Swipe;
 
-function Basic() {
+function Basic(props) {
   //정보 가져오기
   const [hotlineList, setHotlineList] = useState([]);
   //유저 정보 가져오기
@@ -59,6 +55,10 @@ function Basic() {
   }));
 
   let userInfo = jwtDecode(token.get().token).info;
+
+  useEffect(() => {
+    getDatas();
+  }, [props.reloadHotline]);
 
   function getDatas(params) {
     axios.defaults.baseURL = 'http://35.77.54.132:8080/hotline';
@@ -91,7 +91,13 @@ function Basic() {
           <HStack alignItems="center" space={3}>
             <Icon1
               as={Icon1}
-              name={item.status ==="승인" ? "check" : item.status === "반려" ? "cross" : "dots-three-horizontal"}//hotline아이콘
+              name={
+                item.status === '승인'
+                  ? 'check'
+                  : item.status === '반려'
+                  ? 'cross'
+                  : 'dots-three-horizontal'
+              } //hotline아이콘
               size={40}
               color="black"
               _dark={{

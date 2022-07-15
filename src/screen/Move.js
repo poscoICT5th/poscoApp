@@ -26,7 +26,8 @@ const Move = props => {
 
   //axios
   useEffect(() => {
-    axios.defaults.baseURL = 'http://13.230.28.30:8080/move';
+    props.setTitle("이동")
+    axios.defaults.baseURL = 'http://35.77.44.58:8080/move';
     axios
       .get('/search', {
         params: {

@@ -1,7 +1,13 @@
-import {Text, StyleSheet} from 'react-native';
+import {
+  Text,
+  StyleSheet,
+  RefreshControl,
+  SafeAreaView,
+  ScrollView,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import DashboardTodoList from './DashboardTodoList';
-import {Heading, ScrollView} from 'native-base';
+import {Heading} from 'native-base';
 import {importToday} from '../../axios';
 import axios from 'axios';
 import DashboardTodayChart from './DashboardTodayChart';
@@ -16,7 +22,20 @@ import Swipe from '../Swipe';
 const importURL = 'http://35.77.20.236:8080/import';
 const exportURL = 'http://13.230.30.203:8080/export';
 const moveURL = 'http://35.77.44.58:8080/move';
+
+const wait = timeout => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+};
+
 const Dashboard = props => {
+  const [refreshing, setRefreshing] = React.useState(false);
+  const [reloadHotline, setReloadHotline] = useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(2000).then(() => setRefreshing(false));
+    setReloadHotline(!reloadHotline);
+  }, []);
   // user정보 추출
   const {token} = useRootData(({screenModeStore}) => ({
     token: screenModeStore.token,
@@ -142,18 +161,27 @@ const Dashboard = props => {
       .catch(err => {});
   }
   useEffect(() => {
+    let cleanup = true
+    if (cleanup) {
+      props.setTitle('메인');
+    }
     messaging().subscribeToTopic(userId);
     userWarehouseCode.map(wh_code => {
       messaging().subscribeToTopic(wh_code);
     });
-    importAxios();
-    exportAxios();
-    moveAxios();
+    // importAxios();
+    // exportAxios();
+    // moveAxios();
+
+    return () => {cleanup = false}
   }, []);
-  console.log(props);
   return (
     <NativeBaseProvider>
-      <ScrollView>
+      <ScrollView
+        contentContainerStyle={styles.scrollView}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
         <View>
           <DashboardTodayChart />
           <Center>
@@ -191,12 +219,7 @@ const Dashboard = props => {
               />
             </Stack>
           </Center>
-          <Swipe></Swipe>
-          {/* <Stack direction="row"> */}
-          {/* <Heading color="amber.400">오늘의 </Heading>
-            <Heading color="amber.400">Even Better</Heading>
-            </Stack>
-          <Heading color="amber.400">7월 14일 목요일 소식입니다. </Heading> */}
+          <Swipe reloadHotline={reloadHotline} />
         </View>
       </ScrollView>
       <View style={{position: 'absolute', bottom: 0, right: 13}}>

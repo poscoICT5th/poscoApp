@@ -8,9 +8,12 @@ import DashboardTodoList from '../Dashboard/DashboardTodoList';
 
 const Drawer = createDrawerNavigator();
 
-const MainNavigator = () => {
-  const [title, setTitle] = useState('');
-
+const MainNavigator = (props) => {
+  const [title, setTitle] = useState('메인');
+  const CustomStackNavigator = (cur_props) => {
+    return <StackNavigator setTitle={setTitle} {...cur_props}/>
+  }
+  let customprops = {}
   return (
     <Drawer.Navigator
       drawerPosition="left"
@@ -26,17 +29,15 @@ const MainNavigator = () => {
           // backgroundColor: '#bae6fd',
         }
       }
-      drawerContent={props => (
-        <CustomDrawerContent {...props} setTitle={setTitle} />
-      )}
-      drawerTodoList={props => (
-        <DashboardTodoList {...props} setTitle={setTitle} />
-      )}
+      drawerContent={props => {
+        return <CustomDrawerContent {...props} setTitle={setTitle} />
+        }
+      }
     >
       {/* <Drawer.Screen name="LoginNavigator" component={LoginNavigator} /> */}
       <Drawer.Screen
         name="StackNavigator"
-        component={StackNavigator}
+        component={CustomStackNavigator}
         options={{
           headerTitle: title,
           headerStyle: {
