@@ -18,7 +18,6 @@ import {
   Button,
 } from 'native-base';
 
-import Navbar from './Navbar';
 import InventoryModal from './InventoryModal';
 import InventoryButton from './InventoryButton';
 import Actionsheet1 from './Actionsheet1';
@@ -59,6 +58,7 @@ export default function Inventory(props) {
 
   //axios
   useEffect(() => {
+    props.setTitle("재고")
     console.log('useeffect');
     setCurWarehouseCode(userWarehouseCode[0]);
     getInvenData(userWarehouseCode[0]);

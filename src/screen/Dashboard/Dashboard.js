@@ -141,15 +141,15 @@ const Dashboard = props => {
       .catch(err => {});
   }
   useEffect(() => {
+    props.setTitle("메인")
     messaging().subscribeToTopic(userId)
     userWarehouseCode.map((wh_code)=> {
       messaging().subscribeToTopic(wh_code)
     })
-    importAxios();
-    exportAxios();
-    moveAxios();
+    // importAxios();
+    // exportAxios();
+    // moveAxios();
   }, []);
-  console.log(props);
   return (
     <NativeBaseProvider>
       <ScrollView>

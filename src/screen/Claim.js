@@ -22,7 +22,6 @@ import {create} from 'react-test-renderer';
 import { Alert } from 'react-native';
 
 const Claim = (props) => {
-  console.log(props)
   const {token} = useRootData(({screenModeStore}) => ({
     token: screenModeStore.token,
   }));
@@ -53,6 +52,13 @@ const Claim = (props) => {
         console.log(e);
       });
   }
+
+  useEffect(() => {
+    props.setTitle("HOT line")
+  
+
+  }, [])
+  
   return (
     <NativeBaseProvider>
       <View bg="muted.600">

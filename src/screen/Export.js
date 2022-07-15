@@ -19,6 +19,7 @@ const Export = props => {
 
   //axios
   useEffect(() => {
+    props.setTitle("출고")
     axios.defaults.baseURL = 'http://13.230.30.203:8080/export';
     axios
       .get('/search', {

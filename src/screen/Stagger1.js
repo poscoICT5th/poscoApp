@@ -20,7 +20,6 @@ import {Button} from '@react-native-material/core';
 const Example = props => {
   const {isOpen, onToggle} = useDisclose();
   const [exportList, setExportList] = useState([]);
-  console.log(props);
   return (
     // <View style={{alignSelf: 'flex-end', alignContent: 'flex-end', marginRight: 13,}}>
     <Center marginRight="7">

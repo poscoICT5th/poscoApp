@@ -98,7 +98,7 @@ const DashboardTodayChart = (props) => {
       .catch((err) => { })
   }, [])
   useEffect(() => {
-    axios.defaults.baseURL = "http://35.77.44.58:8080/move"
+    axios.defaults.baseURL = "http://13.230.28.30:8080/move"
     axios.get('/search', {
       params: {
         instruction_no: "전체보기",

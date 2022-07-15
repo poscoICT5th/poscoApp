@@ -27,7 +27,7 @@ const CustomDrawerContent = props => {
           <TouchableOpacity
             onPress={() => {
               props.navigation.navigate('Dashboard');
-              console.log(props);
+              // console.log(props);
               props.setTitle('메인');
             }}>
             <Text style={styles.title}>메인</Text>
@@ -79,7 +79,7 @@ const CustomDrawerContent = props => {
             onPress={() => {
               props.navigation.navigate('Mypage');
               props.setTitle('Mypage');
-              console.log(props);
+              // console.log(props);
             }}>
             <Text style={styles.title}>마이페이지</Text>
           </TouchableOpacity>

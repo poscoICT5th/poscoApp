@@ -18,7 +18,6 @@ const DashboardTodoList = props => {
       <TouchableOpacity
         onPress={() => {
           props.navigation.navigate(props.navigate);
-					console.log(props);
         }}>
         <Box
           width={80}

@@ -28,6 +28,7 @@ function Import(props) {
 
 //axios
 useEffect(() => {
+  props.setTitle("입고")
   axios.defaults.baseURL = 'http://35.77.20.236:8080/import';
   axios
     .get('/search', {

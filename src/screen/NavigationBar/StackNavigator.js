@@ -13,7 +13,7 @@ import Mypage from '../Mypage';
 import Claim from '../Claim';
 
 const StackApp = createStackNavigator();
-const StackNavigator = () => {
+const StackNavigator = (props) => {
   const navOptionHandler = () => ({
     headerShown: false,
   });
@@ -21,27 +21,44 @@ const StackNavigator = () => {
     <StackApp.Navigator initialRouteName="Dashboard" backBehavior="history">
       <StackApp.Screen
         name="Inventory"
-        component={Inventory}
+        // component={Inventory}
+        component={() => <Inventory {...props}/>}
         options={navOptionHandler} // header & 뒤로가기
       />
       <StackApp.Screen
         name="Import"
-        component={Import}
+        // component={Import}
+        component={() => <Import {...props}/>}
         options={navOptionHandler}
       />
       <StackApp.Screen
         name="Export"
-        component={Export}
+        // component={Export}
+        component={() => <Export {...props}/>}
         options={navOptionHandler}
       />
       <StackApp.Screen
         name="Move"
-        component={Move}
+        // component={Move}
+        component={() => <Move {...props}/>}
         options={navOptionHandler}
       />
       <StackApp.Screen
         name="Dashboard"
-        component={Dashboard}
+        // component={Dashboard}
+        component={() => <Dashboard {...props}/>}
+        options={navOptionHandler}
+      />
+      <StackApp.Screen
+        name="Mypage"
+        // component={Mypage}
+        component={() => <Mypage {...props}/>}
+        options={navOptionHandler}
+      />
+        <StackApp.Screen
+        name="Claim"
+        // component={Claim}
+        component={() => <Claim {...props}/>}
         options={navOptionHandler}
       />
       <StackApp.Screen
@@ -52,16 +69,6 @@ const StackNavigator = () => {
       <StackApp.Screen
         name="BarcodeScanner"
         component={BarcodeScanner}
-        options={navOptionHandler}
-      />
-      <StackApp.Screen
-        name="Mypage"
-        component={Mypage}
-        options={navOptionHandler}
-      />
-        <StackApp.Screen
-        name="Claim"
-        component={Claim}
         options={navOptionHandler}
       />
     </StackApp.Navigator>

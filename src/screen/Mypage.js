@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, ScrollView} from 'react-native';
 import {Table, TableWrapper, Row} from 'react-native-table-component';
 import {
@@ -22,6 +22,9 @@ import useRootData from '../hooks/useRootData';
 import jwtDecode from 'jwt-decode';
 import InventoryStagger from './InventoryStagger';
 import Icon from 'react-native-vector-icons/FontAwesome';
+
+
+
 const Mypage = props => {
   const {token} = useRootData(({screenModeStore}) => ({
     token: screenModeStore.token,
@@ -63,6 +66,11 @@ const Mypage = props => {
   let now = new Date();
   let month = now.getMonth();
   let date = now.getDate();
+
+  useEffect(() => {
+    props.setTitle("마이페이지")
+  }, [])
+  
 
   return (
     <NativeBaseProvider>
