@@ -1,16 +1,17 @@
 import {Text, StyleSheet} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import DashboardTodoList from './DashboardTodoList';
-import {ScrollView} from 'native-base';
+import {Heading, ScrollView} from 'native-base';
 import {importToday} from '../../axios';
 import axios from 'axios';
 import DashboardTodayChart from './DashboardTodayChart';
 import moment from 'moment';
-import {View, NativeBaseProvider} from 'native-base';
+import {View, NativeBaseProvider, Stack, Center} from 'native-base';
 import InventoryStagger from '../InventoryStagger';
-import messaging from '@react-native-firebase/messaging'
+import messaging from '@react-native-firebase/messaging';
 import useRootData from '../../hooks/useRootData';
 import jwtDecode from 'jwt-decode';
+import Swipe from '../Swipe';
 
 const importURL = 'http://35.77.20.236:8080/import';
 const exportURL = 'http://13.230.30.203:8080/export';
@@ -141,50 +142,61 @@ const Dashboard = props => {
       .catch(err => {});
   }
   useEffect(() => {
-    props.setTitle("메인")
-    messaging().subscribeToTopic(userId)
-    userWarehouseCode.map((wh_code)=> {
-      messaging().subscribeToTopic(wh_code)
-    })
-    // importAxios();
-    // exportAxios();
-    // moveAxios();
+    props.setTitle("메인");
+    messaging().subscribeToTopic(userId);
+    userWarehouseCode.map(wh_code => {
+      messaging().subscribeToTopic(wh_code);
+    });
+    importAxios();
+    exportAxios();
+    moveAxios();
   }, []);
   return (
     <NativeBaseProvider>
       <ScrollView>
         <View>
           <DashboardTodayChart />
-          <View style={styles.dashboardTodolist}>
-            <DashboardTodoList
-              title="재고"
-              subTitle="담당하는 창고의 재고현황 파악"
-              navigate="Inventory"
-              navigation={props.navigation}
-              // setTitle={props.route.params.setTitle}
-            />
-            <DashboardTodoList
-              title="창고입고"
-              subTitle="담당 창고 입고 리스트"
-              navigate="Import"
-              navigation={props.navigation}
-              // setTitle={props.route.params.setTitle}
-            />
-            <DashboardTodoList
-              title="창고출고"
-              subTitle="담당 창고 출고 리스트"
-              navigate="Export"
-              navigation={props.navigation}
-              // setTitle={props.route.params.setTitle}
-            />
-            <DashboardTodoList
-              title="창고이동"
-              subTitle="담당 창고 이동 리스트"
-              navigate="Move"
-              navigation={props.navigation}
-              // setTitle={props.route.params.setTitle}
-            />
-          </View>
+          <Center>
+            <Stack direction="row" mb="1" mt="1.5" space={12}>
+              <DashboardTodoList
+                title="재고"
+                subTitle="담당하는 창고의 재고현황 파악"
+                navigate="Inventory"
+                navigation={props.navigation}
+                // setTitle={props.route.params.setTitle}
+              />
+              <DashboardTodoList
+                title="창고입고"
+                subTitle="담당 창고 입고 리스트"
+                navigate="Import"
+                navigation={props.navigation}
+                // setTitle={props.route.params.setTitle}
+              />
+            </Stack>
+            {/* 두번째줄 */}
+            <Stack direction="row" mb="2.5" mt="1" space={12}>
+              <DashboardTodoList
+                title="창고출고"
+                subTitle="담당 창고 출고 리스트"
+                navigate="Export"
+                navigation={props.navigation}
+                // setTitle={props.route.params.setTitle}
+              />
+              <DashboardTodoList
+                title="창고이동"
+                subTitle="담당 창고 이동 리스트"
+                navigate="Move"
+                navigation={props.navigation}
+                // setTitle={props.route.params.setTitle}
+              />
+            </Stack>
+          </Center>
+          <Swipe></Swipe>
+          {/* <Stack direction="row"> */}
+          {/* <Heading color="amber.400">오늘의 </Heading>
+            <Heading color="amber.400">Even Better</Heading>
+            </Stack>
+          <Heading color="amber.400">7월 14일 목요일 소식입니다. </Heading> */}
         </View>
       </ScrollView>
       <View style={{position: 'absolute', bottom: 0, right: 13}}>

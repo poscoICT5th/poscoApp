@@ -10,6 +10,9 @@ const Drawer = createDrawerNavigator();
 
 const MainNavigator = (props) => {
   const [title, setTitle] = useState('메인');
+  const CustomStackNavigator = (cur_props) => {
+    return <StackNavigator setTitle={setTitle} {...cur_props}/>
+  }
   let customprops = {}
   return (
     <Drawer.Navigator
@@ -27,7 +30,6 @@ const MainNavigator = (props) => {
         }
       }
       drawerContent={props => {
-        customprops = props.navigation
         return <CustomDrawerContent {...props} setTitle={setTitle} />
         }
       }
@@ -35,9 +37,7 @@ const MainNavigator = (props) => {
       {/* <Drawer.Screen name="LoginNavigator" component={LoginNavigator} /> */}
       <Drawer.Screen
         name="StackNavigator"
-        // component={StackNavigator}
-        component={() => {
-        return <StackNavigator navigation={customprops} setTitle ={setTitle} />}}
+        component={CustomStackNavigator}
         options={{
           headerTitle: title,
           headerStyle: {

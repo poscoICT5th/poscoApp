@@ -37,12 +37,12 @@ const Move_second = props => {
   return (
     <NativeBaseProvider>
       <ScrollView>
-        {doneList.map(moveItem => {
+        {doneList.map((moveItem,index) => {
           return (
-            <Box alignItems="center" marginY={3}>
-              <TouchableOpacity onPress={() => setShowModal(true)}>
+            <Box alignItems="center" marginY={6} key={index}>
+              <TouchableOpacity >
                 <Box
-                  width="80"
+                  width="600"
                   rounded="lg"
                   overflow="hidden"
                   borderColor="coolGray.100"

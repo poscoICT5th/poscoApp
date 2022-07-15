@@ -14,6 +14,7 @@ import {
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Stagger1 from './Stagger1';
 import MoveModal from './MoveModal';
+import InventoryModal from './InventoryModal';
 const Import_first = props => {
   const [doneList, setDoneList] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -41,12 +42,14 @@ const Import_first = props => {
   return (
     <NativeBaseProvider>
       <ScrollView>
-        {doneList.map(moveItem => {
+        {doneList.map((moveItem,index) => {
+          console.log(doneList);
+          console.log(index);
           return (
-            <Box alignItems="center" marginY={6}>
-              <TouchableOpacity onPress={() => setShowModal(true)}>
+            <Box alignItems="center" marginY={6} key={index}>
+              <TouchableOpacity>
                 <Box
-                    width="600"
+                    width="550"
                   rounded="lg"
                   overflow="hidden"
                   borderColor="coolGray.100"

@@ -64,7 +64,6 @@ useEffect(() => {
     })
     .then(res => {
       setImportList(res.data);
-      console.log(res.data, ' 이거 뭐야 ');
     })
     .catch(err => {
       console.log(err);
@@ -207,6 +206,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     padding: 16,
+    color: 'red',
     backgroundColor: 'white',
   },
 });

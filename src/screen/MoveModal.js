@@ -14,9 +14,21 @@ import {
   VStack,
   Button,
 } from 'native-base';
+//여기모달 입고, 출고, 창고이동 다 공통이다. 각자 리스트는 다름. 
 const InventoryModal = props => {
-  return (
+  return ( 
     <View>
+      <Button
+        // color="muted.800"
+        bgColor="muted.700"
+       _text={{
+        color: 'muted.50'
+      }} 
+        onPress={() => {
+          props.setShowModal(true);
+        }}>
+        자세히보기
+      </Button>
       <Modal
         isOpen={props.showModal}
         onClose={() => props.setShowModal(false)}

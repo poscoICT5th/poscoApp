@@ -114,9 +114,9 @@ export default function Inventory(props) {
           </HStack>
         </Center>
 
-        {inventoryList.map(inventoryItem => {
+        {inventoryList.map((inventoryItem,index) => {
           return (
-            <Box alignItems="center" marginY={3}>
+            <Box alignItems="center" marginY={3} key={index}>
               <Box
                 onPress={() => setShowModal(true)}
                 width="60%"

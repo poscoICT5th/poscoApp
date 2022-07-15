@@ -10,6 +10,7 @@ import {
   Button,
   Center,
   NativeBaseProvider,
+  Text
 } from 'native-base';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
@@ -56,35 +57,41 @@ export default function LoginScreen(props) {
   }, []);
   return (
     <NativeBaseProvider>
-      <Center w="100%" marginTop={20}>
-        <Box safeArea p="2" py="8" w="90%" maxW="290">
+      <Center marginTop={70} w="130%" h="90%">
+        <Box safeArea w="70%">
           <Heading
-            size="lg"
+            size="2xl"
             fontWeight="600"
-            color="coolGray.800"
+            color="muted.600"
             _dark={{
               color: 'warmGray.50',
             }}>
-            POSCO ICT - 5
+            Even Better
           </Heading>
           <Heading
             mt="1"
             _dark={{
               color: 'warmGray.200',
             }}
-            color="coolGray.600"
+            color="muted.600"
             fontWeight="medium"
-            size="xs">
+            size="lg">
             물류, 창고 재고 모니터링 시스템
           </Heading>
-          <VStack space={3} mt="5">
-            <FormControl.Label>ID</FormControl.Label>
+          <VStack space={3} mt="5" w="70%">
+           
+            <Text
+         fontSize="xl"
+            >ID</Text>
             <Input
               onChange={e => {
                 setId(e.nativeEvent.text);
               }}
             />
-            <FormControl.Label>Password</FormControl.Label>
+            <Text
+              fontSize="xl"
+              mt="3"
+            >Password</Text>
             <Input
               type="password"
               onChange={e => {
@@ -92,7 +99,7 @@ export default function LoginScreen(props) {
               }}
             />
             <Button
-              mt="2"
+              mt="7"
               onPress={() => {
                 loginApi({id: id, pw: pw});
               }}

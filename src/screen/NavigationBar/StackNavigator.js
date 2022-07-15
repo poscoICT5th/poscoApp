@@ -13,7 +13,29 @@ import Mypage from '../Mypage';
 import Claim from '../Claim';
 
 const StackApp = createStackNavigator();
-const StackNavigator = (props) => {
+const StackNavigator = props => {
+  const StackInventory = cur_props => {
+    return <Inventory setTitle={props.setTitle} {...cur_props} />;
+  };
+  const StackImport = cur_props => {
+    return <Import setTitle={props.setTitle} {...cur_props} />;
+  };
+  const StackExport = cur_props => {
+    return <Export setTitle={props.setTitle} {...cur_props} />;
+  };
+  const StackMove = cur_props => {
+    return <Move setTitle={props.setTitle} {...cur_props} />;
+  };
+  const StackDashboard = cur_props => {
+    return <Dashboard setTitle={props.setTitle} {...cur_props} />;
+  };
+  const StackMypage = cur_props => {
+    return <Mypage setTitle={props.setTitle} {...cur_props} />;
+  };
+  const StackClaim = cur_props => {
+    return <Claim setTitle={props.setTitle} {...cur_props} />;
+  };
+
   const navOptionHandler = () => ({
     headerShown: false,
   });
@@ -21,44 +43,37 @@ const StackNavigator = (props) => {
     <StackApp.Navigator initialRouteName="Dashboard" backBehavior="history">
       <StackApp.Screen
         name="Inventory"
-        // component={Inventory}
-        component={() => <Inventory {...props}/>}
+        component={StackInventory}
         options={navOptionHandler} // header & 뒤로가기
       />
       <StackApp.Screen
         name="Import"
-        // component={Import}
-        component={() => <Import {...props}/>}
+        component={StackImport}
         options={navOptionHandler}
       />
       <StackApp.Screen
         name="Export"
-        // component={Export}
-        component={() => <Export {...props}/>}
+        component={StackExport}
         options={navOptionHandler}
       />
       <StackApp.Screen
         name="Move"
-        // component={Move}
-        component={() => <Move {...props}/>}
+        component={StackMove}
         options={navOptionHandler}
       />
       <StackApp.Screen
         name="Dashboard"
-        // component={Dashboard}
-        component={() => <Dashboard {...props}/>}
+        component={StackDashboard}
         options={navOptionHandler}
       />
       <StackApp.Screen
         name="Mypage"
-        // component={Mypage}
-        component={() => <Mypage {...props}/>}
+        component={StackMypage}
         options={navOptionHandler}
       />
         <StackApp.Screen
         name="Claim"
-        // component={Claim}
-        component={() => <Claim {...props}/>}
+        component={StackClaim}
         options={navOptionHandler}
       />
       <StackApp.Screen

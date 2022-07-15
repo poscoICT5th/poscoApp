@@ -31,8 +31,9 @@ const InventoryModal = props => {
       <Modal
         isOpen={props.showModal}
         onClose={() => props.setShowModal(false)}
-        size="lg">
-        <Modal.Content maxWidth="350">
+        size="xl"
+      >
+        <Modal.Content width="80%">
           <Modal.CloseButton />
           <Modal.Header>Order</Modal.Header>
           <Modal.Body>

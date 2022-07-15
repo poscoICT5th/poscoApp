@@ -71,23 +71,17 @@ const Claim = props => {
   return (
     <NativeBaseProvider>
       <View bg="muted.600">
-        <Heading color="amber.400" mx="7" mt="10" fontSize="3xl">
-          요청사항
+        <Heading color="amber.400" mx="8" mt="10" fontSize="4xl">
+          HotLine
         </Heading>
 
-        <Text
-          fontSize="xl"
-          alignItems="center"
-          mx="7"
-          color="amber.50"
-          mt="5"
-          mb="10">
+        <Text fontSize="xl" alignItems="center" mx="8" color="amber.50" mt="5" mb="10">
           *요청사항을 입력해주세요.
         </Text>
 
         <Flex direction="row-reverse" h="58" p="4" mb="3">
           <Text color="amber.50" fontSize="lg">
-            POSCO ICT
+            Even Better
           </Text>
           <Divider bg="amber.50" thickness="1" mx="2" orientation="vertical" />
           <Text color="amber.50" fontSize="lg">
