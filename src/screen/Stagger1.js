@@ -115,9 +115,9 @@ const Example = props => {
           // colorScheme="gray"
           variant="ghost"
           icon={
-            <Icon
-              as={Icon}
-              name="angle-up"
+            <Icon2
+              as={Icon2}
+              name="plus-box-multiple-outline"
               size={40}
               color="black"
               // _dark={{

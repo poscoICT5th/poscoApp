@@ -16,7 +16,7 @@ const CustomDrawerContent = props => {
     setToken: screenModeStore.setToken,
   }));
   return (
-    <DrawerContentScrollView {...props} style={{backgroundColor: 'white'}}>
+    <DrawerContentScrollView {...props} style={{backgroundColor: 'white'}} drawerLabel={"Even Better"}>
       <View style={styles.header}>
         <View style={styles.headerContainer}>
           <Text style={styles.headerTitle}>메뉴</Text>
@@ -93,10 +93,10 @@ const CustomDrawerContent = props => {
               console.log(token);
             }}>
             <Text
-             _light={{
+              _light={{
               color: 'amber.500',
             }}
-            
+            fontSize= "xl"
             >로그아웃</Text>
           </TouchableOpacity>
         </View>
@@ -114,7 +114,6 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'column',
     alignItems: 'center',
-
     // backgroundColor: '#f0f0f0',
     // borderColor: '#dccab2',
     // borderWidth: 3,
@@ -125,7 +124,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   title: {
-    fontSize: 15,
+    fontSize: 20,
     // color: '#243A73',
     color: '#262626',
     fontWeight: 'bold',

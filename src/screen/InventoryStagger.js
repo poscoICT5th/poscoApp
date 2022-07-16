@@ -12,6 +12,7 @@ import {
 import {StyleSheet, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon1 from 'react-native-vector-icons/Entypo';
+import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import axios from 'axios';
 import {Button} from '@react-native-material/core';
@@ -90,9 +91,9 @@ const Example = props => {
           // colorScheme="gray"
           variant="ghost"
           icon={
-            <Icon
-              as={Icon}
-              name="angle-up"
+            <Icon2
+              as={Icon2}
+              name="plus-box-multiple-outline"
               size={40}
               color="black"
               // _dark={{
