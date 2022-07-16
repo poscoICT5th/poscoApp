@@ -79,7 +79,6 @@ const CustomDrawerContent = props => {
             onPress={() => {
               props.navigation.navigate('Mypage');
               props.setTitle('Mypage');
-              // console.log(props);
             }}>
             <Text style={styles.title}>마이페이지</Text>
           </TouchableOpacity>
@@ -88,9 +87,7 @@ const CustomDrawerContent = props => {
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             onPress={() => {
-              console.log(token);
               setToken(null);
-              console.log(token);
             }}>
             <Text
              _light={{

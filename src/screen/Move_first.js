@@ -24,9 +24,19 @@ const Move_first = props => {
   }, []);
   //예정인것 , 필터링
   function first() {
-    setDoneList([
-      ...props.moveList.filter(moveItem => moveItem.status === '이동예정'),
-    ]);
+    if ((props.title === '이동예정')) {
+      setDoneList([
+        ...props.moveList.filter(moveItem => moveItem.status === '이동예정'),
+      ]);
+    } else if ((props.title === '이동중')) {
+      setDoneList([
+        ...props.moveList.filter(moveItem => moveItem.status === '이동중'),
+      ]);
+    } else if ((props.title === '이동완료')) {
+      setDoneList([
+        ...props.moveList.filter(moveItem => moveItem.status === '이동완료'),
+      ]);
+    }
   }
 
   return (

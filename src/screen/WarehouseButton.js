@@ -14,13 +14,15 @@ import {
 import { background } from 'native-base/lib/typescript/theme/styled-system';
 //최근 순 , 상태 순
 //여기는 안씀
-const InventoryButton = props => {
+const WarehouseButton = props => {
   return (
-    <View>
-      <HStack space={5} justifyContent="center">
+    <View style={styles1.button}>
+      <HStack space={20} justifyContent="center">
           {props.userWarehouseCode.map((code, i) => {
             return (
               <Button
+                width={170}
+                mb={3}
                 key={i}
                 size="lg"
                 variant="outline"
@@ -44,5 +46,11 @@ const InventoryButton = props => {
   );
 };
 
-export default InventoryButton;
+export default WarehouseButton;
 
+const styles1 = StyleSheet.create({
+ button: {
+    backgroundColor: 'white',
+  },
+
+});

@@ -35,7 +35,6 @@ export default function Inventory(props) {
     token: screenModeStore.token,
   }));
   let team = jwtDecode(token.get().token).info.team;
-  console.log(team);
 
   const userInfo = {
     warehouse_code: team,
@@ -48,7 +47,6 @@ export default function Inventory(props) {
     axios
       .get(`/warehouse/` + warehouse_code)
       .then(res => {
-        // console.log(res.data, ' 인벤토리데이터');
         setInventoryList(res.data);
       })
       .catch(err => {
@@ -181,8 +179,6 @@ export default function Inventory(props) {
       </ScrollView>
       <View style={{position: 'absolute', bottom: 0, right: 13}}>
         <InventoryStagger
-        // title="move"
-        // onGetBarcode={props.onGetBarcodeMove}
          navigation={props.navigation}
         />
       </View>

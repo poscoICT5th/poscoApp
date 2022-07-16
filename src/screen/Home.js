@@ -64,12 +64,7 @@ export default class Home extends Component {
       axios.defaults.baseURL = 'http://35.77.20.236:8080';
       axios
         .get('/import/lotno/' + barcodeValue)
-        // axios.get("http://35.77.20.236:8080/import/lotno/" +barcodeValue)
         .then(res => {
-          console.log(123123123);
-          console.log(res.data);
-          console.log(res.data.instruction_no);
-          // axios.put("http://35.77.20.236:8080/import/import/" + res.data.instruction_no)
           axios
             .put('/import/import/' + res.data.instruction_no)
             .then(res2 => {
@@ -86,13 +81,9 @@ export default class Home extends Component {
         });
     } else if (cmdType == 'move') {
       axios.defaults.baseURL = 'http://35.77.44.58:8080';
-      // axios.get("http://35.77.44.58:8080/move/lotno/" +barcodeValue)
       axios
         .get('/move/lotno/' + barcodeValue)
         .then(res => {
-          console.log(123123123);
-          console.log(res.data);
-          console.log(res.data.instruction_no);
           axios
             .put('/move/move/' + res.data.instruction_no)
             .then(res2 => {
@@ -109,11 +100,7 @@ export default class Home extends Component {
       axios.defaults.baseURL = 'http://13.230.30.203:8080';
       axios
         .get('/export/lotno/' + barcodeValue)
-        // axios.get("http://13.230.30.203:8080/export/lotno/" +barcodeValue)
         .then(res => {
-          console.log(123123123);
-          console.log(res.data);
-          console.log(res.data.instruction_no);
           axios
             .put('/export/export/' + res.data.instruction_no)
             .then(res2 => {

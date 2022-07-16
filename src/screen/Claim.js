@@ -56,7 +56,6 @@ const Claim = props => {
       axios
         .post('/', hotlineData)
         .then(res => {
-          console.log('여기다 여기 여기라고');
           Alert.alert(res.data ? '등록되었습니다.' : '등록을 실패하였습니다.');
           if (res.data) {
             props.navigation.goBack();

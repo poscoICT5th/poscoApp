@@ -43,8 +43,6 @@ const Import_first = props => {
     <NativeBaseProvider>
       <ScrollView>
         {doneList.map((moveItem,index) => {
-          console.log(doneList);
-          console.log(index);
           return (
             <Box alignItems="center" marginY={6} key={index}>
               <TouchableOpacity>

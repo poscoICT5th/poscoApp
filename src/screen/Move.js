@@ -2,19 +2,14 @@ import React, {useEffect, useState} from 'react';
 import {Animated, View, TouchableOpacity, StyleSheet, Text} from 'react-native';
 import {TabView, SceneMap} from 'react-native-tab-view';
 import Move_first from './Move_first';
-import Move_second from './Move_second';
-import Move_third from './Move_third';
 import axios from 'axios';
 import MoveModal from './MoveModal';
 import {NativeBaseProvider} from 'native-base';
 import Stagger1 from './Stagger1';
 import useRootData from '../hooks/useRootData';
 import jwtDecode from 'jwt-decode';
-
+import WarehouseButton from './WarehouseButton';
 const Move = props => {
-  const [moveList, setMoveList] = useState([]);
-  const [showModal, setShowModal] = useState(false);
-
   // store에서 token 갖고옴
   const {token} = useRootData(({screenModeStore}) => ({
     token: screenModeStore.token,
@@ -22,12 +17,12 @@ const Move = props => {
 
   let team = jwtDecode(token.get().token).info.team;
   const userWarehouseCode = team.split(' ');
+  const [moveList, setMoveList] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [curWarehouseCode, setCurWarehouseCode] = useState('');
 
-
-  //axios
-  useEffect(() => {
-    props.setTitle("이동")
-    axios.defaults.baseURL = 'http://35.77.44.58:8080/move';
+  const getMoveData = () => {
+    axios.defaults.baseURL = 'http://13.230.28.30:8080/move';
     axios
       .get('/search', {
         params: {
@@ -48,7 +43,7 @@ const Move = props => {
           min_height: 0,
           max_height: 10000000,
           location: '전체보기',
-          from_warehouse: userWarehouseCode[0],
+          from_warehouse: curWarehouseCode,
           to_warehouse: '전체보기',
           inst_reg_date: '전체보기',
           inst_deadline: '전체보기',
@@ -61,21 +56,29 @@ const Move = props => {
       .catch(err => {
         console.log(err);
       });
+  };
+  //axios
+  useEffect(() => {
+    props.setTitle('이동');
+    setCurWarehouseCode(userWarehouseCode[0]);
+    getMoveData();
   }, []);
+  //창고코드 바뀌면
+  useEffect(() => {
+    getMoveData();
+  }, [curWarehouseCode]);
   //바코드용
   const onGetBarcodeMove = (barcodeValue, cmdType) => {
     console.log('barcode value: ', barcodeValue);
     //아래 함수의 파라미터로 문자열만 넘길 수 있음. barcodeValue가 문자열처럼 보이지만 문자열이 아닌 듯. String()는 작동하지 않음. JSON.stringify()는 작동함
     //  Alert.alert("barcode value: ", barcodeValue);
-    if (cmdType == 'export') {
+    if (cmdType == 'move') {
       axios.defaults.baseURL = 'http://13.230.30.203:8080';
       axios
-        .get('/export/lotno/' + barcodeValue)
-        // axios.get("http://13.230.30.203:8080/export/lotno/" +barcodeValue)
+        .get('/move/lotno/' + barcodeValue)
         .then(res => {
-         // console.log(res.data);
           axios
-            .put('/export/export/' + res.data.instruction_no)
+            .put('/move/export/' + res.data.instruction_no)
             .then(res2 => {
               Alert.alert('출고 완료되었습니다.');
             })
@@ -92,15 +95,26 @@ const Move = props => {
   const FirstRoute = () => (
     <Move_first
       moveList={moveList}
+      title="이동예정"
       onGetBarcodeMove={onGetBarcodeMove}
       navigation={props.navigation}
       style={{backgroundColor: '#ffffff'}}
     />
   );
-  const SecondRoute = () => <Move_second moveList={moveList} />;
-  const ThirdRoute = () => (
-    <Move_third
+  const SecondRoute = () => (
+    <Move_first
       moveList={moveList}
+      title="이동중"
+      onGetBarcodeMove={onGetBarcodeMove}
+      navigation={props.navigation}
+    />
+  );
+  const ThirdRoute = () => (
+    <Move_first
+      moveList={moveList}
+      title="이동완료"
+      onGetBarcodeMove={onGetBarcodeMove}
+      navigation={props.navigation}
       style={[styles.container, {backgroundColor: '#ffffff'}]}
     />
   );
@@ -147,12 +161,18 @@ const Move = props => {
   });
 
   return (
-    <TabView
-      navigationState={state}
-      renderScene={_renderScene}
-      renderTabBar={_renderTabBar}
-      onIndexChange={_handleIndexChange}
-    />
+    <NativeBaseProvider >
+      <WarehouseButton
+        userWarehouseCode={userWarehouseCode}
+        setCurWarehouseCode={setCurWarehouseCode}
+      />
+      <TabView
+        navigationState={state}
+        renderScene={_renderScene}
+        renderTabBar={_renderTabBar}
+        onIndexChange={_handleIndexChange}
+      />
+    </NativeBaseProvider>
   );
 };
 export default Move;
@@ -169,7 +189,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     padding: 16,
-    backgroundColor: 'gray.300',
-    
+    backgroundColor: 'white', //탭바 color
   },
 });

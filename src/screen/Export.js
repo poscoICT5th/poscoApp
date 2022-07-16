@@ -5,9 +5,11 @@ import Export_first from './Export_first';
 import useRootData from '../hooks/useRootData';
 import jwtDecode from 'jwt-decode';
 import {TabView, SceneMap} from 'react-native-tab-view';
-
+import { NativeBaseProvider } from 'native-base';
+import WarehouseButton from './WarehouseButton';
 const Export = props => {
   const [exportList, setExportList] = useState([]);
+  const [curWarehouseCode, setCurWarehouseCode] = useState(''); //현재선택한창고코드
 
   // store에서 token 갖고옴
   const {token} = useRootData(({screenModeStore}) => ({
@@ -16,10 +18,7 @@ const Export = props => {
 
   let team = jwtDecode(token.get().token).info.team;
   const userWarehouseCode = team.split(' ');
-
-  //axios
-  useEffect(() => {
-    props.setTitle("출고")
+  const getExportData = () => {
     axios.defaults.baseURL = 'http://13.230.30.203:8080/export';
     axios
       .get('/search', {
@@ -45,7 +44,7 @@ const Export = props => {
           max_height: 10000000,
           product_family: '전체보기',
           location: '전체보기',
-          from_warehouse: userWarehouseCode[0],
+          from_warehouse: curWarehouseCode,
           customer: '전체보기',
           order_date: '전체보기',
           inst_reg_date: '전체보기',
@@ -60,8 +59,17 @@ const Export = props => {
       .catch(err => {
         console.log(err);
       });
+}
+  //axios
+  useEffect(() => {
+    setCurWarehouseCode(userWarehouseCode[0])
+    props.setTitle("출고")
+    getExportData();
   }, []);
-
+  //창고코드 바뀌면
+  useEffect(() => {
+    getExportData();
+  }, [curWarehouseCode]);
   const onGetBarcodeExport = (barcodeValue, cmdType) => {
     console.log('barcode value: ', barcodeValue);
     //아래 함수의 파라미터로 문자열만 넘길 수 있음. barcodeValue가 문자열처럼 보이지만 문자열이 아닌 듯. String()는 작동하지 않음. JSON.stringify()는 작동함
@@ -72,9 +80,6 @@ const Export = props => {
         .get('/export/lotno/' + barcodeValue)
         // axios.get("http://13.230.30.203:8080/export/lotno/" +barcodeValue)
         .then(res => {
-          console.log(123123123);
-          console.log(res.data);
-          console.log(res.data.instruction_no);
           axios
             .put('/export/export/' + res.data.instruction_no)
             .then(res2 => {
@@ -146,12 +151,18 @@ const Export = props => {
   });
 
   return (
+    <NativeBaseProvider style={(backgroundColor = '#fafaf9')}>
+    <WarehouseButton
+      userWarehouseCode={userWarehouseCode}
+      setCurWarehouseCode={setCurWarehouseCode}
+    />
     <TabView
       navigationState={state}
       renderScene={_renderScene}
       renderTabBar={_renderTabBar}
       onIndexChange={_handleIndexChange}
-    />
+      />
+          </NativeBaseProvider>
   );
 };
 export default Export;
@@ -171,20 +182,3 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
 });
-
-{
-  /* <IconButton
-mb="4"
-size="lg"
-variant="solid"
-bg="indigo.500"
-colorScheme="indigo"
-borderRadius="full"
-onPress={() =>
-  props.navigation.navigate('BarcodeScanner', {
-    onGetBarcode: onGetBarcodeExport,
-    cmdType: 'export',
-  })
-}
-/> */
-}
