@@ -15,7 +15,6 @@ PushNotification.createChannel({
   channelName : "myChannel"
 })
 
-
 const App = () => {
   const [pushToken, setPushToken] = useState(null)
   const [isAuthorized, setIsAuthorized] = useState(false)
@@ -23,11 +22,11 @@ const App = () => {
   const foregroundListener = useCallback(() => {
     messaging().onMessage(async message => {
       console.log(message)
-      PushNotification.localNotification({
-        message: message.notification.body,
-        title: message.notification.title,
-        channelId: true,
-      })
+      // PushNotification.localNotification({
+      //   message: message.notification.body,
+      //   title: message.notification.title,
+      //   channelId: true,
+      // })
 
     })
   }, [])
