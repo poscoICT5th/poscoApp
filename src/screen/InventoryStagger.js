@@ -87,7 +87,7 @@ const Example = props => {
           borderRadius="full"
           size="lg"
           onPress={onToggle}
-          // bg="blue"
+          bg="amber.200"
           // colorScheme="gray"
           variant="ghost"
           icon={

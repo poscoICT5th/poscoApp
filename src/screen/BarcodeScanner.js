@@ -31,7 +31,7 @@ const BarcodeScanner = props => {
     console.log('scanned barcode value: ' + barcodeValue);
     setTimeout(() => {
       isFirstGet = true;
-    }, 2000);
+    }, 1000);
   }
 
 
